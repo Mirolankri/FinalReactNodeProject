@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
-import { UserContext, useUser } from "../providers/UserProvider";
+import { UserContext, useUser } from "../users/providers/UserProvider"
 
 const PhoneVerify = () => {
 	const [code, setCode] = useState("");

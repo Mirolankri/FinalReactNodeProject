@@ -1,6 +1,6 @@
 import React, { useEffect,useContext} from "react";
 import { useNavigate } from "react-router-dom";
-import { useUser } from "../providers/UserProvider";
+import { useUser } from "../users/providers/UserProvider";
 import PageHeader from "./PageHeader";
 import { Container } from "react-bootstrap";
 
