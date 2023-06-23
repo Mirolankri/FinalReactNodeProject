@@ -73,10 +73,12 @@ const Login = () => {
 
 	return (
 		<>
-		<div className="Auth-form-container">
-			<form className="Auth-form">
+		<div className="Auth-form-container" style={{backgroundColor:'#8668FF'}}>
+			<form className="Auth-form" style={{backgroundColor:'#FFF8F880'}}>
 				<div className="Auth-form-content">
-				<h3 className="Auth-form-title">Log in to XX</h3>
+				<h3 className="Auth-form-title">
+					<img src="/assets/images/logo/logo-orange.png" alt="Main Logo" width='100%'></img>
+				</h3>
 				<div className="form-group mt-3">
 					<label htmlFor='email'>Email address</label>
 					<input
@@ -106,9 +108,10 @@ const Login = () => {
 				</div>
 				<div className=" mt-3">
 					<Button 
-					variant="primary" 
+					variant="" 
 					className="btn-block w-100" 
 					type="submit" 
+					style={{backgroundColor:"#FF8A00"}}
 					disabled={!email || !password || isLoading}
 					onClick={!isLoading ? handleSubmit : null}>
 
@@ -132,9 +135,6 @@ const Login = () => {
 					<ButtonGroup className="d-flex align-items-center mb-2" >
 						<Button variant="outline-dark" size="xs" className="" type="button">
 							<i className="bi bi-apple"></i>
-						</Button>
-						<Button variant="outline-dark" size="xs" className="" type="button">
-						<i className="bi bi-github"></i>						
 						</Button>
 						<Button variant="outline-dark" size="xs" className="" type="button">
 						<i className="bi bi-google"></i>						

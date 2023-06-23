@@ -5,6 +5,7 @@ const cors = require("cors");
 const chalk = require('chalk');
 const connectToDB = require('./db/dbService');
 const cookieParser = require("cookie-parser")
+
 const { v4: uuidv4 } = require('uuid');
 require('dotenv').config()
 const app = express();
