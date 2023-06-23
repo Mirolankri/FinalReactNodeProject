@@ -1,13 +1,13 @@
-import React, { createContext, useState,useContext,useMemo,useEffect } from 'react';
-import LocalStorage from '../Helpers/LocalStorage/LocalStorage';
+import React, { createContext, useState, useContext, useMemo, useEffect } from 'react'
+import LocalStorage from '../../Helpers/LocalStorage/LocalStorage'
 
 // Create the user context
-export const UserContext = createContext();
+export const UserContext = createContext()
 
 // Create a provider component
 export const UserProvider = ({ children }) => {
-  const [userData, setUserData] = useState(null);
-  const [Token, setToken] = useState(LocalStorage.get_item("token"));
+  const [userData, setUserData] = useState(null)
+  const [Token, setToken] = useState(LocalStorage.get_item("token"))
 
 
   const login = (_userData,_Token) => {

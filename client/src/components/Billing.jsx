@@ -1,5 +1,5 @@
 import React from 'react'
-import { useUser } from "../providers/UserProvider";
+import { useUser } from "../users/providers/UserProvider"
 
 
 const Billing = () => {
