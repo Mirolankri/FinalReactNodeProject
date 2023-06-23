@@ -4,16 +4,22 @@ const jwt = require('jsonwebtoken');
 
 const UserSchema = require("../../db/schemas/User");
 const { GeneratePassWord,ComparePassWord } = require("../../helpers/bcrypt");
-const {generateCode,generateID} = require("../../helpers/generateNumbers")
+const {generateCode,generateID} = require("../../helpers/generateNumbers");
+const { verifyGoogleToken } = require("../../helpers/googleverify");
 require('dotenv').config()
 
 const secretKey = process.env.JWT_KEY;
 
 
 router.post("/login", async (req, res) => {
-	const { email, password } = req.body;
+	// console.log("dd ",req.body);
+	const verificationResponse = ''
+	//await verifyGoogleToken(req.body.e.credential);
 
-	let CheckUserLogin = await UserSchema.findOne({email:email})
+	const { email, password } = req.body;
+	let emailforsignin = email??verificationResponse.payload.email
+	console.log(emailforsignin);
+	let CheckUserLogin = await UserSchema.findOne({email:emailforsignin})
 	if(!CheckUserLogin) throw Error('אחד הפרטים לא נכונים')
 
 	// let result = users.filter(

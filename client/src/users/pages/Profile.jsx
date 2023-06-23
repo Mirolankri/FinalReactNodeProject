@@ -12,6 +12,7 @@ const Profile = () => {
       <PageHeader _title={"פרופיל"}/>
     
     <div>{JSON.stringify(userData)}</div>
+    
     </Container>
   )
 }
