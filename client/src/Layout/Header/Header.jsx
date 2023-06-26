@@ -4,7 +4,7 @@ import NavBar from './nav';
 
 const Header = () => {
     const location = useLocation();
-    console.log(location);
+    // console.log(location);
     const excludeNavbarPaths = ['/login', '/register','/phone/verify']; // Add more paths as needed
 
   // Check if the current path should exclude the Navbar component
