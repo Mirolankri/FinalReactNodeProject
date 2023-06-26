@@ -8,13 +8,14 @@ import Spinner from 'react-bootstrap/Spinner';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 // import Swal from 'sweetalert2'
 import { UserContext, useUser } from "../../users/providers/UserProvider";
-
+import  axios  from "axios";
 
 
 
 const Login = () => {
+	axios.defaults.withCredentials = true;
 	// const { setUserData } = useContext(UserContext)
-	const {setUserData,login} = useUser()
+	const {setUserData,login,userData} = useUser()
 	// const [email, setEmail] = useState("");
 	// const [password, setPassword] = useState("");
 	const [email, setEmail] = useState("miro@istoreil.co.il");
@@ -23,8 +24,9 @@ const Login = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
+		if(userData) navigate("/")
 		function simulateNetworkRequest() {
-		  return new Promise((resolve) => setTimeout(resolve, 5000));
+		  return new Promise((resolve) => setTimeout(resolve, 10000));
 		}
 	
 		if (isLoading) {
@@ -35,29 +37,46 @@ const Login = () => {
 	  }, [isLoading]);
 	
 	const postLoginDetails = () => {
-		fetch(`${process.env.REACT_APP_DOMAIN}/user/login`, {
-			method: "POST",
-			body: JSON.stringify({
-				email,
-				password,
-			}),
-			headers: {
-				"Content-Type": "application/json",
-			},
-		})
-			.then((res) => res.json())
-			.then((data) => {
-				if (data.error_message) {
-					alert(data.error_message);
-				} else {
-					console.log(data.data);
+		const body = {email,password};
+    const headers = { 
+        // 'Authorization': 'Bearer my-token',
+        "Content-Type": "application/json",
+    };
+	
+    axios.post(`${process.env.REACT_APP_DOMAIN}/user/login`, body, { headers:headers })
+        .then(response => {
+			console.log(" response axios",response);
 					
-					// localStorage.setItem("username", data.data.username.username);
-					login(data.data.userdata,data.data.token);
-					navigate("/phone/verify");
-				}
-			})
-			.catch((err) => console.error(err));
+			// localStorage.setItem("username", data.data.username.username);
+			login(response.data.data.userdata,response.data.data.token);
+			navigate("/phone/verify");
+
+		});
+
+
+		// fetch(`${process.env.REACT_APP_DOMAIN}/user/login`, {
+		// 	method: "POST",
+		// 	body: JSON.stringify({
+		// 		email,
+		// 		password,
+		// 	}),
+		// 	headers: {
+		// 		"Content-Type": "application/json",
+		// 	},
+		// })
+			// .then((res) => res.json())
+			// .then((data) => {
+			// 	if (data.error_message) {
+			// 		alert(data.error_message);
+			// 	} else {
+			// 		console.log(data.data);
+					
+			// 		// localStorage.setItem("username", data.data.username.username);
+			// 		login(data.data.userdata,data.data.token);
+			// 		navigate("/phone/verify");
+			// 	}
+			// })
+			// .catch((err) => console.error(err));
 	};
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -133,11 +152,9 @@ const Login = () => {
 
 					{/* <div style={{ display: "flex", alignItems: "center" }}> */}
 					<ButtonGroup className="d-flex align-items-center mb-2" >
+						
 						<Button variant="outline-dark" size="xs" className="" type="button">
-							<i className="bi bi-apple"></i>
-						</Button>
-						<Button variant="outline-dark" size="xs" className="" type="button">
-						<i className="bi bi-google"></i>						
+							Login With <i className="bi bi-google"></i>						
 						</Button>
 					</ButtonGroup>
 
@@ -154,39 +171,7 @@ const Login = () => {
 				</p>
 				</div>
 			</form>
-		</div>
-	
-	<div className='login__container d-none'>
-				<h2>Login </h2>
-				<form className='login__form' onSubmit={handleSubmit}>
-					<label htmlFor='email'>Email</label>
-					<input
-						type='text'
-						id='email'
-						name='email'
-						value={email}
-						required
-						onChange={(e) => setEmail(e.target.value)}
-					/>
-					<label htmlFor='password'>Password</label>
-					<input
-						type='password'
-						name='password'
-						id='password'
-						minLength={3}
-						required
-						value={password}
-						onChange={(e) => setPassword(e.target.value)}
-					/>
-					<button className='loginBtn'>SIGN IN</button>
-					<p>
-						Don't have an account?{" "}
-						<span className='link' onClick={gotoSignUpPage}>
-							Sign up
-						</span>
-					</p>
-				</form>
-			</div>
+		</div>	
 		</>
 	);
 };

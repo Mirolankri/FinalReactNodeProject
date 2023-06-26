@@ -20,29 +20,35 @@ router.post("/login", async (req, res) => {
 	let emailforsignin = email??verificationResponse.payload.email
 	console.log(emailforsignin);
 	let CheckUserLogin = await UserSchema.findOne({email:emailforsignin})
-	if(!CheckUserLogin) throw Error('אחד הפרטים לא נכונים')
+	if(!CheckUserLogin) throw Error('שם משתמש או סיסמא שגויים')
 
-	// let result = users.filter(
-	// 	(user) => user.email === email && user.password === password
-	// );
 	let CheckPassWord = ComparePassWord(password,CheckUserLogin.password);
 
 	if (!CheckPassWord) {
 		return res.json({
-			error_message: "אחד הפרטים לא נכונים",
+			error_message: "שם משתמש או סיסמא שגויים",
 		});
 	}
-	code = generateCode(100000,999999);
-
+	// code = generateCode(100000,999999);
+	code = 111111
 	//👇🏻 Send the SMS 
     console.log(CheckUserLogin, code);
-	req.session.UserID = CheckUserLogin._id;
-	req.session.username = CheckUserLogin.username;
-
-	// console.log(req.session);
+	
 	const token = jwt.sign({ username: CheckUserLogin.username }, secretKey,{ expiresIn: "24h" });
-    // req.headers.authorization = `Bearer ${token}`
-    // console.log(req.headers);
+
+	req.session.Site = {
+		UserID:CheckUserLogin._id,
+		username:CheckUserLogin.username,
+		JWT_TOKEN:token,
+		OTP:code
+	}
+	// req.session.Site.UserID = CheckUserLogin._id;
+	// req.session.Site.username = CheckUserLogin.username;
+	// // req.session.Site.username = CheckUserLogin.username;
+	// req.session.Site.JWT_TOKEN = token;
+	// req.session.Site.OTP = code;
+
+
 	res.json({
 		message: "Login successfully",
 		data: {
@@ -106,11 +112,10 @@ router.get('/protected', (req, res) => {
 });
 
 router.get('/getme',async (req,res)=>{
-   
-    
-    const UserID = req.session.UserID;
-    console.log("ff");
-    console.log(req.headers);
+	console.log("in getme");
+	console.log("get me session",req.session);
+    const UserID = req.session.Site.UserID;
+    // console.log(req.headers);
     const token = req.headers.authorization.split(' ')[1];
     console.log(token);
     // Verify the token
@@ -137,9 +142,10 @@ router.get('/getme',async (req,res)=>{
 })
 
 router.post("/verification", (req, res) => {
-    console.log(req.body.code);
-    console.log(code);
-	if (code == req.body.code) {
+	console.log(req.session.Site.OTP);
+    // console.log(req.body.code);
+    // console.log(code);
+	if (req.session.Site.OTP == req.body.code) {
 		return res.json({ message: "You're verified successfully" });
 	}
 	res.json({

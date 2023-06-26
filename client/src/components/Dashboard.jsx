@@ -31,9 +31,9 @@ const Dashboard = () => {
 			<PageHeader _title={"דף הבית"}/>
 			<h2 style={{ margin: "0px",textAlign:"center" }}>
 				Hello,{userData && `user name ${userData.username}`}
-				<GoogleOAuthProvider clientId="213352614385-gk8iuql2eok33cisjg8mt6l5iil2c2fa.apps.googleusercontent.com">
+				{/* <GoogleOAuthProvider clientId="213352614385-gk8iuql2eok33cisjg8mt6l5iil2c2fa.apps.googleusercontent.com">
           			<Google />
-        		</GoogleOAuthProvider>
+        		</GoogleOAuthProvider> */}
 				{/* Hello, {localStorage.getItem("username")} */}
 			</h2>
         </Container>
