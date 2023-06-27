@@ -4,7 +4,7 @@ const UserSchema = require("../../db/schemas/User")
 const { handleError } = require('../../utils/errorHandler')
 const { validateProfile } = require('../validations/userValidationService')
 
-router.post('/profile', async (req, res) => {
+router.post('/', async (req, res) => {
 	try {
 		let profile = req.body
         const { error } = validateProfile(profile)
