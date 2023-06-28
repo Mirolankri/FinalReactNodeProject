@@ -1,15 +1,16 @@
-const config = require('config')
-const DB = config.get("DB") || 'mongoDB'
+require('dotenv').config()
+const DB = process.env.DB || 'mongoDB'
 const ProfileSchema = require('./mongoDB/Profile')
 
 const createUpdateProfile = async (normalizedProfile) => {
     if (DB === 'mongoDB'){
         try {
-            const { _id } = normalizedProfile
-            let profile = await ProfileSchema.findOne({_id})
+            const { user_id } = normalizedProfile
+            let profile = await ProfileSchema.findOne({user_id})
 
             if (profile){
-                profile = await ProfileSchema.findByIdAndUpdate(_id, normalizedProfile, {new: true}).select(['-__v'])
+                console.log(user_id);
+                profile = await ProfileSchema.findByIdAndUpdate(profile._id, normalizedProfile, {new: true}).select(['name.first','name.last'])
                 return Promise.resolve(profile)
             }
 

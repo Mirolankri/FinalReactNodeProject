@@ -23,6 +23,9 @@ const ProfileSchema = mongoose.Schema({
         type: Boolean,
         require: true
     },
+    user_id: {
+        type: mongoose.Schema.Types.ObjectId
+    }
 })
 
 module.exports = mongoose.model("profile", ProfileSchema)

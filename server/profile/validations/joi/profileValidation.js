@@ -1,6 +1,7 @@
 const Joi = require('joi');
 
 const profileValidation = (profile) => {
+    console.log(profile);
     const schema = Joi.object({
         name: Joi.object().keys({
             first: Joi.string().min(2).max(256).required(),
@@ -14,19 +15,18 @@ const profileValidation = (profile) => {
             houseNumber: Joi.number().required()
         }).required(),
         phone: Joi.string().ruleset.regex(/^[0][5][0|2|3|4|5|8|9]{1}[-]{0,1}[0-9]{7}$/).rule({ message: 'יש להכניס מספר סלולארי ישראלי בעל 10 ספרות.' }).required(),
-        // owner: Joi.object({
-
-        // }),
-        dogWoker: Joi.object({
+        // owner: Joi.object({}),
+        dogWoker: Joi.object().keys({
             dogsInTrip: Joi.number().required(),
             payBy: Joi.string().required(),
             mobile: Joi.boolean().required()
-        }),
+        }).allow(""),
         experience: Joi.string().required(),
-        bigDogs: Joi.boolean().required()
+        bigDogs: Joi.boolean().required(),
+        // user_id: Joi.string().required()
     })
 
-    return schema.valid(profile)
+    return schema.validate(profile)
 }
 
 module.exports = profileValidation
