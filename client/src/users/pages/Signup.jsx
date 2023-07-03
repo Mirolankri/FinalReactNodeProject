@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 
+import BlankPage from "./BlankPage";
+
 const Signup = () => {
 	const [email, setEmail] = useState("miro@istoreil.co.il");
 	const [username, setUsername] = useState("miros");
@@ -49,14 +51,16 @@ const Signup = () => {
 		setUsername("");
 		setPassword("");
 	};
-	const gotoLoginPage = () => navigate("/");
+	const gotoLoginPage = () => navigate("/login");
 
 	return (
-        <>
-        <div className="Auth-form-container">
+
+        <BlankPage>
+        {/* <div className="Auth-form-container">
 			<form className="Auth-form">
-				<div className="Auth-form-content">
-				<h3 className="Auth-form-title">Get started With XX</h3>
+				<div className="Auth-form-content"> */}
+
+				<h3 className="Auth-form-title">Get started</h3>
 				<div className="form-group mt-3">
 					<label htmlFor='email'>Email address</label>
                     <input
@@ -135,61 +139,13 @@ const Signup = () => {
 						Login
 					</span>
 				</p>
-				</div>
+				{/* </div>
 			</form>
-		</div>
+		</div> */}
         
 
-		<div className='signup__container d-none'>
-			<h2>Sign up </h2>
-			<form className='signup__form' onSubmit={handleSubmit}>
-				<label htmlFor='email'>Email Address</label>
-				<input
-					type='email'
-					name='email'
-					id='email'
-					value={email}
-					required
-					onChange={(e) => setEmail(e.target.value)}
-				/>
-				<label htmlFor='username'>Username</label>
-				<input
-					type='text'
-					id='username'
-					name='username'
-					value={username}
-					required
-					onChange={(e) => setUsername(e.target.value)}
-				/>
-				<label htmlFor='tel'>Phone Number</label>
-				<input
-					type='tel'
-					name='tel'
-					id='tel'
-					value={tel}
-					required
-					onChange={(e) => setTel(e.target.value)}
-				/>
-				<label htmlFor='tel'>Password</label>
-				<input
-					type='password'
-					name='password'
-					id='password'
-					minLength={8}
-					required
-					value={password}
-					onChange={(e) => setPassword(e.target.value)}
-				/>
-				<button className='signupBtn'>SIGN UP</button>
-				<p>
-					Already have an account?{" "}
-					<span className='link' onClick={gotoLoginPage}>
-						Login
-					</span>
-				</p>
-			</form>
-		</div>
-        </>
+		
+        </BlankPage>
 	);
 };
 

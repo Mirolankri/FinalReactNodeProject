@@ -11,7 +11,7 @@ import Google from './Buttons/SignInButtons/google';
 const Dashboard = () => {
 	// const { userData } = useContext(UserContext);
     const {userData} = useUser()
-	console.log(userData);
+	// console.log(userData);
 	const navigate = useNavigate();
 
 	useEffect(() => {

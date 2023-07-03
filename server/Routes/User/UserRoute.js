@@ -114,30 +114,40 @@ router.get('/protected', (req, res) => {
 router.get('/getme',async (req,res)=>{
 	console.log("in getme");
 	console.log("get me session",req.session);
-    const UserID = req.session.Site.UserID;
-    // console.log(req.headers);
-    const token = req.headers.authorization.split(' ')[1];
-    console.log(token);
-    // Verify the token
-    console.log(UserID);
-    
-    const decoded = jwt.verify(token, secretKey);
+    const UserID = req.session.Site?.UserID;
+	if(UserID)
+	{
+		// console.log(req.headers);
+		const token = req.headers.authorization.split(' ')[1];
+		console.log(token);
+		// Verify the token
+		console.log(UserID);
+		
+		const decoded = jwt.verify(token, secretKey);
 
-    // const token = req.headers.authorization.split(' ')[1];
+		// const token = req.headers.authorization.split(' ')[1];
 
 
-    let CheckUserLogin = await UserSchema.findOne({username:decoded.username})
-	if(!CheckUserLogin) throw Error('משתמש לא מחובר')
+		let CheckUserLogin = await UserSchema.findOne({username:decoded.username})
+		if(!CheckUserLogin) throw Error('משתמש לא מחובר')
 
-    // delete req.cookies;
-    res.json({
-		CheckUserLogin: CheckUserLogin,
-		session: req.session,
-		headers: req.headers,
-        cookie:req.cookies,
-        // token:token
-		// header: req.header,
-	});
+		// delete req.cookies;
+		res.json({
+			CheckUserLogin: CheckUserLogin,
+			session: req.session,
+			headers: req.headers,
+			cookie:req.cookies,
+			// token:token
+			// header: req.header,
+		});
+
+	}
+	else
+	{
+		res.json({
+			error_message: "Incorrect get me",
+		});
+	}
 
 })
 
