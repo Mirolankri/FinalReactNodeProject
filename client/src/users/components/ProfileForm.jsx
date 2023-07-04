@@ -1,26 +1,36 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { func, object, string } from 'prop-types'
 import Form from '../../forms/components/Form'
 import Input from '../../forms/components/Input'
 
-const ProfileForm = ({ onSubmit, onReset, onFormChange, title, errors, data, onInputChange, setData }) => {
+const ProfileForm = ({ onSubmit, onReset, onFormChange, title, subTitle, errors, data, onInputChange, setData }) => {
     return (
-        <Form title={title} onSubmit={onSubmit} onReset={onReset} to='/'>
-            <Input type='text' id='first_name' label='שם פרטי' style={{ maxWidth: 'calc(50% - 8px)', flexBasis: 'calc(50% - 8px)' }} />
-            <Input type='text' id='last_name' label='שם משפחה' style={{ maxWidth: 'calc(50% - 8px)', flexBasis: 'calc(50% - 8px)' }} />
-            <Input type='date' id='birth' label='תאריך לידה' style={{ maxWidth: 'calc(50% - 8px)', flexBasis: 'calc(50% - 8px)' }} />
-            <Input type='text' id='gander' label='מין' style={{ maxWidth: 'calc(50% - 8px)', flexBasis: 'calc(50% - 8px)' }}  />
-            <Input type='text' id='address' label='כתובת מגורים' style={{ maxWidth: 'calc(50% - 8px)', flexBasis: 'calc(50% - 8px)' }}  />
-            <Input type='text' id='phone' label='מספר נייד' style={{ maxWidth: 'calc(50% - 8px)', flexBasis: 'calc(50% - 8px)' }}  />
-            <Input type='text' id='godCount' label='כמות כלבים שתוציא בטיול' style={{ maxWidth: 'calc(50% - 8px)', flexBasis: 'calc(50% - 8px)' }}  />
-            <Input type='text' id='payBy' label='?כיצד תעדיף להשכר' style={{ maxWidth: 'calc(50% - 8px)', flexBasis: 'calc(50% - 8px)' }}  />
-            <Input type='text' id='mobile' label='האם אתה נייד?' style={{ maxWidth: 'calc(50% - 8px)', flexBasis: 'calc(50% - 8px)' }}  />
-            <Input type='text' id='experience' label='האם יש לך נסיון עם כלבים?' style={{ maxWidth: 'calc(50% - 8px)', flexBasis: 'calc(50% - 8px)' }}  />
-            <Input type='text' id='bigDog' label='האם אתה מפחד מכלבים גדולים?' style={{ maxWidth: 'calc(50% - 8px)', flexBasis: 'calc(50% - 8px)' }}  />
+        <Form title={title} subTitle={subTitle} onSubmit={onSubmit} onReset={onReset} onChange={onFormChange} to='/' >
+            <Input type='text' id='first_name' label='שם פרטי' />
+            <Input type='text' id='last_name' label='שם משפחה' />
+            <Input type='date' id='birth' label='תאריך לידה' />
+            <Input isSelect={true} id='gander' label='מין' placeholder='יש לבחור אחת מהאפשרויות' options={[{val: 'male', text: 'זכר'},{val: 'female', text: 'נקבה'},{val: 'other', text: 'אחר'}]}  />
+            <Input type='text' placeholder='יש להזין כתובת מגורים הכוללת עיר, רחוב ומספר בית' id='address' label='כתובת מגורים'  />
+            <Input type='text' id='phone' label='מספר נייד'  />
+            <Input isSelect={true} placeholder='יש לבחור אחת מהאפשרויות' id='dogCount' label='כמות כלבים שתוציא בטיול' options={[{val: 1, text: 'כלב אחד'},{val: 2, text: 'שני כלבים'},{val: 3, text: 'שלושה כלבים'},{val: 4, text: 'ארבעה כלבים'},{val: 5, text: 'חמישה כלבים'}]} formText={'אנחנו דוגלים במתן דגש על תשומת הלב לכלבים. לא ניתן להוליך מעבר לחמישה כלבים.'}  />
+            <Input isSelect={true} placeholder='יש לבחור אחת מהאפשרויות' options={[{val: 'cash', text:'מזומן'},{val: 'bit', text:'העברה באמצעות Bit'},{val: 'other', text:'אחר'}]} id='payBy' label='כיצד תעדיף להשתכר?'  />
+            <Input isSelect={true} placeholder='יש לבחור אחת מהאפשרויות' options={[{val: true, text:'כן'},{val: false, text:'לא'}]} id='mobile' label='האם אתה נייד?'  />
+            <Input isSelect={true} placeholder='יש לבחור אחת מהאפשרויות' options={[{val: 'base', text:'בסיסי'},{val: 'verified', text:'בעל תעודת אילוף'},{val: 'no', text:'אין'},{val: 'other', text:'אחר'}]} id='experience' label='האם יש לך נסיון עם כלבים?'  />
+            <Input isSelect={true} placeholder='יש לבחור אחת מהאפשרויות' options={[{val: true, text:'כן'},{val: false, text:'לא'}]} id='bigDog' label='האם אתה מפחד מכלבים גדולים?'  />
         </Form>
     )
 }
 
-ProfileForm.propTypes = {}
+ProfileForm.propTypes = {
+    onSubmit: func.isRequired,
+    onReset: func.isRequired,
+    onFormChange: func.isRequired,
+    title: string.isRequired,
+    subTitle: string.isRequired,
+    errors: object.isRequired,
+    data: object.isRequired,
+    onInputChange: func.isRequired,
+    setData: func.isRequired
+}
 
 export default ProfileForm

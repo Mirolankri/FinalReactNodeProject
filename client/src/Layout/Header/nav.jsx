@@ -16,7 +16,7 @@ function NavBar() {
 	// 	navigate("/login");
 	// };
   return (
-    <Navbar sticky="top" collapseOnSelect expand="lg" data-bs-theme="dark"  style={{backgroundColor:"#8668FF"}}>
+    <Navbar dir='ltr' sticky="top" collapseOnSelect expand="lg" data-bs-theme="dark"  style={{backgroundColor:"#8668FF"}}>
       <Container fluid >
         <Navbar.Brand style={{color:"#ffffff"}} as={NavLink} to="/">
         <img

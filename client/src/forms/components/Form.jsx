@@ -7,14 +7,15 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import ReactForm from 'react-bootstrap/Form'
 
-const Form = ({ title, onSubmit, onReset, onChange, to, children }) => {
+const Form = ({ title, subTitle, onSubmit, onReset, onChange, to, children }) => {
     const navigate = useNavigate()
 
     return (
         <ReactForm>
-            <Container>
-                <h1 style={{textAlign: 'center'}} className='mt-5'>{ title }</h1>
-                <div className='d-flex justify-content-between flex-wrap' style={{gap: '15px'}}>
+            <Container dir='rtl'>
+                <h1 className='mt-5 text-center' style={{fontSize:'2.2rem'}}>{ title }</h1>
+                <p className='mb-4 text-center font-weight-normal'>{ subTitle }</p>
+                <div className='d-flex justify-content-between flex-wrap' style={{rowGap: '15px'}}>
                     { children }
                 </div>
                 <Row>
