@@ -5,15 +5,14 @@ import Login from '../users/pages/Login';
 import Billing from '../components/Billing';
 import Signup from '../users/pages/Signup';
 import PhoneVerify from '../users/pages/PhoneVerify';
-import ProfilePage from '../users/pages/ProfilePage';
 // import { useUser } from "../users/providers/UserProvider";
 import { useUser } from '../users/providers/UserProvider';
 import { useNavigate } from 'react-router-dom';
 import BlankPage from '../users/pages/BlankPage';
 import ErrorPage from '../components/ErrorPage';
-
 import ROUTES from './routesModel';
-import UpdateProfilePage from '../users/pages/UpdateProfilePage';
+import ProfilePage from '../profile/pages/ProfilePage';
+import UpdateProfilePage from '../profile/pages/UpdateProfilePage';
 function Router() {
     // const {userData} = useUser()
     // const navigate = useNavigate()

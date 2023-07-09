@@ -36,7 +36,7 @@ const getProfile = async (user_id) => {
 
             return Promise.resolve(profile)
         } catch (error) {
-            error.status = 404
+            error.status = 400
             return Promise.reject(error)
         }
     }

@@ -23,6 +23,10 @@ const ProfileSchema = mongoose.Schema({
         type: Boolean,
         require: true
     },
+    gender: {
+        type: String,
+        require: true
+    },
     user_id: {
         type: mongoose.Schema.Types.ObjectId
     }

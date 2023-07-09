@@ -5,6 +5,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useNavigate, NavLink } from "react-router-dom";
 import LocalStorage from '../../Helpers/LocalStorage/LocalStorage';
 import { useUser } from '../../users/providers/UserProvider';
+import ROUTES from '../../routes/routesModel';
 
 function NavBar() {
   const {userData,logout} = useUser()
@@ -35,6 +36,7 @@ function NavBar() {
           <Nav className="me-auto">
             <Nav.Link href="#features" style={{color:"#ffffff"}}>Features</Nav.Link>
             <Nav.Link href="#pricing" style={{color:"#ffffff"}}>Pricing</Nav.Link>
+            <Nav.Link as={NavLink} to={`${ROUTES.PROFILE}/update`} style={{color:"#ffffff"}}>Profile</Nav.Link>
             
             <NavDropdown title="Dropdown" id="collasible-nav-dropdown" style={{color:"#ffffff"}}>
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
