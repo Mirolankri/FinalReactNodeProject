@@ -25,8 +25,8 @@ const ProfileForm = ({ onSubmit, onReset, onFormChange, title, subTitle, data })
             <Input type='text' value={data.last} id='last_name' label='שם משפחה' />
             <Input type='date' value={`${yearBirth}-${monthBirth}-${dayBirth}`} id='birth' label='תאריך לידה' />
             <Input isSelect={true} id='gander' label='מין' placeholder='יש לבחור אחת מהאפשרויות' options={[{val: 'male', text: 'זכר'},{val: 'female', text: 'נקבה'},{val: 'other', text: 'אחר'}]}  />
-            <Input type='text' placeholder='יש להזין כתובת מגורים הכוללת עיר, רחוב ומספר בית' id='address' label='כתובת מגורים'  />
-            <Input type='text' id='phone' label='מספר נייד'  />
+            <Input type='text' value={data.address} placeholder='יש להזין כתובת מגורים הכוללת עיר, רחוב ומספר בית' id='address' label='כתובת מגורים'  />
+            <Input type='text' value={data.phone} id='phone' label='מספר נייד'  />
             <Input isSelect={true} placeholder='יש לבחור אחת מהאפשרויות' id='dogCount' label='כמות כלבים שתוציא בטיול' options={[{val: 1, text: 'כלב אחד'},{val: 2, text: 'שני כלבים'},{val: 3, text: 'שלושה כלבים'},{val: 4, text: 'ארבעה כלבים'},{val: 5, text: 'חמישה כלבים'}]} formText={'אנחנו דוגלים במתן דגש על תשומת הלב לכלבים. לא ניתן להוליך מעבר לחמישה כלבים.'}  />
             <Input isSelect={true} placeholder='יש לבחור אחת מהאפשרויות' options={[{val: 'cash', text:'מזומן'},{val: 'bit', text:'העברה באמצעות Bit'},{val: 'other', text:'אחר'}]} id='payBy' label='כיצד תעדיף להשתכר?'  />
             <Input isSelect={true} placeholder='יש לבחור אחת מהאפשרויות' options={[{val: true, text:'כן'},{val: false, text:'לא'}]} id='mobile' label='האם אתה נייד?'  />
