@@ -2,7 +2,7 @@ import React from 'react'
 import { func, object, string } from 'prop-types'
 import Form from '../../forms/components/Form'
 import Input from '../../forms/components/Input'
-import { useUser } from '../providers/UserProvider'
+import { useUser } from '../../users/providers/UserProvider'
 
 const ProfileForm = ({ onSubmit, onReset, onFormChange, title, subTitle, data }) => {
     let birth
