@@ -3,7 +3,7 @@ const router = express.Router()
 const jwt = require('jsonwebtoken');
 
 const UserSchema = require("../../db/schemas/User");
-const { GeneratePassWord,ComparePassWord } = require("../../helpers/bcrypt");
+const { GeneratePassWord, ComparePassWord } = require("../../helpers/bcrypt");
 const {generateCode,generateID} = require("../../helpers/generateNumbers");
 const { verifyGoogleToken } = require("../../helpers/googleverify");
 require('dotenv').config()
@@ -22,7 +22,7 @@ router.post("/login", async (req, res) => {
 	let CheckUserLogin = await UserSchema.findOne({email:emailforsignin})
 	if(!CheckUserLogin) throw Error('שם משתמש או סיסמא שגויים')
 
-	let CheckPassWord = ComparePassWord(password,CheckUserLogin.password);
+	let CheckPassWord = ComparePassWord(password, CheckUserLogin.password);
 
 	if (!CheckPassWord) {
 		return res.json({
