@@ -36,6 +36,15 @@ const UserSchema = mongoose.Schema({
         type: Boolean,
         default: true
     },
+    isDogManager:{
+        type:Boolean,
+        default: false
+    },
+    isDogWalker:{
+        type:Boolean,
+        default: false
+    },
+    
     // address: AddressSchema,
     // isAdmin:{
     //     type:Boolean,

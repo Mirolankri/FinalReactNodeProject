@@ -3,7 +3,7 @@ const router = express.Router()
 const jwt = require('jsonwebtoken');
 
 const UserSchema = require("../../db/schemas/User");
-const { GeneratePassWord,ComparePassWord } = require("../../helpers/bcrypt");
+const { GeneratePassWord, ComparePassWord } = require("../../helpers/bcrypt");
 const {generateCode,generateID} = require("../../helpers/generateNumbers");
 const { verifyGoogleToken } = require("../../helpers/googleverify");
 require('dotenv').config()
@@ -22,7 +22,7 @@ router.post("/login", async (req, res) => {
 	let CheckUserLogin = await UserSchema.findOne({email:emailforsignin})
 	if(!CheckUserLogin) throw Error('שם משתמש או סיסמא שגויים')
 
-	let CheckPassWord = ComparePassWord(password,CheckUserLogin.password);
+	let CheckPassWord = ComparePassWord(password, CheckUserLogin.password);
 
 	if (!CheckPassWord) {
 		return res.json({
@@ -63,15 +63,25 @@ router.post("/login", async (req, res) => {
 router.post("/register", async (req, res) => {
 
 	try {
-		const { email, password, tel, username } = req.body;
+		const { email, password, tel, username,UserType } = req.body;
 
 		let CheckUserRegister = await UserSchema.findOne({email})
-		console.log(CheckUserRegister);
 		// return
-		if(CheckUserRegister) throw Error('משתמש קיים במערכת')
+		switch (UserType) {
+			case '1':
+				req.body.isDogManager = true
+				break;
+			case '2':
+				req.body.isDogWalker = true
+				break;
+		
+		}
+		// if(CheckUserRegister) throw Error('משתמש קיים במערכת')
+		if(CheckUserRegister) throw new Error('משתמש קיים במערכת')
 
 		req.body.password = GeneratePassWord(req.body.password)
 
+		console.log(req.body);
 		let User = await UserSchema(req.body).save()
 		// Set the user ID in the session
 		req.session.UserID = User._id;
@@ -87,7 +97,7 @@ router.post("/register", async (req, res) => {
 		error.status = 404
 		// return Promise.reject(error)
 		return res.json({
-			error_message: JSON.stringify(error),
+			error_message: "משתמש קיים במערכת",
 			// error_message: "User already exists",
 		});
 	}

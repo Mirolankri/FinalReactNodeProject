@@ -5,14 +5,14 @@ import Login from '../users/pages/Login';
 import Billing from '../components/Billing';
 import Signup from '../users/pages/Signup';
 import PhoneVerify from '../users/pages/PhoneVerify';
-import Profile from '../users/pages/Profile';
 // import { useUser } from "../users/providers/UserProvider";
 import { useUser } from '../users/providers/UserProvider';
 import { useNavigate } from 'react-router-dom';
 import BlankPage from '../users/pages/BlankPage';
 import ErrorPage from '../components/ErrorPage';
-
 import ROUTES from './routesModel';
+import ProfilePage from '../profile/pages/ProfilePage';
+import UpdateProfilePage from '../profile/pages/UpdateProfilePage';
 function Router() {
     // const {userData} = useUser()
     // const navigate = useNavigate()
@@ -28,10 +28,11 @@ function Router() {
     return (
         <Routes>
             {/* <Route path='/' element={<LoginTest />} /> */}
-            <Route path={ROUTES.ROOT} element={<Dashboard />} />
+            <Route exact path={ROUTES.ROOT} element={<Dashboard />} />
             <Route path={ROUTES.LOGIN} element={<Login />} />
             <Route path='/register' element={<Signup />} />
-            <Route path='/profile' element={<Profile />} />
+            <Route path={ROUTES.UPDATE_PROFILE} element={<UpdateProfilePage />} />
+            <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
             <Route path='/Billing' element={<Billing />} />
             <Route path='/phone/verify' element={<PhoneVerify />} />
             <Route path='*' element={<ErrorPage />} />

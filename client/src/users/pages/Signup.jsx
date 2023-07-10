@@ -1,10 +1,14 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 
 import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 
 import BlankPage from "./BlankPage";
+import ButtonGroup from "react-bootstrap/esm/ButtonGroup";
+import ToggleButton from "react-bootstrap/esm/ToggleButton";
+import Form from 'react-bootstrap/Form';
+import { OptionUserType } from "../const/userconst";
 
 const Signup = () => {
 	const [email, setEmail] = useState("miro@istoreil.co.il");
@@ -12,10 +16,30 @@ const Signup = () => {
 	const [tel, setTel] = useState("0542412241");
 	const [password, setPassword] = useState("1234");
     const [isLoading, setLoading] = useState(false);
+    const [Agreement, setAgreement] = useState(false);
+	const [UserType, setUserType] = useState(false);
+	
+
 
 	const navigate = useNavigate();
+	const handleSubmit = (e) => {
+		e.preventDefault();
+        setLoading(true);
+		postSignUpDetails();
+		setEmail("");
+		setTel("");
+		setUsername("");
+		setPassword("");
+		setUserType(false);
+	};
+	const handleCheckboxAgreement = (e) => {
+		console.log(e.target.checked);
+		setAgreement(e.target.checked)
+	}
+	const gotoLoginPage = () => navigate("/login");
 
 	const postSignUpDetails = () => {
+		// let type = UserType
 		fetch(`${process.env.REACT_APP_DOMAIN}/user/register`, {
 			method: "POST",
 			body: JSON.stringify({
@@ -23,6 +47,7 @@ const Signup = () => {
 				password,
 				tel,
 				username,
+				UserType
 			}),
 			headers: {
 				"Content-Type": "application/json",
@@ -40,27 +65,13 @@ const Signup = () => {
 			})
 			.catch((err) => console.error(err));
 	};
-
-	const handleSubmit = (e) => {
-		e.preventDefault();
-        setLoading(true);
-        // return
-		postSignUpDetails();
-		setEmail("");
-		setTel("");
-		setUsername("");
-		setPassword("");
-	};
-	const gotoLoginPage = () => navigate("/login");
-
 	return (
-
         <BlankPage>
         {/* <div className="Auth-form-container">
 			<form className="Auth-form">
 				<div className="Auth-form-content"> */}
 
-				<h3 className="Auth-form-title">Get started</h3>
+				<h3 className="Auth-form-title">מתחילים כאן</h3>
 				<div className="form-group mt-3">
 					<label htmlFor='email'>Email address</label>
                     <input
@@ -113,31 +124,65 @@ const Signup = () => {
 						onChange={(e) => setPassword(e.target.value)}
 					/>
 				</div>
+				<Form.Group className="form-group mt-3" controlId="exampleForm.ControlInput1">
+					<Form.Label>מי את/ה</Form.Label>
 
+					<ButtonGroup className="d-flex align-items-center mb-2" >
+				{OptionUserType.map((radio, idx) => (
+					<ToggleButton
+						key={idx}
+						id={`radio-${idx}`}
+						type="radio"
+						variant="outline-dark"
+						name="radio"
+						value={radio.value}
+						checked={UserType === radio.value}
+						onChange={(e) => setUserType(e.currentTarget.value)}
+					>
+						{radio.name}
+					</ToggleButton>
+					))}
+				</ButtonGroup>
+				</Form.Group>
+				
+
+
+
+				<div className="form-group form-check mt-3">
+					<label htmlFor='agreement'>
+					בלחיצה על הירשם אתה מסכים לתנאים ולהגבלות שלנו, ואתה מאשר שקראתה את מדיניות הפרטיות שלנו
+					</label>
+                    <input
+						className="form-check-input mt-1"
+						type='checkbox'
+						id='agreement'
+						name='agreement'
+						checked={Agreement}
+						required
+						onChange={handleCheckboxAgreement}
+					/>
+				</div>
 				<div className="d-grid gap-2 mt-3">
 					<Button 
-					variant="primary" 
+					variant="orange" 
 					className="btn-block w-100" 
 					type="submit" 
-					disabled={!email || !password || !username || !tel || isLoading}
+					disabled={!UserType || !Agreement || !email || !password || !username || !tel || isLoading}
 					onClick={!isLoading ? handleSubmit : null}>
 
 					{isLoading ? (
 							<>
-							Loading... <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+								<Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
 							</>
 						) : (
-							'Sign Up'
+							'הרשמה'
 						)}
 						
 					</Button>
 				</div>
 				
-				<p className="dont-have-account text-right mt-2">
-				Already have an account?{" "}
-					<span className='link' onClick={gotoLoginPage}>
-						Login
-					</span>
+				<p className="dont-have-account text-center mt-2 link" onClick={gotoLoginPage}>
+				כבר יש לך חשבון? התחבר/י פה
 				</p>
 				{/* </div>
 			</form>

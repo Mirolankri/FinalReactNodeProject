@@ -57,35 +57,9 @@ const Login = () => {
 			navigate("/phone/verify");
 
 		});
-
-
-		// fetch(`${process.env.REACT_APP_DOMAIN}/user/login`, {
-		// 	method: "POST",
-		// 	body: JSON.stringify({
-		// 		email,
-		// 		password,
-		// 	}),
-		// 	headers: {
-		// 		"Content-Type": "application/json",
-		// 	},
-		// })
-			// .then((res) => res.json())
-			// .then((data) => {
-			// 	if (data.error_message) {
-			// 		alert(data.error_message);
-			// 	} else {
-			// 		console.log(data.data);
-					
-			// 		// localStorage.setItem("username", data.data.username.username);
-			// 		login(data.data.userdata,data.data.token);
-			// 		navigate("/phone/verify");
-			// 	}
-			// })
-			// .catch((err) => console.error(err));
 	};
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		
 		setLoading(true);
 		// return
 		postLoginDetails();
@@ -108,7 +82,7 @@ const Login = () => {
 				required
 				onChange={(e) => setEmail(e.target.value)}
 				/>
-        		<label htmlFor="email">Email address</label>
+        		<label htmlFor="email">דואר אלקטרוני</label>
       		</Form.Floating>
 
 			  <Form.Floating className="mt-3">
@@ -122,31 +96,31 @@ const Login = () => {
 				onChange={(e) => setPassword(e.target.value)}
 				minLength={3}
 				/>
-        		<label htmlFor="password">Password</label>
+        		<label htmlFor="password">סיסמא</label>
       		</Form.Floating>
 			
 			<div className=" mt-3">
 				<Button 
-				variant="" 
+				variant="orange" 
 				className="btn-block w-100" 
 				type="submit" 
-				style={{backgroundColor:"#FF8A00"}}
+				// style={{backgroundColor:"#FF8A00"}}
 				disabled={!email || !password || isLoading}
 				onClick={!isLoading ? handleSubmit : null}>
 
 				{isLoading ? (
 						<>
-						Loading... <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+						<Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
 						</>
 					) : (
-						'Log in'
+						'התחברות'
 					)}
 					
 				</Button>
 
 				<div style={{ display: "flex", alignItems: "center" }}>
 					<div style={{ flex: 1, backgroundColor: "#ccc", height: "1px" }} />
-					<p style={{ margin: "0 10px" }}>OR</p>
+					<p style={{ margin: "0 10px" }}>או</p>
 					<div style={{ flex: 1, backgroundColor: "#ccc", height: "1px" }} />
 				</div>
 
@@ -154,19 +128,20 @@ const Login = () => {
 				<ButtonGroup className="d-flex align-items-center mb-2" >
 					
 					<Button variant="outline-dark" size="xs" className="" type="button">
-						Login With <i className="bi bi-google"></i>						
+						התחברות עם <i className="bi bi-google"></i>						
 					</Button>
 				</ButtonGroup>
 
 				{/* </div> */}
 			</div>
-			<p className="forgot-password text-right mt-2">
-				Forgot <a href="#">password?</a>
-			</p>
+			
+			<span className='link forgot-password text-right mt-2'>
+				שכחתי סיסמא?
+			</span>
 			<p className="dont-have-account text-right mt-2">
-			Don't have an account?{" "}
+			אין לך חשבון?{" "}
 			<span className='link' onClick={gotoSignUpPage}>
-				Sign up
+				הרשמה
 			</span>
 			</p>
 		</BlankPage>

@@ -108,6 +108,12 @@ body{
     left: -25px;
 }
 
+/*---------- typography ------------*/
+/* .typography-page-tite{
+	font-weight: 700;
+	font-size: 40px;
+} */
+
 
 @media(min-width: 992px){
 	.navbar-expand-custom {

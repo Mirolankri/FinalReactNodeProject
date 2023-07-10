@@ -1,7 +1,6 @@
 const Joi = require('joi');
 
 const profileValidation = (profile) => {
-    console.log(profile);
     const schema = Joi.object({
         name: Joi.object().keys({
             first: Joi.string().min(2).max(256).required(),

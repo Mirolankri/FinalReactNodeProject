@@ -1,6 +1,7 @@
 require('dotenv').config()
 const DB = process.env.DB || 'mongoDB'
 const ProfileSchema = require('./mongoDB/Profile')
+const { pick } = require('lodash')
 
 const createUpdateProfile = async (normalizedProfile) => {
     if (DB === 'mongoDB'){
@@ -24,4 +25,21 @@ const createUpdateProfile = async (normalizedProfile) => {
     }
 }
 
-module.exports = { createUpdateProfile }
+const getProfile = async (user_id) => {
+    if (DB === 'mongoDB'){
+        try {
+            let profile = await ProfileSchema.findOne({user_id})
+            if (!profile) throw new Error ('Profile not found')
+
+            // profile = pick(profile, [''])
+            console.log(profile)
+
+            return Promise.resolve(profile)
+        } catch (error) {
+            error.status = 205
+            return Promise.reject(error)
+        }
+    }
+}
+
+module.exports = { createUpdateProfile, getProfile }
