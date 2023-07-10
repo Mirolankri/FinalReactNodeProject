@@ -29,9 +29,10 @@ const UpdateProfilePage = () => {
   // const { value, ...rest } = useForm(initialProfileForm, createUpdateProfileSchema)
 
   return (
-    <></>
-    // <ProfileForm title='בוא.י נכיר לעומק' subTitle='ספר.י לנו קצת על עצמך' onSubmit={} onReset={} onFormChange={} onInputChange={} setData={} errors={} data={} />
-    // <ProfileForm title='בוא.י נכיר לעומק' subTitle='ספר.י לנו קצת על עצמך' />
+    <>
+    <ProfileForm title='בוא.י נכיר לעומק' subTitle='ספר.י לנו קצת על עצמך' onSubmit={rest.onSubmit} onReset={rest.handleReset} onFormChange={rest.validateForm} onInputChange={rest.handleChange} data={value.data} />
+    {/* <ProfileForm title='בוא.י נכיר לעומק' subTitle='ספר.י לנו קצת על עצמך' /> */}
+    </>
   )
 }
 

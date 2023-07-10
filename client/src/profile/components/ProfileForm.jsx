@@ -3,12 +3,27 @@ import { func, object, string } from 'prop-types'
 import Form from '../../forms/components/Form'
 import Input from '../../forms/components/Input'
 
-const ProfileForm = ({ onSubmit, onReset, onFormChange, title, subTitle, errors, data, onInputChange, setData }) => {
+const ProfileForm = ({ onSubmit, onReset, onFormChange, title, subTitle, data }) => {
+    let birth
+    let dayBirth
+    let monthBirth
+    let yearBirth
+    if(data.birth !== ''){
+        birth = new Date(data.birth)
+        dayBirth = ('0' + birth.getDate()).slice(-2)
+        monthBirth = ('0' + (birth.getMonth()+1)).slice(-2)
+        yearBirth = birth.getFullYear()
+    } else {
+        birth = new Date()
+        dayBirth = ('0' + birth.getDate()).slice(-2)
+        monthBirth = ('0' + (birth.getMonth()+1)).slice(-2)
+        yearBirth = birth.getFullYear()-18
+    }
     return (
         <Form title={title} subTitle={subTitle} onSubmit={onSubmit} onReset={onReset} onChange={onFormChange} to='/' >
-            <Input type='text' id='first_name' label='שם פרטי' />
-            <Input type='text' id='last_name' label='שם משפחה' />
-            <Input type='date' id='birth' label='תאריך לידה' />
+            <Input type='text' value={data.first} id='first_name' label='שם פרטי' />
+            <Input type='text' value={data.last} id='last_name' label='שם משפחה' />
+            <Input type='date' value={`${yearBirth}-${monthBirth}-${dayBirth}`} id='birth' label='תאריך לידה' />
             <Input isSelect={true} id='gander' label='מין' placeholder='יש לבחור אחת מהאפשרויות' options={[{val: 'male', text: 'זכר'},{val: 'female', text: 'נקבה'},{val: 'other', text: 'אחר'}]}  />
             <Input type='text' placeholder='יש להזין כתובת מגורים הכוללת עיר, רחוב ומספר בית' id='address' label='כתובת מגורים'  />
             <Input type='text' id='phone' label='מספר נייד'  />
