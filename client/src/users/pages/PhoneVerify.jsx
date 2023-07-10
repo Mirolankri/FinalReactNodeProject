@@ -9,6 +9,9 @@ import Form from 'react-bootstrap/Form';
 import { UserContext, useUser } from "../providers/UserProvider"
 import axios from "axios";
 import BlankPage from "./BlankPage";
+import ButtonGroup from "react-bootstrap/esm/ButtonGroup";
+import ToggleButton from "react-bootstrap/esm/ToggleButton";
+import { OptionUserType } from "../const/userconst";
 
 
 const PhoneVerify = () => {
@@ -16,9 +19,11 @@ const PhoneVerify = () => {
 
 	const [code, setCode] = useState("");
     const [isLoading, setLoading] = useState(false);
-	const {setUserData,login,userData} = useUser()
+    const [ShowAskPage, setShowAskPage] = useState(false);
+	const {setUserData,login,userData,isAskUserType,useUserType, setuseUserType} = useUser()
 
 
+	console.log("isAskUserType",isAskUserType);
     const inputRef = useRef(null);
 	const navigate = useNavigate();
 
@@ -27,7 +32,6 @@ const PhoneVerify = () => {
         if (inputRef.current && inputRef.current.value.length === 6) {
           // Trigger button click event
           document.querySelector('.SendOTP').click();
-        // console.log("fdf");
         }
       }, [code]);
 
@@ -47,12 +51,25 @@ const PhoneVerify = () => {
 				alert(response.data.error_message);
 				setLoading(false);
 			} else {
+				// navigate("/");
+				if(isAskUserType)
+					return setShowAskPage(true)
+
 				navigate("/");
-				// console.log("navigate");
+
+
 			}
 		})
 		.catch((err) => console.error(err));
 	};
+	const HandleSetUserType = (e) => {
+		// console.log(e.currentTarget.value);
+
+		setuseUserType(e.currentTarget.value)
+		// console.log("useUserType",useUserType);
+
+		navigate("/");
+	}
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		setLoading(true);
@@ -61,24 +78,47 @@ const PhoneVerify = () => {
 	};
 	return (
 		<BlankPage>
-{/* <div className="Auth-form-container">
-			<form className="Auth-form"> */}
-				{/* <div className="Auth-form-content"> */}
-				<h3 className="Auth-form-title">{userData && userData.username} <br/> Verify your Phone number</h3>
+			<h3 className="Auth-form-title">{userData && userData.username}</h3>
+
+			{ShowAskPage ? (
+				<>
+				<Form.Group className="form-group mt-3" controlId="exampleForm.ControlInput1">
+					<Form.Label>מי את/ה</Form.Label>
+
+					<ButtonGroup className="d-flex align-items-center mb-2" >
+				{OptionUserType.map((radio, idx) => (
+					<ToggleButton
+						key={idx}
+						id={`radio-${idx}`}
+						type="radio"
+						variant="outline-dark"
+						name="radio"
+						value={radio.value}
+						// checked={useUserType === radio.value}
+						onChange={HandleSetUserType}
+						
+					>
+						{radio.name}
+					</ToggleButton>
+					))}
+				</ButtonGroup>
+				</Form.Group>
+				</>
+			):(<>
 				<Form.Floating className="mt-3">
-				<Form.Control
-				id="code"
-				type="text"
-				placeholder="Enter Your Code"
-				name="code"
-				value={code}
-				required
-				onChange={(e) => setCode(e.target.value)}
-				maxLength={6}
-				ref={inputRef}
-				/>
-        		<label htmlFor="code">Enter OTP Code</label>
-      		</Form.Floating>
+					<Form.Control
+					id="code"
+					type="text"
+					placeholder="יש להזין קוד"
+					name="code"
+					value={code}
+					required
+					onChange={(e) => setCode(e.target.value)}
+					maxLength={6}
+					ref={inputRef}
+					/>
+					<label htmlFor="code">יש להזין קוד</label>
+      			</Form.Floating>
 			
 				<div className="d-grid gap-2 mt-3">
 					<Button 
@@ -91,23 +131,23 @@ const PhoneVerify = () => {
 
 					{isLoading ? (
 							<>
-							Verify Your Code... <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+							מאמת את הקוד שלך... <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
 							</>
 						) : (
-							'Log in'
+							'התחברות'
 						)}
 						
 					</Button>
 				</div>
 				<p className="dont-have-account text-right mt-2">
-				Don't Get an Code?{" "}
+					לא קיבלת קוד?{" "}
 						<span className='link'>
-							Click here
+						לחץ/י כאן
 						</span>
 				</p>
-				{/* </div> */}
-			{/* </form>
-		</div> */}
+			</>)}
+				
+
 		</BlankPage>
 
 	);

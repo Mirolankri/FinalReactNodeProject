@@ -9,7 +9,8 @@ const Input = ({ type, name, data, label, required, style, isSelect = false, pla
         <>
         <div className='col-12 col-md-6 p-2' >
             <Form.Label htmlFor={name}>{label}</Form.Label>
-            { isSelect ? <Select name={name} onChange={onChange} required={required} options={options} placeholder={placeholder}/> : <Text type={type} name={name} onChange={onChange} required={required} placeholder={placeholder}/> }
+            { isSelect ? 
+            <Select name={name} onChange={onChange} required={required} options={options} placeholder={placeholder}/> : <Text data={data} type={type} name={name} onChange={onChange} required={required} placeholder={placeholder}/> }
             <Form.Text id={name} muted>{formText}</Form.Text>
         </div>
         </>

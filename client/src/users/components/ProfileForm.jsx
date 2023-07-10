@@ -2,11 +2,14 @@ import React from 'react'
 import { func, object, string } from 'prop-types'
 import Form from '../../forms/components/Form'
 import Input from '../../forms/components/Input'
+import { useUser } from '../providers/UserProvider'
 
 const ProfileForm = ({ onSubmit, onReset, onFormChange, title, subTitle, errors, data, onInputChange, setData }) => {
+    const {userData} = useUser();
+    console.log(userData);
     return (
         <Form title={title} subTitle={subTitle} onSubmit={onSubmit} onReset={onReset} onChange={onFormChange} to='/' >
-            <Input type='text' id='first_name' label='שם פרטי' />
+            <Input type='text' id='first_name' label='שם פרטי' data={""} />
             <Input type='text' id='last_name' label='שם משפחה' />
             <Input type='date' id='birth' label='תאריך לידה' />
             <Input isSelect={true} id='gander' label='מין' placeholder='יש לבחור אחת מהאפשרויות' options={[{val: 'male', text: 'זכר'},{val: 'female', text: 'נקבה'},{val: 'other', text: 'אחר'}]}  />

@@ -5,18 +5,19 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useNavigate, NavLink } from "react-router-dom";
 import LocalStorage from '../../Helpers/LocalStorage/LocalStorage';
 import { useUser } from '../../users/providers/UserProvider';
+// import { useBootstrapPrefix } from 'react-bootstrap/esm/ThemeProvider';
+
 
 function NavBar() {
   const {userData,logout} = useUser()
     const navigate = useNavigate();
-
   //   const handleSignOut = () => {
   //   LocalStorage.remove_item("username")
   //   LocalStorage.remove_item("token")
 	// 	navigate("/login");
 	// };
   return (
-    <Navbar dir='ltr' sticky="top" collapseOnSelect expand="lg" data-bs-theme="dark"  style={{backgroundColor:"#8668FF"}}>
+    <Navbar sticky="top" collapseOnSelect expand="lg" data-bs-theme="dark"  style={{backgroundColor:"#8668FF"}}>
       <Container fluid >
         <Navbar.Brand style={{color:"#ffffff"}} as={NavLink} to="/">
         <img

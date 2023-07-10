@@ -2,20 +2,19 @@ import React, { useEffect,useContext} from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../users/providers/UserProvider";
 import PageHeader from "./PageHeader";
-import { Container } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 // import { GoogleLogin } from '@react-oauth/google';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import Google from './Buttons/SignInButtons/google';
-
+import { FindUserType, OptionUserType } from "../users/const/userconst";
 
 const Dashboard = () => {
 	// const { userData } = useContext(UserContext);
-    const {userData} = useUser()
+    const {userData,useUserType} = useUser()
 	// console.log(userData);
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		console.log(userData);
 		const checkUser = () => {
 			if (!localStorage.getItem("username")) {
 				navigate("/login");
@@ -23,14 +22,19 @@ const Dashboard = () => {
 		};
 		checkUser();
 	}, [navigate]);
-
-	
-
+	let findname = FindUserType(useUserType)
+	// console.log(findname);
+	// console.log(FindUserType(useUserType));
+// console.log(OptionUserType.find(type => type.value == Number(useUserType)));
 	return (
         <Container fluid>
 			<PageHeader _title={"דף הבית"}/>
 			<h2 style={{ margin: "0px",textAlign:"center" }}>
-				Hello,{userData && `user name ${userData.username}`}
+				שלום,{userData && `שם משתמש ${userData.username}`}
+				<br></br>
+				סוג { findname && findname.name}
+				
+
 				{/* <GoogleOAuthProvider clientId="213352614385-gk8iuql2eok33cisjg8mt6l5iil2c2fa.apps.googleusercontent.com">
           			<Google />
         		</GoogleOAuthProvider> */}

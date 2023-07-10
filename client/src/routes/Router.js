@@ -29,7 +29,7 @@ function Router() {
     return (
         <Routes>
             {/* <Route path='/' element={<LoginTest />} /> */}
-            <Route path={ROUTES.ROOT} element={<Dashboard />} />
+            <Route exact path={ROUTES.ROOT} element={<Dashboard />} />
             <Route path={ROUTES.LOGIN} element={<Login />} />
             <Route path='/register' element={<Signup />} />
             <Route path={ROUTES.UPDATE_PROFILE} element={<UpdateProfilePage />} />
