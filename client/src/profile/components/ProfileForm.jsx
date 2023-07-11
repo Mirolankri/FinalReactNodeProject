@@ -37,15 +37,11 @@ const ProfileForm = ({ onSubmit, onReset, onFormChange, title, subTitle, data })
 }
 
 ProfileForm.propTypes = {
-    onSubmit: func.isRequired,
-    onReset: func.isRequired,
-    onFormChange: func.isRequired,
     title: string.isRequired,
     subTitle: string.isRequired,
-    errors: object.isRequired,
-    data: object.isRequired,
-    onInputChange: func.isRequired,
-    setData: func.isRequired
+    onSubmit: func.isRequired,
+    onReset: func.isRequired,
+    onFormChange: func.isRequired
 }
 
 export default ProfileForm

@@ -9,7 +9,9 @@ import ROUTES from '../../routes/routesModel';
 
 function NavBar() {
   const {userData,logout} = useUser()
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+
+  console.log(userData);
 
   //   const handleSignOut = () => {
   //   LocalStorage.remove_item("username")
@@ -36,7 +38,9 @@ function NavBar() {
           <Nav className="me-auto">
             <Nav.Link href="#features" style={{color:"#ffffff"}}>Features</Nav.Link>
             <Nav.Link href="#pricing" style={{color:"#ffffff"}}>Pricing</Nav.Link>
-            <Nav.Link as={NavLink} to={`${ROUTES.PROFILE}/update`} style={{color:"#ffffff"}}>Profile</Nav.Link>
+            { !!userData ? <Nav.Link as={NavLink} to={`${ROUTES.PROFILE}/update/${userData._id}`} style={{color:"#ffffff"}}>Update Profile</Nav.Link> : ''}
+            { !!userData ? <Nav.Link as={NavLink} to={`${ROUTES.PROFILE}/${userData._id}`} style={{color:"#ffffff"}}>Profile</Nav.Link> : ''}
+            {/* <Nav.Link as={NavLink} to={`${ROUTES.PROFILE}/update/${userData._id}`} style={{color:"#ffffff"}}>Profile</Nav.Link> */}
             
             <NavDropdown title="Dropdown" id="collasible-nav-dropdown" style={{color:"#ffffff"}}>
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>

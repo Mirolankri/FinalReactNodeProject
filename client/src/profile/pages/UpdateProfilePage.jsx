@@ -10,21 +10,25 @@ import useProfiles from '../hooks/useProfiles'
 import mapProfileToModel from '../helpers/normalization/mapToModel'
 
 const UpdateProfilePage = () => {
+  const { user_id } = useParams()
   const { userData } = useUser()
   const { handleGetProfile, value: { profile } } = useProfiles()
 
   const { value, ...rest } = useForm(initialProfileForm, createUpdateProfileSchema, () => {})
 
   useEffect( () => {
-    handleGetProfile(userData).then(data => {
+    handleGetProfile(user_id).then(data => {
+      console.log(data);
       if(!data) return
       const modeledProfile = mapProfileToModel(data)
-      console.log(modeledProfile);
       rest.setData(modeledProfile)
     })
   }, [] )
 
   if(!userData) return <Navigate replace to={ROUTES.LOGIN} />
+  // if(!userData._id === user_id) return (
+  //   <h1>נראה שאין לך הרשאה לעדכן פרופיל זה</h1>
+  // )
 
   // const { value, ...rest } = useForm(initialProfileForm, createUpdateProfileSchema)
 

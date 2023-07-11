@@ -18,17 +18,17 @@ const Form = ({ title, subTitle, onSubmit, onReset, onChange, to, children }) =>
                 <div className='d-flex justify-content-between flex-wrap' style={{rowGap: '15px'}}>
                     { children }
                 </div>
-                <Row>
-                    <Col>
-                        <Button onClick={onReset}>Reset</Button>
+                <Row className='pl-2 pt-4'>
+                    <Col className='p-2 py-1'>
+                        <Button style={{width: '100%', backgroundColor: '#ffffff', borderColor: '#ff8a00', color: '#ff8a00' }} onClick={onReset}>איפוס</Button>
                     </Col>
-                    <Col>
-                        <Button onClick={()=>navigate(to)}>Cancel</Button>
+                    <Col className='p-2 py-1'>
+                        <Button style={{width: '100%', backgroundColor: '#ff4c00', borderColor: '#ff4c00'}} onClick={()=>navigate(to)}>ביטול</Button>
                     </Col>
                 </Row>
-                <Row>
-                    <Col>
-                        <Button onClick={onSubmit}>Submit</Button>
+                <Row className='pl-2'>
+                    <Col className='p-2'>
+                        <Button style={{width: '100%', backgroundColor: '#ff8a00', borderColor: '#ff8a00' }} onClick={onSubmit}>שליחה</Button>
                     </Col>
                 </Row>
             </Container>

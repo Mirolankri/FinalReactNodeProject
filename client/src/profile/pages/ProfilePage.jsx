@@ -1,36 +1,28 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
+import { useParams } from 'react-router-dom'
+import useProfiles from '../hooks/useProfiles'
+import { Container } from 'react-bootstrap'
 
-const ProfilePage = props => {
-  const user = {
-    "_id": "64a300c9feae7efdf3343db9",
-    "name": {
-        "first": "ben",
-        "last": "krakovsky",
-        "_id": "64a300c9feae7efdf3343dba"
-    },
-    "birth": "1991-05-22T21:00:00.000Z",
-    "address": {
-        "city": "tel aviv",
-        "street": "my street",
-        "houseNumber": 6,
-        "_id": "64a300c9feae7efdf3343dbb"
-    },
-    "phone": "0502299004",
-    "dogWoker": {
-        "dogsInTrip": 2,
-        "payBy": "Bit",
-        "mobile": 1,
-        "_id": "64a300c9feae7efdf3343dbc"
-    },
-    "experience": "2",
-    "bigDogs": true,
-    "user_id": "649c9144f490d481a5faf65e",
-    "__v": 0
-  }
+const ProfilePage = () => {
+  const { user_id } = useParams()
+  
+  const { handleGetProfile, value: { profile } } = useProfiles()
+  
+  useEffect( () => {
+    handleGetProfile(user_id)
+  }, [] )
+
+  if(!profile) return (
+    <h1> אופס... נראה שמשהו השתבש </h1>
+  )
   
   return (
-    <div>ProfilePage</div>
+    <Container dir='rtl'>
+      <h1>שלום {profile.name.first}</h1>
+
+    </Container>
+
   )
 }
 

@@ -7,9 +7,10 @@ const useProfiles = () => {
     const { userData } = useUser()
     const [ profile, setProfile ] = useState(null)
 
-    const handleGetProfile = useCallback( async (userData) => {
+    const handleGetProfile = useCallback( async (user_id) => {
         try {
-            const profile = await getProfile(userData)
+            const profile = await getProfile(user_id)
+            setProfile(profile)
             return profile
         } catch (error) {
             return console.log('handleGetProfile Error');

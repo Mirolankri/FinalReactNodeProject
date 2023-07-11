@@ -31,8 +31,8 @@ function Router() {
             <Route path={ROUTES.ROOT} element={<Dashboard />} />
             <Route path={ROUTES.LOGIN} element={<Login />} />
             <Route path='/register' element={<Signup />} />
-            <Route path={ROUTES.UPDATE_PROFILE} element={<UpdateProfilePage />} />
-            <Route path={ROUTES.PROFILE} element={<ProfilePage />} />
+            <Route path={`${ROUTES.UPDATE_PROFILE}/:user_id`} element={<UpdateProfilePage />} />
+            <Route path={`${ROUTES.PROFILE}/:user_id`} element={<ProfilePage />} />
             <Route path='/Billing' element={<Billing />} />
             <Route path='/phone/verify' element={<PhoneVerify />} />
             <Route path='*' element={<ErrorPage />} />

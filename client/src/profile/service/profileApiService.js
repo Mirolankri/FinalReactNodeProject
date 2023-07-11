@@ -4,7 +4,7 @@ const apiUrl = "http://localhost:5005"
 
 export const getProfile = async (user) => {
     try {
-        const { data } = await axios.get(`${apiUrl}/profile/by_user_id/${user._id}`);
+        const { data } = await axios.get(`${apiUrl}/profile/by_user_id/${user}`);
         return data;
     } catch (error) {
         return Promise.reject(error.message);
