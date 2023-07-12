@@ -12,6 +12,9 @@ export const UserProvider = ({ children }) => {
   const navigate = useNavigate();
 
   const [userData, setUserData] = useState(null)
+  const [UserBrowserData, setUserBrowserData] = useState({})
+  const [useUserType, setuseUserType] = useState(false)
+  const [isAskUserType, setisAskUserType] = useState(false)
   const [Token, setToken] = useState(LocalStorage.get_item("token"))
   axios.defaults.withCredentials = true;
 
@@ -21,11 +24,25 @@ export const UserProvider = ({ children }) => {
   //   // Navigate to the desired route (e.g., '/login') after logout
   //   navigate("/login");
   // }
+  const GetUserBrowserData = ()=>{
+    let isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+    setUserBrowserData({isDarkMode})
+  }
   const logout = ()=>{
     LocalStorage.remove_item("username")
     LocalStorage.remove_item("token")
 		navigate("/login");
   }
+
+  const CheckUserType = (_userData)=>{
+    setisAskUserType(_userData.isDogWalker && _userData.isDogManager)
+    if(_userData.isDogWalker) setuseUserType("1")
+    if(_userData.isDogManager) setuseUserType("2")
+  }
+  const SetUserType = (_UserType)=>{
+
+  }
+
   const login = (_userData,_Token) => {
     console.log("in login pro");
     // Assuming successful authentication, set the user data
@@ -35,7 +52,9 @@ export const UserProvider = ({ children }) => {
     LocalStorage.set_item("username",_userData.username)
 
   };
+
   useEffect(() => {
+    GetUserBrowserData()
     console.log("useEffect in UserProvider",Token);
     if (Token) {
       const headers = {
@@ -51,6 +70,7 @@ export const UserProvider = ({ children }) => {
               LocalStorage.remove_item("token")
               LocalStorage.remove_item("username")
           } else {
+            CheckUserType(response.data.CheckUserLogin)
             setUserData(response.data.CheckUserLogin)
             console.log(response.data.session.cookie.expires);
             console.log(response.data.session.Site.username);
@@ -79,8 +99,8 @@ export const UserProvider = ({ children }) => {
     }
   }, [Token]);
   const value = useMemo(() => {
-    return { userData, setUserData,login,logout,Token }
-}, [userData,Token])
+    return { userData, setUserData,login,logout,Token,UserBrowserData,isAskUserType,useUserType, setuseUserType }
+}, [userData,Token,useUserType])
 
   return (
     <UserContext.Provider value={ value }>

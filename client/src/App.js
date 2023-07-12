@@ -2,14 +2,20 @@ import { BrowserRouter } from "react-router-dom";
 import { UserProvider } from "./users/providers/UserProvider";
 import Layout from "./Layout/Layout";
 import Router from "./routes/Router";
+import { ThemeProvider } from "react-bootstrap";
+import { lightTheme, darkTheme } from './theme/theme';
 
-function App() {
+// import ThemeProvider from 'react-bootstrap/ThemeProvider';
+
+function App() {	  
 	return (
 		<BrowserRouter>
 			<UserProvider>
-				<Layout>
-					<Router/>
-				</Layout>
+				<ThemeProvider dir="rtl" prefixes={{ bs: 'custom' }} theme={lightTheme}>
+					<Layout>
+						<Router/>
+					</Layout>
+				</ThemeProvider>
 			</UserProvider>
 		</BrowserRouter>
 	);
