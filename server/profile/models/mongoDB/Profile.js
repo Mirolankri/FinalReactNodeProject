@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const NameSchema = require('./Name')
 const AddressSchema = require('./Address')
-const DogwokerSchema = require('./Dogwoker')
+const dogWalkerSchema = require('./dogWalker')
 
 const ProfileSchema = mongoose.Schema({
     name: NameSchema,
@@ -14,7 +14,7 @@ const ProfileSchema = mongoose.Schema({
         type: String,
         match: RegExp(/^[0][5][0|2|3|4|5|8|9]{1}[-]{0,1}[0-9]{7}$/g)
     },
-    dogWoker: DogwokerSchema,
+    dogWalker: dogWalkerSchema,
     experience: {
         type: String,
         require: true

@@ -20,7 +20,7 @@ const Form = ({ title, subTitle, onSubmit, onReset, onChange, to, children }) =>
                 </div>
                 <Row className='pl-2 pt-4'>
                     <Col className='p-2 py-1'>
-                        <Button style={{width: '100%', backgroundColor: '#ffffff', borderColor: '#ff8a00', color: '#ff8a00' }} onClick={onReset}>איפוס</Button>
+                        <Button variant="outline" style={{width: '100%' }} onClick={onReset}>איפוס</Button>
                     </Col>
                     <Col className='p-2 py-1'>
                         <Button style={{width: '100%', backgroundColor: '#ff4c00', borderColor: '#ff4c00'}} onClick={()=>navigate(to)}>ביטול</Button>
@@ -28,7 +28,7 @@ const Form = ({ title, subTitle, onSubmit, onReset, onChange, to, children }) =>
                 </Row>
                 <Row className='pl-2'>
                     <Col className='p-2'>
-                        <Button style={{width: '100%', backgroundColor: '#ff8a00', borderColor: '#ff8a00' }} onClick={onSubmit}>שליחה</Button>
+                        <Button variant="orange" style={{width: '100%' }} onClick={onSubmit}>שליחה</Button>
                     </Col>
                 </Row>
             </Container>

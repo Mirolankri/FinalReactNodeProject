@@ -6,9 +6,9 @@ const mapProfileToModel = (profile) => {
         gander: profile.gander || '',
         address: `${profile.address.street} ${profile.address.houseNumber} || '', ${profile.address.city}` || '',
         phone: profile.phone || '',
-        dogCount: profile.dogWoker.dogsInTrip || '',
-        payBy: profile.dogWoker.payBy || '',
-        mobile: profile.dogWoker.mobile || '',
+        dogCount: profile.dogWalker.dogsInTrip || '',
+        payBy: profile.dogWalker.payBy || '',
+        mobile: profile.dogWalker.mobile || '',
         experience: profile.experience || '',
         bigDog: profile.bigDogs || ''
     }

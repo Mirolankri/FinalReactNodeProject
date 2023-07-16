@@ -8,6 +8,7 @@ import { useUser } from '../../users/providers/UserProvider'
 import ROUTES from '../../routes/routesModel'
 import useProfiles from '../hooks/useProfiles'
 import mapProfileToModel from '../helpers/normalization/mapToModel'
+import BlankPage from '../../users/pages/BlankPage'
 
 const UpdateProfilePage = () => {
   const { user_id } = useParams()
@@ -33,10 +34,9 @@ const UpdateProfilePage = () => {
   // const { value, ...rest } = useForm(initialProfileForm, createUpdateProfileSchema)
 
   return (
-    <>
-    <ProfileForm title='בוא.י נכיר לעומק' subTitle='ספר.י לנו קצת על עצמך' onSubmit={rest.onSubmit} onReset={rest.handleReset} onFormChange={rest.validateForm} onInputChange={rest.handleChange} data={value.data} />
-    {/* <ProfileForm title='בוא.י נכיר לעומק' subTitle='ספר.י לנו קצת על עצמך' /> */}
-    </>
+    <BlankPage>
+      <ProfileForm title='בוא.י נכיר לעומק' subTitle='ספר.י לנו קצת על עצמך' onSubmit={rest.onSubmit} onReset={rest.handleReset} onFormChange={rest.validateForm} onInputChange={rest.handleChange} data={value.data} />
+    </BlankPage>
   )
 }
 

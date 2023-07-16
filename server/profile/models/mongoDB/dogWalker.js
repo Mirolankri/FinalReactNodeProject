@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const DogwokerSchema = mongoose.Schema({
+const dogWalkerSchema = mongoose.Schema({
     dogsInTrip: {
         type: Number,
         required: true
@@ -15,4 +15,4 @@ const DogwokerSchema = mongoose.Schema({
     }
 })
 
-module.exports = DogwokerSchema
+module.exports = dogWalkerSchema
