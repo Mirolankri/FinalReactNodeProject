@@ -17,7 +17,7 @@ import BlankPage from "./BlankPage";
 const Login = () => {
 	axios.defaults.withCredentials = true;
 	const {userData,setUserData,login} = useUser()
-	const [email, setEmail] = useState("miro@istoreil.co.il");
+	const [email, setEmail] = useState("ben@krakov.co");
 	const [password, setPassword] = useState("1234");
 	const [isLoading, setLoading] = useState(false);
 	const [Error, setError] = useState("");

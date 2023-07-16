@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const dogWalkerSchema = mongoose.Schema({
-    dogsInTrip: {
+    dogCount: {
         type: Number,
         required: true
     },

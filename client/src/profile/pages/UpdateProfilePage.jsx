@@ -9,17 +9,19 @@ import ROUTES from '../../routes/routesModel'
 import useProfiles from '../hooks/useProfiles'
 import mapProfileToModel from '../helpers/normalization/mapToModel'
 import BlankPage from '../../users/pages/BlankPage'
+import normalizeProfile from '../helpers/normalization/normalizeProfile'
 
 const UpdateProfilePage = () => {
   const { user_id } = useParams()
   const { userData } = useUser()
-  const { handleGetProfile, value: { profile } } = useProfiles()
+  const { handleGetProfile, handleUpdateProfile } = useProfiles()
 
-  const { value, ...rest } = useForm(initialProfileForm, createUpdateProfileSchema, () => {})
+  const { value, ...rest } = useForm(initialProfileForm, createUpdateProfileSchema, () => {
+    handleUpdateProfile({...normalizeProfile( {...value.data} )} ,user_id)
+  })
 
   useEffect( () => {
     handleGetProfile(user_id).then(data => {
-      console.log(data);
       if(!data) return
       const modeledProfile = mapProfileToModel(data)
       rest.setData(modeledProfile)
@@ -27,11 +29,6 @@ const UpdateProfilePage = () => {
   }, [] )
 
   if(!userData) return <Navigate replace to={ROUTES.LOGIN} />
-  // if(!userData._id === user_id) return (
-  //   <h1>נראה שאין לך הרשאה לעדכן פרופיל זה</h1>
-  // )
-
-  // const { value, ...rest } = useForm(initialProfileForm, createUpdateProfileSchema)
 
   return (
     <BlankPage>

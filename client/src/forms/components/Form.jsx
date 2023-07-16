@@ -28,7 +28,7 @@ const Form = ({ title, subTitle, onSubmit, onReset, onChange, to, children }) =>
                 </Row>
                 <Row className='pl-2'>
                     <Col className='p-2'>
-                        <Button variant="orange" style={{width: '100%' }} onClick={onSubmit}>שליחה</Button>
+                        <Button variant="orange" style={{width: '100%' }} disabled={!!onChange()} onClick={onSubmit}>שליחה</Button>
                     </Col>
                 </Row>
             </Container>
