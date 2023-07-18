@@ -20,9 +20,12 @@
   color: #9b9b9b;
 }
 
-.profile-image-container {
+.profile-image .profile-image-container {
   width: 80px;
   height: 80px;
+}
+
+.profile-image-container {
   border-radius: 500px;
   overflow: hidden;
   display: flex;
@@ -58,6 +61,44 @@
 .profile-tags img {
   width: 25px;
   margin-bottom: 7px;
+}
+
+.review:not(:last-child) {
+  border-bottom: 1px solid #333;
+}
+.review .star {
+  width: 15px;
+  height: 15px;
+}
+.review .review-name {
+  margin: 0;
+  padding: 0;
+  font-weight: 600;
+}
+.review .review-content {
+  font-weight: 15px;
+  font-weight: 400;
+  line-height: 1, 2em;
+}
+.review .profile-img {
+  max-width: 90px;
+  flex-basis: 90px;
+}
+.review .profile-img .circle-stroke {
+  background: linear-gradient(135deg, #ff8a00 0%, #8668ff 100%);
+  border-radius: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+}
+.review .profile-img .circle-stroke .profile-image-container {
+  width: 76px;
+  height: 76px;
+}
+.review .profile-img .circle-stroke img {
+  width: 110%;
 }
 
 body {

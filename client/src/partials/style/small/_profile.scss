@@ -4,6 +4,11 @@
     justify-content: center;
 }
 
+@mixin circle-stroke{
+    background: linear-gradient(135deg, #ff8a00 0%, #8668ff 100%);
+    border-radius: 500px;
+}
+
 .profile-image {
     max-width: 100px;
     flex-basis: 100px;
@@ -24,9 +29,14 @@
     color: #9b9b9b;
 }
 
+.profile-image{
+    .profile-image-container {
+        width: 80px;
+        height: 80px;
+    }
+}
+
 .profile-image-container {
-    width: 80px;
-    height: 80px;
     border-radius: 500px;
     overflow: hidden;
     @include display-flex-center;
@@ -35,8 +45,7 @@
 .circle-profile {
     width: 86px;
     height: 86px;
-    background: linear-gradient(135deg, #ff8a00 0%, #8668ff 100%);
-    border-radius: 500px;
+    @include circle-stroke;
     @include display-flex-center;
 }
 
@@ -56,5 +65,49 @@
     img{
         width: 25px;
         margin-bottom: 7px;
+    }
+}
+
+.review{
+     &:not(:last-child){
+        border-bottom: 1px solid #333;
+     }
+
+    .star{
+        width: 15px;
+        height: 15px;
+    }
+
+    .review-name{
+        margin: 0;
+        padding: 0;
+        font-weight: 600;
+    }
+
+    .review-content{
+        font-weight: 15px;
+        font-weight: 400;
+        line-height: 1,2em;
+    }
+
+    .profile-img{
+        max-width: 90px;
+        flex-basis: 90px;
+
+        .circle-stroke{
+            @include circle-stroke;
+            @include display-flex-center;
+            width: 80px;
+            height: 80px;
+
+            .profile-image-container{
+                width: 76px;
+                height: 76px;
+            }
+
+            img{
+                width: 110%;
+            }
+        }
     }
 }

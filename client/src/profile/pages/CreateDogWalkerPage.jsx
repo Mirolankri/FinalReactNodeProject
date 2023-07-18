@@ -12,14 +12,20 @@ import BlankPage from '../../users/pages/BlankPage'
 const CreateDogWalkerPage = () => {
   const { user_id } = useParams()
   const { userData } = useUser()
-  const { handleUpdateProfile } = useProfiles()
+  const { handleUpdateProfile, handleGetProfile } = useProfiles()
   const navigate = useNavigate()
 
   const { value, ...rest } = useForm(initialProfileForm, updateProfileWalkerSchema, ()=>{
     handleUpdateProfile(value.data, user_id)
   })
 
-  if(!userData) return <Navigate replace to={ROUTES.LOGIN} />
+  useEffect( () => {
+    handleGetProfile(user_id).then(data => {
+      console.log(`${data}`)
+      if(!!data) return navigate(`${ROUTES.UPDATE_DOGWALKER}/${user_id}`)
+    })
+  })
+
   if(!userData) return <Navigate replace to={ROUTES.LOGIN} />
   
   return (
