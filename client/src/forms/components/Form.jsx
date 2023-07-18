@@ -1,5 +1,5 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { node, string, func } from 'prop-types'
 import { useNavigate } from "react-router-dom"
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
@@ -36,6 +36,14 @@ const Form = ({ title, subTitle, onSubmit, onReset, onChange, to, children }) =>
     )
 }
 
-Form.propTypes = {}
+Form.propTypes = {
+    children: node.isRequired,
+    title: string.isRequired,
+    subTitle: string.isRequired,
+    onSubmit: func.isRequired,
+    onReset: func.isRequired,
+    onChange: func.isRequired,
+    to: string.isRequired
+}
 
 export default React.memo(Form)

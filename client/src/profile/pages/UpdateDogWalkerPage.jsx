@@ -1,28 +1,28 @@
 import React, { useEffect } from 'react'
-import ProfileForm from '../components/ProfileForm'
+import ProfileWalkerForm from '../components/ProfileWalkerForm'
 import { useNavigate, useParams, Navigate } from 'react-router-dom'
 import useForm from '../../forms/hooks/useForm'
 import initialProfileForm from '../helpers/initialForms/initialProfileForm'
-import createUpdateProfileSchema from '../models/joi-schema/updateProfile'
+import updateProfileWalkerSchema from '../models/joi-schema/updateProfile'
 import { useUser } from '../../users/providers/UserProvider'
 import ROUTES from '../../routes/routesModel'
 import useProfiles from '../hooks/useProfiles'
 import mapProfileToModel from '../helpers/normalization/mapToModel'
 import BlankPage from '../../users/pages/BlankPage'
-import normalizeProfile from '../helpers/normalization/normalizeProfile'
 
-const UpdateProfilePage = () => {
+const UpdateDogWalkerPage = () => {
   const { user_id } = useParams()
   const { userData } = useUser()
   const { handleGetProfile, handleUpdateProfile } = useProfiles()
+  const navigate = useNavigate()
 
-  const { value, ...rest } = useForm(initialProfileForm, createUpdateProfileSchema, () => {
-    handleUpdateProfile({...normalizeProfile( {...value.data} )} ,user_id)
+  const { value, ...rest } = useForm(initialProfileForm, updateProfileWalkerSchema, () => {
+    handleUpdateProfile(value.data, user_id)
   })
 
   useEffect( () => {
     handleGetProfile(user_id).then(data => {
-      if(!data) return
+      if (!data) return navigate(`${ROUTES.CREATE_DOGWALKER}/${user_id}`)
       const modeledProfile = mapProfileToModel(data)
       rest.setData(modeledProfile)
     })
@@ -32,9 +32,9 @@ const UpdateProfilePage = () => {
 
   return (
     <BlankPage>
-      <ProfileForm title='בוא.י נכיר לעומק' subTitle='ספר.י לנו קצת על עצמך' onSubmit={rest.onSubmit} onReset={rest.handleReset} onFormChange={rest.validateForm} onInputChange={rest.handleChange} data={value.data} />
+      <ProfileWalkerForm title='בוא.י נכיר לעומק' subTitle='ספר.י לנו קצת על עצמך' onSubmit={rest.onSubmit} errors={value.errors} onReset={rest.handleReset} onFormChange={rest.validateForm} onInputChange={rest.handleChange} data={value.data} />
     </BlankPage>
   )
 }
 
-export default UpdateProfilePage
+export default UpdateDogWalkerPage

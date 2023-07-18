@@ -3,13 +3,15 @@ const initialProfileForm = {
     last: '',
     birth: '',
     gender: '',
-    address: '',
     phone: '',
+    city: '',
+    street: '',
     dogCount: '',
     payBy: '',
     mobile: '',
     experience: '',
-    bigDogs: ''
+    bigDogs: '',
+    about: ''
 }
 
 export default initialProfileForm

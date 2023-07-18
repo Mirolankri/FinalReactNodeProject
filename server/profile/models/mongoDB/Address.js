@@ -12,10 +12,6 @@ const AddressSchema = mongoose.Schema({
         trim: true,
         minLength: 2,
         required: true
-    },
-    houseNumber: {
-        type: Number,
-        required: true
     }
 })
 

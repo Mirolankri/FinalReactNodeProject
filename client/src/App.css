@@ -15,7 +15,8 @@
 }
 
 .Auth-form {
-  width: 350px;
+  width: 83.333%;
+  max-width: 850px;
   box-shadow: rgb(0 0 0 / 16%) 1px 1px 10px;
   padding-top: 10px;
   padding-bottom: 10px;

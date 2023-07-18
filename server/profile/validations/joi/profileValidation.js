@@ -11,18 +11,18 @@ const profileValidation = (profile) => {
         address: Joi.object().keys({
             city: Joi.string().required(),
             street: Joi.string().required(),
-            houseNumber: Joi.number().required()
         }).required(),
         phone: Joi.string().ruleset.regex(/^[0][5][0|2|3|4|5|8|9]{1}[-]{0,1}[0-9]{7}$/).rule({ message: 'יש להכניס מספר סלולארי ישראלי בעל 10 ספרות.' }).required(),
         // owner: Joi.object({}),
         dogWalker: Joi.object().keys({
             dogCount: Joi.number().required(),
             payBy: Joi.string().required(),
-            mobile: Joi.boolean().required()
+            mobile: Joi.boolean().required(),
+            experience: Joi.string().required(),
+            bigDogs: Joi.boolean().required(),
+            about: Joi.string().min(2).required()
         }).allow(""),
-        experience: Joi.string().required(),
-        bigDogs: Joi.boolean().required(),
-        // user_id: Joi.string().required()
+        user_id: Joi.string().required()
     })
 
     return schema.validate(profile)

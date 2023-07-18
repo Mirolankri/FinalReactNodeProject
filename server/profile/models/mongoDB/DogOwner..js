@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const rate = require('./rate')
 
-const dogWalkerSchema = mongoose.Schema({
+const DogOwnerSchema = mongoose.Schema({
     dogCount: {
         type: Number,
         required: true
@@ -18,10 +18,6 @@ const dogWalkerSchema = mongoose.Schema({
         type: String,
         require: true
     },
-    bigDogs: {
-        type: Boolean,
-        require: true
-    },
     about: {
         type: String,
         minLength: 2,
@@ -31,7 +27,8 @@ const dogWalkerSchema = mongoose.Schema({
         type: Date,
         default: new Date()
     },
+    dogs: [String],
     rate: [rate]
 })
 
-module.exports = dogWalkerSchema
+module.exports = DogOwnerSchema

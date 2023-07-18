@@ -1,18 +1,24 @@
 const normalizeProfile = (profile) => {
     return {
-        first: profile.first,
-        last: profile.last,
+        name:{
+            first: profile.first,
+            last: profile.last,
+        },
         birth: profile.birth,
         gender: profile.gender,
-        address: `${profile.address.street} ${profile.address.houseNumber}, ${profile.address.city}`,
         phone: profile.phone,
+        address: {
+            city: profile.city,
+            street: profile.street
+        },
         dogWalker: {
             dogCount: profile.dogCount,
             payBy: profile.payBy,
             mobile: profile.mobile,
+            experience: profile.experience,
+            bigDogs: profile.bigDogs,
+            about: profile.about
         },
-        experience: profile.experience,
-        bigDogs: profile.bigDogs,
         user_id: profile.user_id
     }
 }

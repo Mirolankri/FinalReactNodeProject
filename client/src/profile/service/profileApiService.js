@@ -13,7 +13,7 @@ export const getProfile = async (user) => {
 
 export const updateProfile = async (profile) => {
     try {
-        const { data } = await axios.post(`${apiUrl}/`, profile)
+        const { data } = await axios.post(`${apiUrl}/profile/`, profile)
         return data
     } catch (error) {
         return Promise.reject(error.message)

@@ -9,7 +9,7 @@ const useForm = (initialForm, schema, handleSubmit) => {
   const handleReset = useCallback(()=>{
     setData(initialForm)
     setErrors({})
-  }, [])
+  }, [initialForm])
 
   const validateProperty = useCallback(( { name, value } ) => {
     const obj = { [name]: value }

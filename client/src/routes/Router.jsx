@@ -12,7 +12,8 @@ import BlankPage from '../users/pages/BlankPage';
 import ErrorPage from '../components/ErrorPage';
 import ROUTES from './routesModel';
 import ProfilePage from '../profile/pages/ProfilePage';
-import UpdateProfilePage from '../profile/pages/UpdateProfilePage';
+import UpdateDogWalkerPage from '../profile/pages/UpdateDogWalkerPage';
+import CreateDogWalkerPage from '../profile/pages/CreateDogWalkerPage';
 function Router() {
     // const {userData} = useUser()
     // const navigate = useNavigate()
@@ -31,7 +32,8 @@ function Router() {
             <Route exact path={ROUTES.ROOT} element={<Dashboard />} />
             <Route path={ROUTES.LOGIN} element={<Login />} />
             <Route path='/register' element={<Signup />} />
-            <Route path={`${ROUTES.UPDATE_PROFILE}/:user_id`} element={<UpdateProfilePage />} />
+            <Route path={`${ROUTES.CREATE_DOGWALKER}/:user_id`} element={<CreateDogWalkerPage />} />
+            <Route path={`${ROUTES.UPDATE_DOGWALKER}/:user_id`} element={<UpdateDogWalkerPage />} />
             <Route path={`${ROUTES.PROFILE}/:user_id`} element={<ProfilePage />} />
             <Route path='/Billing' element={<Billing />} />
             <Route path='/phone/verify' element={<PhoneVerify />} />

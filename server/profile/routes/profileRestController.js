@@ -12,8 +12,6 @@ router.post('/', async (req, res) => {
 		console.log(profile);
         const { error } = validateProfile(profile)
         if (error) return handleError(res, 400, `Joi Error : ${error.details[0].message}`)
-		// profile.user_id = req.user._id || '649c9144f490d481a5faf65e'
-		profile.user_id = '64a305306a87ab8237080706'
         // profile = normalizeProfile(profile)
 		profile = await createUpdateProfile(profile)
 		return res.send(profile).status(201)

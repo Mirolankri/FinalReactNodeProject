@@ -16,7 +16,7 @@ const useProfiles = () => {
     const requestStatus = (errorMessage, profile) => {
         setError(errorMessage)
         setProfile(profile)
-      }
+    }
 
     const handleGetProfile = useCallback( async (user_id) => {
         try {
@@ -26,6 +26,7 @@ const useProfiles = () => {
             return profile
         } catch (error) {
             requestStatus(error, null)
+            return null
         }
     }, [])
 
@@ -33,9 +34,8 @@ const useProfiles = () => {
         try {
             profileFromClient.user_id = user_id
             const normalizedProfile = normalizeProfile(profileFromClient)
-            console.log(normalizedProfile);
-            // const profile = await updateProfile(normalizedProfile)
-            // requestStatus(null, profile)
+            const profile = await updateProfile(normalizedProfile)
+            requestStatus(null, profile)
             navigate(`${ROUTES.PROFILE}/${user_id}`)
         } catch (error) {
             requestStatus(error, null)
