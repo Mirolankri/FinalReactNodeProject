@@ -15,9 +15,15 @@ import BlankPage from "./BlankPage";
 
 
 const Login = () => {
+	let ParamToLogin = "ben@krakov.co"
+	if(process.env.REACT_APP_WHO && process.env.REACT_APP_WHO === "MIRO")
+	{
+		ParamToLogin = "0542412241"
+	}
 	axios.defaults.withCredentials = true;
 	const {userData,setUserData,login} = useUser()
-	const [email, setEmail] = useState("0542412241");
+
+	const [email, setEmail] = useState(ParamToLogin);
 	const [password, setPassword] = useState("1234");
 	const [isLoading, setLoading] = useState(false);
 	const [Error, setError] = useState("");
