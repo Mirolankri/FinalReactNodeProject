@@ -24,6 +24,7 @@ const useForm = (initialForm, schema, handleSubmit) => {
 
     if (errorMessage){
       setErrors((prev) => ({ ...prev, [name]: errorMessage }))
+      console.log(errors);
     } else {
       setErrors((prev) => {
         let obj = { ...prev };

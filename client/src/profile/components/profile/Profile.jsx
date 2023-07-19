@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Col, Container, Image, Row } from 'react-bootstrap'
 import ProfileReviews from './ProfileReviews'
 
-const Profile = ({ profile }) => {
+const Profile = ({ profile, kind }) => {
   
   if (!profile) return (
     <p>Error</p>
@@ -29,16 +29,22 @@ const Profile = ({ profile }) => {
         </Col>
         <Col xs={12} md={3}>
           <Row className='profile-details p-3 d-flex justify-content-start align-items-center'>
-            <Col xs={6}>
+            <Col xs={4}>
               <div className="profile-tags">
-                <Image src='/assets/images/icons/pawllo_star.svg' alt='מיקום'/>
+                <Image src='/assets/images/icons/pawllo_star.svg' alt='דירוג'/>
                 {!profile.dogWalker.rate.length ? `${profile.name.first} עוד לא קיבל דירוג` : profile.dogWalker.rate}
               </div>
             </Col>
-            <Col xs={6}>
+            <Col xs={4}>
               <div className="profile-tags">
                 <Image src='/assets/images/icons/pawllo_location.svg' alt='מיקום'/>
                 {profile.address.city}
+              </div>
+            </Col>
+            <Col xs={4}>
+              <div className="profile-tags">
+                <Image src='/assets/images/icons/pawllo_location.svg' alt='מיקום'/>
+                {(kind === 'walker') ? 'Dog Walker' : 'Dog Owner'}
               </div>
             </Col>
           </Row>

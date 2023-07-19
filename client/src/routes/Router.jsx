@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import BlankPage from '../users/pages/BlankPage';
 import ErrorPage from '../components/ErrorPage';
 import ROUTES from './routesModel';
-import ProfilePage from '../profile/pages/ProfilePage';
+import DogWalkerProfilePage from '../profile/pages/DogWalkerProfilePage';
 import UpdateDogWalkerPage from '../profile/pages/UpdateDogWalkerPage';
 import CreateDogWalkerPage from '../profile/pages/CreateDogWalkerPage';
 function Router() {
@@ -34,7 +34,7 @@ function Router() {
             <Route path='/register' element={<Signup />} />
             <Route path={`${ROUTES.CREATE_DOGWALKER}/:user_id`} element={<CreateDogWalkerPage />} />
             <Route path={`${ROUTES.UPDATE_DOGWALKER}/:user_id`} element={<UpdateDogWalkerPage />} />
-            <Route path={`${ROUTES.PROFILE}/:user_id`} element={<ProfilePage />} />
+            <Route path={`${ROUTES.PROFILE}/:user_id`} element={<DogWalkerProfilePage />} />
             <Route path='/Billing' element={<Billing />} />
             <Route path='/phone/verify' element={<PhoneVerify />} />
             <Route path='*' element={<ErrorPage />} />

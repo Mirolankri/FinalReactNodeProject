@@ -21,7 +21,6 @@ const CreateDogWalkerPage = () => {
 
   useEffect( () => {
     handleGetProfile(user_id).then(data => {
-      console.log(`${data}`)
       if(!!data) return navigate(`${ROUTES.UPDATE_DOGWALKER}/${user_id}`)
     })
   })

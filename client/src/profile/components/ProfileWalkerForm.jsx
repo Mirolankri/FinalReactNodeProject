@@ -25,7 +25,7 @@ const ProfileWalkerForm = ({ onSubmit, onReset, onFormChange, onInputChange, tit
 
     return (
         <Form title={title} errors={errors} subTitle={subTitle} onSubmit={onSubmit} onReset={onReset} onChange={onFormChange} to='/' >
-            <Input isTextArea={false} type='text' errors={errors} onChange={onInputChange} data={data} name='first' label='שם פרטי' />
+            <Input isTextArea={false} type='text' errors={errors.first} onChange={onInputChange} data={data} name='first' label='שם פרטי' />
             <Input isTextArea={false} type='text' errors={errors} onChange={onInputChange} data={data} name='last' label='שם משפחה' />
             <Input isTextArea={false} type='date' errors={errors} onChange={onInputChange} data={data} name='birth' label='תאריך לידה' />
             <Input isSelect={true} errors={errors} onChange={onInputChange} data={data} name='gender' label='מגדר' options={[{val: 'male', text: 'זכר'},{val: 'female', text: 'נקבה'},{val: 'other', text: 'אחר'}]}  />

@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import useProfiles from '../hooks/useProfiles'
 import ROUTES from '../../routes/routesModel'
-import Profile from '../components/Profile'
+import Profile from '../components/profile/Profile'
+import { useUser } from '../../users/providers/UserProvider'
 
 const ProfilePage = () => {
   const { user_id } = useParams()
@@ -18,7 +19,7 @@ const ProfilePage = () => {
   }, [] )
 
   return (
-    <Profile profile={profile}/>
+    <Profile profile={profile} kind='walker'/>
   )
 }
 
