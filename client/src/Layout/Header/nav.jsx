@@ -36,14 +36,12 @@ function NavBar() {
         
         <Navbar.Collapse id="responsive-navbar-nav" >
           <Nav className="me-auto">
-            <Nav.Link href="#features" style={{color:"#ffffff"}}>Features</Nav.Link>
-            <Nav.Link href="#pricing" style={{color:"#ffffff"}}>Pricing</Nav.Link>
-            { !!userData ? <Nav.Link as={NavLink} to={`${ROUTES.PROFILE}/update/${userData._id}`} style={{color:"#ffffff"}}>Update Profile</Nav.Link> : ''}
-            { !!userData ? <Nav.Link as={NavLink} to={`${ROUTES.PROFILE}/create/${userData._id}`} style={{color:"#ffffff"}}>Create Profile</Nav.Link> : ''}
-            { !!userData ? <Nav.Link as={NavLink} to={`${ROUTES.PROFILE}/${userData._id}`} style={{color:"#ffffff"}}>Profile</Nav.Link> : ''}
+            { !!userData ? <Nav.Link as={NavLink} to={`${ROUTES.PROFILE}/update/${userData._id}`} style={{color:"#ffffff"}}>עדכון</Nav.Link> : ''}
+            { !!userData ? <Nav.Link as={NavLink} to={`${ROUTES.PROFILE}/create/${userData._id}`} style={{color:"#ffffff"}}>יצירת פרופיל</Nav.Link> : ''}
+            { !!userData ? <Nav.Link as={NavLink} to={`${ROUTES.PROFILE}/${userData._id}`} style={{color:"#ffffff"}}>הפרופיל שלי</Nav.Link> : ''}
             {/* <Nav.Link as={NavLink} to={`${ROUTES.PROFILE}/update/${userData._id}`} style={{color:"#ffffff"}}>Profile</Nav.Link> */}
-            
-            <NavDropdown title="Dropdown" id="collasible-nav-dropdown" style={{color:"#ffffff"}}>
+
+            <NavDropdown title="Dropdown" id="collasible-nav-dropdown" className='d-none' style={{color:"#ffffff"}}>
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
                 Another action
@@ -58,12 +56,14 @@ function NavBar() {
 
           <Nav>
           <NavDropdown title={(<i className="bi bi-person-circle h5" style={{color:"#ffffff"}}></i>)} id="collasible-nav-dropdown" align={'end'} className='remove-arrow' >
-              <NavDropdown.Item>{userData && userData.username}</NavDropdown.Item>
+              <NavDropdown.Item>{userData && userData.username}
+              </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item as={NavLink} to="/profile">Profile</NavDropdown.Item>
-              <NavDropdown.Item as={NavLink} to="/Billing">Billing</NavDropdown.Item>
+              <NavDropdown.Item as={NavLink} to="/profile">הפרופיל שלי</NavDropdown.Item>
+              <NavDropdown.Item as={NavLink} to="/">הפגישות שלי</NavDropdown.Item>
+              <NavDropdown.Item as={NavLink} to="/Billing">הכלבים שלי</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item onClick={logout}>LogOut</NavDropdown.Item>
+              <NavDropdown.Item onClick={logout}>התנתק/י</NavDropdown.Item>
             </NavDropdown>
             {/* <Nav.Link href="/profile">Profile</Nav.Link> */}
             {/* <Nav.Link eventKey={2} href="#memes">Dank memes</Nav.Link> */}

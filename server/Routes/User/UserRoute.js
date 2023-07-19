@@ -19,7 +19,10 @@ router.post("/login", async (req, res) => {
 	const { email, password } = req.body;
 	let emailforsignin = email??verificationResponse.payload.email
 	console.log(emailforsignin);
-	let CheckUserLogin = await UserSchema.findOne({email:emailforsignin})
+	// {email:emailforsignin}
+	let CheckUserLogin = await UserSchema.findOne({
+		$or: [{ tel: emailforsignin }, { email: emailforsignin }],
+	  })
 	if(!CheckUserLogin) throw Error('שם משתמש או סיסמא שגויים')
 
 	let CheckPassWord = ComparePassWord(password, CheckUserLogin.password);
