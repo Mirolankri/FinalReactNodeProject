@@ -1,9 +1,19 @@
-const normalizeProfile = rawUser => {
-    const user = {
+const normalizeProfile = rawProfile => {
+    const dogOwner = {
+        ...rawProfile.dogOwner,
+    } || ""
+    
+    const dogWalker = {
+        ...rawProfile.dogWalker
+    } || ""
+
+    const profile = {
         ...rawUser,
+        dogOwner,
+        dogWalker
     }
 
-    return user
+    return profile
 }
 
 module.exports = normalizeProfile

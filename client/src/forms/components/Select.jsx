@@ -2,15 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Form from 'react-bootstrap/Form'
 
-const Select = ({ name, onChange, required, placeholder, options }) => {
-
+const Select = ({ data, name, onChange, required, options }) => {
   return (
-    <Form.Select aria-label={name}>
-      <option disabled selected>{placeholder}</option>
-      {options.map( (option, i) => {
-        return <option key={i} value={option.val}>{option.text}</option>
-      } )}
-    </Form.Select>
+      <Form.Select name={name} defaultValue={data[name]} onChange={onChange} aria-label="Default select example" required>
+        <option selected disabled>יש לבחור אחת מהאפשרויות</option>
+          {options.map( (option, i) => (
+            <option key={i} value={option.val}>{ option.text }</option>
+          ))}
+      </Form.Select>
   )
 }
 

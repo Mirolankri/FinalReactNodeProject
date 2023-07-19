@@ -2,7 +2,8 @@ const ROUTES = {
     ROOT: '/',
     LOGIN: '/login',
     PROFILE: '/profile',
-    UPDATE_PROFILE: '/profile/update'
+    CREATE_DOGWALKER: '/profile/create',
+    UPDATE_DOGWALKER: '/profile/update'
 }
 
 export default ROUTES

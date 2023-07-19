@@ -1,36 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import useProfiles from '../hooks/useProfiles'
+import ROUTES from '../../routes/routesModel'
+import Profile from '../components/Profile'
 
-const ProfilePage = props => {
-  const user = {
-    "_id": "64a300c9feae7efdf3343db9",
-    "name": {
-        "first": "ben",
-        "last": "krakovsky",
-        "_id": "64a300c9feae7efdf3343dba"
-    },
-    "birth": "1991-05-22T21:00:00.000Z",
-    "address": {
-        "city": "tel aviv",
-        "street": "my street",
-        "houseNumber": 6,
-        "_id": "64a300c9feae7efdf3343dbb"
-    },
-    "phone": "0502299004",
-    "dogWoker": {
-        "dogsInTrip": 2,
-        "payBy": "Bit",
-        "mobile": 1,
-        "_id": "64a300c9feae7efdf3343dbc"
-    },
-    "experience": "2",
-    "bigDogs": true,
-    "user_id": "649c9144f490d481a5faf65e",
-    "__v": 0
-  }
+const ProfilePage = () => {
+  const { user_id } = useParams()
+  const { handleGetProfile, value: { profile } } = useProfiles()
+  const navigate = useNavigate()
   
+  useEffect( () => {
+    console.log(user_id);
+    handleGetProfile(user_id).then(data => {
+      if(!data) return navigate(`${ROUTES.UPDATE_DOGWALKER}/${user_id}`)
+    })
+  }, [] )
+
   return (
-    <div>ProfilePage</div>
+    <Profile profile={profile}/>
   )
 }
 

@@ -11,7 +11,8 @@ import ROUTES from '../../routes/routesModel';
 
 function NavBar() {
   const {userData,logout} = useUser()
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+
   //   const handleSignOut = () => {
   //   LocalStorage.remove_item("username")
   //   LocalStorage.remove_item("token")
@@ -35,11 +36,11 @@ function NavBar() {
         
         <Navbar.Collapse id="responsive-navbar-nav" >
           <Nav className="me-auto">
-            <Nav.Link as={NavLink} to={`${ROUTES.PROFILE}/update`} style={{color:"#ffffff"}}>הפרופיל שלי</Nav.Link>
+            { !!userData ? <Nav.Link as={NavLink} to={`${ROUTES.PROFILE}/update/${userData._id}`} style={{color:"#ffffff"}}>עדכון</Nav.Link> : ''}
+            { !!userData ? <Nav.Link as={NavLink} to={`${ROUTES.PROFILE}/create/${userData._id}`} style={{color:"#ffffff"}}>יצירת פרופיל</Nav.Link> : ''}
+            { !!userData ? <Nav.Link as={NavLink} to={`${ROUTES.PROFILE}/${userData._id}`} style={{color:"#ffffff"}}>הפרופיל שלי</Nav.Link> : ''}
+            {/* <Nav.Link as={NavLink} to={`${ROUTES.PROFILE}/update/${userData._id}`} style={{color:"#ffffff"}}>Profile</Nav.Link> */}
 
-            <Nav.Link href="#features" className='d-none' style={{color:"#ffffff"}}>Features</Nav.Link>
-            <Nav.Link href="#pricing" className='d-none' style={{color:"#ffffff"}}>Pricing</Nav.Link>
-            
             <NavDropdown title="Dropdown" id="collasible-nav-dropdown" className='d-none' style={{color:"#ffffff"}}>
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">
