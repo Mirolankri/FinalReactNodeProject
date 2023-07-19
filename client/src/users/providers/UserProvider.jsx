@@ -9,14 +9,14 @@ export const UserContext = createContext()
 
 // Create a provider component
 export const UserProvider = ({ children }) => {
-  const navigate = useNavigate();
+  axios.defaults.withCredentials = true;
 
+  const navigate = useNavigate();
   const [userData, setUserData] = useState(null)
   const [UserBrowserData, setUserBrowserData] = useState({})
   const [useUserType, setuseUserType] = useState(false)
   const [isAskUserType, setisAskUserType] = useState(false)
   const [Token, setToken] = useState(LocalStorage.get_item("token"))
-  axios.defaults.withCredentials = true;
 
   // function handleLogout() {
   //   // Perform logout logic here

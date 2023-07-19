@@ -16,8 +16,10 @@ const UserSchema = mongoose.Schema({
     },
     tel:{
         type:String,
+        trim: true,
         match: RegExp(/^[0][5][0|2|3|4|5|8|9]{1}[-]{0,1}[0-9]{7}$/g),
-        required: true,
+        required: [true, "Please provide a Mobile!"],
+        unique: true
     },
     email:{
         type: String,

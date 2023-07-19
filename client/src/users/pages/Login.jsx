@@ -17,7 +17,7 @@ import BlankPage from "./BlankPage";
 const Login = () => {
 	axios.defaults.withCredentials = true;
 	const {userData,setUserData,login} = useUser()
-	const [email, setEmail] = useState("miro@istoreil.co.il");
+	const [email, setEmail] = useState("0542412241");
 	const [password, setPassword] = useState("1234");
 	const [isLoading, setLoading] = useState(false);
 	const [Error, setError] = useState("");
@@ -82,7 +82,7 @@ const Login = () => {
 				required
 				onChange={(e) => setEmail(e.target.value)}
 				/>
-        		<label htmlFor="email">דואר אלקטרוני</label>
+        		<label htmlFor="email">טלפון נייד / דו״אל</label>
       		</Form.Floating>
 
 			  <Form.Floating className="mt-3">
