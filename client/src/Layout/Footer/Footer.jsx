@@ -15,7 +15,7 @@ const Footer = () => {
     <>
     {!shouldExcludeNavbar && 
     (
-      <Nav fill variant='underline' className="justify-content-center" ActiveKey="/" as="ul" style={{position: 'sticky', bottom: 0,left: 0, right: 0}}>
+      <Nav fill variant='underline' className="justify-content-center" activeKey={"/"} as="ul" style={{background: 'white',position: 'sticky', bottom: 0,left: 0, right: 0}}>
         <Nav.Item as="li">
           <Nav.Link as={NavLink} to={"/"} eventKey="/"><Icon.House color='' size={25}/></Nav.Link>
         </Nav.Item>

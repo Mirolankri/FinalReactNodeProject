@@ -8,6 +8,7 @@ import { useUser } from '../../users/providers/UserProvider';
 // import { useBootstrapPrefix } from 'react-bootstrap/esm/ThemeProvider';
 
 import ROUTES from '../../routes/routesModel';
+import ScrenSize from '../../Helpers/ScrenSize';
 
 function NavBar() {
   const {userData,logout} = useUser()
@@ -36,10 +37,10 @@ function NavBar() {
         
         <Navbar.Collapse id="responsive-navbar-nav" >
           <Nav className="me-auto">
-            { !!userData ? <Nav.Link as={NavLink} to={`${ROUTES.PROFILE}/update/${userData._id}`} style={{color:"#ffffff"}}>עדכון</Nav.Link> : ''}
+            { !!userData ? <Nav.Link as={NavLink} to={`${ROUTES.PROFILE}/update/${userData._id}`} style={{color:"#ffffff"}}>עדכון פרופיל</Nav.Link> : ''}
             { !!userData ? <Nav.Link as={NavLink} to={`${ROUTES.PROFILE}/create/${userData._id}`} style={{color:"#ffffff"}}>יצירת פרופיל</Nav.Link> : ''}
             { !!userData ? <Nav.Link as={NavLink} to={`${ROUTES.PROFILE}/${userData._id}`} style={{color:"#ffffff"}}>הפרופיל שלי</Nav.Link> : ''}
-            {/* <Nav.Link as={NavLink} to={`${ROUTES.PROFILE}/update/${userData._id}`} style={{color:"#ffffff"}}>Profile</Nav.Link> */}
+            <Nav.Link as={NavLink} to={`/`} style={{color:"#ffffff"}}><ScrenSize/></Nav.Link>
 
             <NavDropdown title="Dropdown" id="collasible-nav-dropdown" className='d-none' style={{color:"#ffffff"}}>
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>

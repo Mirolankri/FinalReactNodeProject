@@ -7,6 +7,8 @@ import { Button, Container } from "react-bootstrap";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import Google from './Buttons/SignInButtons/google';
 import { FindUserType, OptionUserType } from "../users/const/userconst";
+import HomePageOwner from "../page/HomePageOwner";
+import HomePageDogWalker from "../page/HomePageDogWalker";
 
 const Dashboard = () => {
 	// const { userData } = useContext(UserContext);
@@ -16,30 +18,26 @@ const Dashboard = () => {
 
 	useEffect(() => {
 		const checkUser = () => {
+			console.log("userData",userData,useUserType);
 			if (!localStorage.getItem("username")) {
 				navigate("/login");
 			}
 		};
 		checkUser();
 	}, [navigate]);
+
 	let findname = FindUserType(useUserType)
-	// console.log(findname);
-	// console.log(FindUserType(useUserType));
-// console.log(OptionUserType.find(type => type.value == Number(useUserType)));
+	const components = {HomePageOwner,HomePageDogWalker};
+	const DynamicComponent = components[findname.componentname];
 	return (
         <Container fluid>
-			<PageHeader _title={"דף הבית"}/>
-			<h2 style={{ margin: "0px",textAlign:"center" }}>
-				שלום,{userData && `שם משתמש ${userData.username}`}
-				<br></br>
-				סוג { findname && findname.name}
-				
-
+			<PageHeader _title={`דף בית ${findname.name}`}/>
+			{ findname && <DynamicComponent />}
 				{/* <GoogleOAuthProvider clientId="213352614385-gk8iuql2eok33cisjg8mt6l5iil2c2fa.apps.googleusercontent.com">
           			<Google />
         		</GoogleOAuthProvider> */}
 				{/* Hello, {localStorage.getItem("username")} */}
-			</h2>
+			
         </Container>
 	);
 };
