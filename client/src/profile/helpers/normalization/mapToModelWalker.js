@@ -1,4 +1,4 @@
-const mapProfileToModel = (profile) => {
+const mapProfileToModelWalker = (profile) => {
     return ({
         first: profile.name.first,
         last: profile.name.last,
@@ -16,4 +16,4 @@ const mapProfileToModel = (profile) => {
     })
 }
 
-export default mapProfileToModel
+export default mapProfileToModelWalker

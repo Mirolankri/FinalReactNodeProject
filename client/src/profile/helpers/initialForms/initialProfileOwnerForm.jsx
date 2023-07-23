@@ -1,4 +1,4 @@
-const initialProfileForm = {
+const initialProfileOwnerForm = {
     first: '',
     last: '',
     birth: '',
@@ -6,12 +6,9 @@ const initialProfileForm = {
     phone: '',
     city: '',
     street: '',
-    dogCount: '',
     payBy: '',
     mobile: '',
-    experience: '',
-    bigDogs: '',
     about: ''
 }
 
-export default initialProfileForm
+export default initialProfileOwnerForm

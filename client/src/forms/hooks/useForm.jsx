@@ -4,12 +4,13 @@ import Joi from 'joi'
 
 const useForm = (initialForm, schema, handleSubmit) => {
   const [data, setData] = useState(initialForm)
+  const [resetData, setResetData] = useState(initialForm)
   const [errors, setErrors] = useState({})
 
   const handleReset = useCallback(()=>{
-    setData(initialForm)
+    setData(resetData)
     setErrors({})
-  }, [initialForm])
+  }, [resetData])
 
   const validateProperty = useCallback(( { name, value } ) => {
     const obj = { [name]: value }
@@ -18,13 +19,12 @@ const useForm = (initialForm, schema, handleSubmit) => {
     return error ? error.details[0].message : null
   }, [schema])
 
-  const handleChange = useCallback(( { target } )=>{
+  const handleChange = useCallback( ( { target } ) => {
     const { name, value } = target
     const errorMessage = validateProperty(target)
 
-    if (errorMessage){
+    if (errorMessage) {
       setErrors((prev) => ({ ...prev, [name]: errorMessage }))
-      console.log(errors);
     } else {
       setErrors((prev) => {
         let obj = { ...prev };
@@ -57,7 +57,8 @@ const useForm = (initialForm, schema, handleSubmit) => {
     handleChange,
     handleReset,
     validateForm,
-    setData
+    setData,
+    setResetData
   }
 }
 

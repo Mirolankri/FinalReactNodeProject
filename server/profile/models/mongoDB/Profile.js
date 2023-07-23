@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const NameSchema = require('./Name')
 const AddressSchema = require('./Address')
 const dogWalkerSchema = require('./dogWalker')
-const DogOwnerSchema = require('./DogOwner.')
+const DogOwnerSchema = require('./DogOwner')
 
 const ProfileSchema = mongoose.Schema({
     name: NameSchema,

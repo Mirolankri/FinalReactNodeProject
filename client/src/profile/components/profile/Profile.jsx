@@ -1,9 +1,36 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { Col, Container, Image, Row } from 'react-bootstrap'
 import ProfileReviews from './ProfileReviews'
+import * as Icon from 'react-bootstrap-icons'
+import useWalkerProfiles from '../../hooks/useWalkerProfiles'
 
-const Profile = ({ profile, kind }) => {
+const Profile = ({ profile, profile_id, kind }) => {
+  const { handleGetWalkerReviews, setReviews, value: {reviews} } = useWalkerProfiles()
+  const [ stars, setStars ] = useState(0)
+
+  const getAge = (birthDate) => {
+    const now = new Date()
+    birthDate = new Date(birthDate)
+    const month = now.getMonth() - birthDate.getMonth()
+    let age = now.getFullYear() - birthDate.getFullYear()
+    if (month < 0 || (month === 0 && now.getDate() < birthDate.getDate()) ){
+      age--
+    }
+    return age
+  }
+
+  useEffect( () => {
+    handleGetWalkerReviews(profile_id).then(data => {
+      setReviews(data)
+      console.log(data);
+      let sum = 0
+      data.map( (rev) => {
+        sum = sum + rev.rate
+        return setStars(sum / data.length)
+      })
+    })
+  }, [] )
   
   if (!profile) return (
     <p>Error</p>
@@ -29,22 +56,28 @@ const Profile = ({ profile, kind }) => {
         </Col>
         <Col xs={12} md={3}>
           <Row className='profile-details p-3 d-flex justify-content-start align-items-center'>
-            <Col xs={4}>
+            <Col xs={3}>
               <div className="profile-tags">
-                <Image src='/assets/images/icons/pawllo_star.svg' alt='דירוג'/>
-                {!profile.dogWalker.rate.length ? `${profile.name.first} עוד לא קיבל דירוג` : profile.dogWalker.rate}
+                <Icon.StarFill color='#ff8a00' size={24} className='mb-1' />
+                {stars === 0 ? '-' : stars.toFixed(1)}
               </div>
             </Col>
-            <Col xs={4}>
+            <Col xs={3}>
               <div className="profile-tags">
-                <Image src='/assets/images/icons/pawllo_location.svg' alt='מיקום'/>
+                <Icon.GeoAltFill color='#8668ff' size={24} className='mb-1' />
                 {profile.address.city}
               </div>
             </Col>
-            <Col xs={4}>
+            <Col xs={3}>
               <div className="profile-tags">
-                <Image src='/assets/images/icons/pawllo_location.svg' alt='מיקום'/>
-                {(kind === 'walker') ? 'Dog Walker' : 'Dog Owner'}
+                <Icon.PersonLinesFill color='#ff8a00' size={24} className='mb-1' />
+                {(kind === 'walker') ? 'דוגווקר' : 'בעלים'}
+              </div>
+            </Col>
+            <Col xs={3}>
+              <div className="profile-tags">
+                <Icon.PersonBadgeFill color='#8668ff' size={24} className='mb-1' />
+                { `${profile.gender === 'male' ? 'בן' : profile.gender === 'female' ? 'בת' :''} ${getAge(profile.birth)}`}
               </div>
             </Col>
           </Row>
@@ -62,7 +95,7 @@ const Profile = ({ profile, kind }) => {
           <h3 className='reviews'>ביקורות</h3>
         </Col>
 
-        <ProfileReviews reviews={[{name: 'בן קרקובסקי', rate: 3,img:'/assets/images/dog/persons/male.png', content:'WOWOWOWOWOWO WOWOWOWOWOW WOWOWOWOWOW'},{name: 'בן קרקובסקי', rate: 3, content:'WOWOWOWOWOWO WOWOWOWOWOW'},{name: 'בן קרקובסקי', rate: 3, content:'WOWOWOWOWOWO WOWOWOWOWOW'}]} />
+        <ProfileReviews reviews={reviews ? reviews : []} />
       </Row>
     </Container>
   )

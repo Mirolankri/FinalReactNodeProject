@@ -7,10 +7,12 @@ const auth = (req, res, next) => {
     if(tokenGenerator === 'jwt'){
         try {
             const tokenFromClient = req.headers['x-auth-token']
-            if(!tokenFromClient) throw new Error('בעיית זיהוי : נא לבצע התחברות.')
+            if(!tokenFromClient) throw new Error('בעיית זיהוי : נא לבצע התחברות')
 
             const userInfo = verifyAuthToken(tokenFromClient)
-            if(!userInfo) throw new Error('בעיית זיהוי : משתמש לא מורשה.')
+            if(!userInfo) throw new Error('בעיית זיהוי : משתמש לא מורשה')
+
+            req.user = userInfo
             return next()
         } catch (error) {
             handleError(res, 401, error.message)

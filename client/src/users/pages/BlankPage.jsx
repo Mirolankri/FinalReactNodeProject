@@ -14,12 +14,11 @@ import  axios  from "axios";
 
 const BlankPage = ({children}) => {
 	return (
-		<>
 		<div className="Auth-form-container">
             <div className="Auth-form-title">
                 <img src="/assets/images/logo/logo-orange.png" alt="Main Logo" width='100%'></img>
             </div>
-			<form className="Auth-form" style={{backgroundColor:'#FFF8F880'}}>
+			<form className="Auth-form" style={{backgroundColor:'#FFF8F880', maxWidth:'300px'}}>
 				<div className="Auth-form-content">
 				    {children}
 				</div>
@@ -28,7 +27,6 @@ const BlankPage = ({children}) => {
                 <img src="/assets/images/dog/dog-reg.png" alt="Dog Logo" width='100%'></img>
             </div>
 		</div>	
-		</>
 	);
 };
 

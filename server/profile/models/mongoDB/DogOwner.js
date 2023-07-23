@@ -2,21 +2,13 @@ const mongoose = require('mongoose')
 const rate = require('./rate')
 
 const DogOwnerSchema = mongoose.Schema({
-    dogCount: {
-        type: Number,
-        required: true
-    },
     payBy: {
         type: String,
         required: true
     },
     mobile: {
-        type: Boolean,
-        required: true
-    },
-    experience: {
         type: String,
-        require: true
+        required: true
     },
     about: {
         type: String,
