@@ -8,6 +8,7 @@ const normalizeReview = require('../helpers/normalizeReview')
 router.post('/', async (req, res) => {
     try {
         let review = req.body
+        console.log(review);
         
         const { error } = validateReview(review)
         if(error) return handleError(res, 400, `Joi Error: ${error.details[0].message}`)

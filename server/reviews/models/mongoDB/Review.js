@@ -13,11 +13,12 @@ const ReviewSchema = mongoose.Schema({
         type: String,
         minLength: 2,
         maxLength: 256,
-        require: true
+        require: true,
+        trim: true
     },
     rate: {
         type: Number,
-        min: 0,
+        min: 1,
         max: 5,
         require: true
     },

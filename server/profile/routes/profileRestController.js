@@ -14,9 +14,8 @@ router.post('/', async (req, res) => {
 
 		const { error } = validateProfile(profile)
         if (error) return handleError(res, 400, `Joi Error : ${error.details[0].message}`)
-		// const dbProfile = await getProfile(profile.user_id)
-        // profile = normalizeProfile(profile, dbProfile)
-        profile = normalizeProfile(profile)
+
+		profile = normalizeProfile(profile)
 		profile = await createUpdateProfile(profile)
 		return res.send(profile).status(201)
 	} catch (error) {

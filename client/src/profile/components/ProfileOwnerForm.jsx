@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { func, object, string } from 'prop-types'
 import Form from '../../forms/components/Form'
 import Input from '../../forms/components/Input'
-import ROUTES from "../../routes/routesModel"
+import ROUTES from '../../routes/routesModel'
 
 const ProfileOwnerForm = ({ onSubmit, onReset, onFormChange, onInputChange, title, subTitle, data, errors }) => {
     let birth

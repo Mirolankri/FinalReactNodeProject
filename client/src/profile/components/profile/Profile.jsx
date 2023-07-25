@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import { Col, Container, Image, Row } from 'react-bootstrap'
+import { Button, Col, Container, Image, Row } from 'react-bootstrap'
 import ProfileReviews from './ProfileReviews'
 import * as Icon from 'react-bootstrap-icons'
 import useWalkerProfiles from '../../hooks/useWalkerProfiles'
+import { useNavigate } from 'react-router-dom'
+import ROUTES from '../../../routes/routesModel'
 
-const Profile = ({ profile, profile_id, kind }) => {
+const Profile = ({ profile, profile_id, user_id, handleEdit, kind }) => {
   const { handleGetWalkerReviews, setReviews, value: {reviews} } = useWalkerProfiles()
   const [ stars, setStars ] = useState(0)
+  const navigate = useNavigate()
 
   const getAge = (birthDate) => {
     const now = new Date()
@@ -20,10 +23,13 @@ const Profile = ({ profile, profile_id, kind }) => {
     return age
   }
 
+  const handleAddReview = () => {
+    navigate(`${ROUTES.REVIEW_ADD}/${profile_id}`)
+  }
+
   useEffect( () => {
     handleGetWalkerReviews(profile_id).then(data => {
       setReviews(data)
-      console.log(data);
       let sum = 0
       data.map( (rev) => {
         sum = sum + rev.rate
@@ -38,8 +44,13 @@ const Profile = ({ profile, profile_id, kind }) => {
 
   return (
     <Container dir='rtl'>
+      <Row className='profile-container position-relative'>
+        <Col className='d-flex justify-content-end pt-2 position-absolute'>
+          {(user_id === profile.user_id) ? <Button variant="orange" style={{width: '100%', maxWidth: '200px'}} onClick={handleEdit}><Icon.PencilFill/> עריכת פרופיל</Button> : ''}
+        </Col>
+      </Row>
       <Row className='profile-container d-flex justify-content-between align-items-end'>
-        <Col xs={12} md={7} className='p-4'>
+        <Col xs={12} md={6} lg={8} className='p-4'>
           <Row className='d-flex justify-content-start align-items-center'>
             <Col className='profile-image'>
               <div className="circle-profile">
@@ -54,7 +65,7 @@ const Profile = ({ profile, profile_id, kind }) => {
             </Col>
           </Row>
         </Col>
-        <Col xs={12} md={3}>
+        <Col xs={12} md={6} lg={4}>
           <Row className='profile-details p-3 d-flex justify-content-start align-items-center'>
             <Col xs={3}>
               <div className="profile-tags">
@@ -95,7 +106,7 @@ const Profile = ({ profile, profile_id, kind }) => {
           <h3 className='reviews'>ביקורות</h3>
         </Col>
 
-        <ProfileReviews reviews={reviews ? reviews : []} />
+        <ProfileReviews onAddReview={handleAddReview} reviews={reviews ? reviews : []} />
       </Row>
     </Container>
   )

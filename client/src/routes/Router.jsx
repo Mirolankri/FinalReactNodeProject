@@ -10,7 +10,8 @@ import ROUTES from './routesModel'
 import DogWalkerProfilePage from '../profile/pages/DogWalkerProfilePage'
 import UpdateDogWalkerPage from '../profile/pages/UpdateDogWalkerPage'
 import CreateDogWalkerPage from '../profile/pages/CreateDogWalkerPage'
-import CreateDogOwnerPage from '../profile/pages/CreateDogOwnerPage'
+import CreateProfileReview from '../profile/pages/CreateProfileReview'
+// import CreateDogOwnerPage from '../profile/pages/CreateDogOwnerPage'
 
 function Router() {
     return (
@@ -18,10 +19,11 @@ function Router() {
             <Route exact path={ROUTES.ROOT} element={<Dashboard />} />
             <Route path={ROUTES.LOGIN} element={<Login />} />
             <Route path='/register' element={<Signup />} />
+            <Route path={`${ROUTES.REVIEW_ADD}/:profile_id`} element={<CreateProfileReview />} />
             <Route path={`${ROUTES.CREATE_DOGWALKER}/:user_id`} element={<CreateDogWalkerPage />} />
             <Route path={`${ROUTES.UPDATE_DOGWALKER}/:user_id`} element={<UpdateDogWalkerPage />} />
             <Route path={`${ROUTES.PROFILE_WALKER}/:user_id`} element={<DogWalkerProfilePage />} />
-            <Route path={`${ROUTES.CREATE_DOGOWNER}/:user_id`} element={<CreateDogOwnerPage />} />
+            {/* <Route path={`${ROUTES.CREATE_DOGOWNER}/:user_id`} element={<CreateDogOwnerPage />} /> */}
             <Route path='/Billing' element={<Billing />} />
             <Route path='/phone/verify' element={<PhoneVerify />} />
             <Route path='*' element={<ErrorPage />} />

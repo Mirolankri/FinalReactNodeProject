@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { func, object, string } from 'prop-types'
 import Form from '../../forms/components/Form'
 import Input from '../../forms/components/Input'
-import ROUTES from "../../routes/routesModel"
+import ROUTES from '../../routes/routesModel'
 
 const ProfileWalkerForm = ({ onSubmit, onReset, onFormChange, onInputChange, title, subTitle, data, errors }) => {
     let birth
@@ -25,7 +25,7 @@ const ProfileWalkerForm = ({ onSubmit, onReset, onFormChange, onInputChange, tit
     }
 
     return (
-        <Form title={title} subTitle={subTitle} onSubmit={onSubmit} onReset={onReset} onChange={onFormChange} to={ROUTES.PROFILE_WALKER} >
+        <Form title={title} subTitle={subTitle} onSubmit={onSubmit} onReset={onReset} onChange={onFormChange} to={`${ROUTES.PROFILE_WALKER}`} >
             <Input varient='text' type='text' error={errors.first} onChange={onInputChange} data={data} name='first' label='שם פרטי' errMsg='יש להזין שם פרטי.' />
             <Input varient='text' type='text' error={errors.last} onChange={onInputChange} data={data} name='last' label='שם משפחה' errMsg='יש להזין שם משפחה.' />
             <Input varient='date' error={errors.bitrh} onChange={onInputChange} data={data} name='birth' label='תאריך לידה' errMsg='יש להזין תאריך.' />

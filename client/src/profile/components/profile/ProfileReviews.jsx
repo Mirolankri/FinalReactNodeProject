@@ -1,15 +1,20 @@
 import React from 'react'
 import { arrayOf, object, array } from 'prop-types'
-import { Col, Image, Row } from 'react-bootstrap'
+import { Button, Col, Image, Row } from 'react-bootstrap'
 import ReviewFeedbeck from './ReviewFeedbeck'
+import * as Icon from 'react-bootstrap-icons'
 
+const ProfileReviews = ({ reviews, onAddReview }) => {
 
-const ProfileReviews = ({ reviews }) => {
-
-    if (!reviews.length) return <Col xs={12}> <p>טרם נכתבו ביקורות</p> </Col>
+    if (!reviews.length) return (
+        <Col xs={12}>
+            <Button variant="orange" style={{width: '100%', maxWidth: '200px'}} onClick={onAddReview}><Icon.PencilFill/> כתיבת ביקורת</Button>
+            <p>טרם נכתבו ביקורות</p>
+        </Col>)
 
     return (
         <>
+        <Button variant="orange" style={{width: '100%', maxWidth: '200px'}} onClick={onAddReview}><Icon.PencilFill/> כתיבת ביקורת</Button>
         {reviews.map( (review, i) => {
             return (
                 <ReviewFeedbeck key={i} i={i} review={review}/>
@@ -20,7 +25,7 @@ const ProfileReviews = ({ reviews }) => {
 }
 
 ProfileReviews.propTypes = {
-    review: array.isRequired
+    review: array
 }
 
 export default ProfileReviews

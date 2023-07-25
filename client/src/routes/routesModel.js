@@ -1,6 +1,7 @@
 const ROUTES = {
     ROOT: '/',
     LOGIN: '/login',
+    REVIEW_ADD: '/add-review',
     PROFILE: '/profile',
     PROFILE_WALKER: '/profile/walker',
     PROFILE_OWNER: '/profile/walker',
