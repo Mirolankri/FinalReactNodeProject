@@ -7,7 +7,7 @@ import useWalkerProfiles from '../../hooks/useWalkerProfiles'
 import { useNavigate } from 'react-router-dom'
 import ROUTES from '../../../routes/routesModel'
 
-const Profile = ({ profile, reviews, profile_id, user_id, stars, handleEdit, kind }) => {
+const Profile = ({ profile, reviews, user_id, stars, handleEdit, kind }) => {
   const navigate = useNavigate()
 
   const getAge = (birthDate) => {
@@ -22,11 +22,12 @@ const Profile = ({ profile, reviews, profile_id, user_id, stars, handleEdit, kin
   }
 
   const handleAddReview = () => {
-    navigate(`${ROUTES.REVIEW_ADD}/${profile_id}`)
+    navigate(`${ROUTES.REVIEW_ADD}/${profile.data._id}`)
   }
   
   if (!profile) return (
-    <p>Error</p>
+    // <p>Error</p>
+    <></>
   )
 
   return (

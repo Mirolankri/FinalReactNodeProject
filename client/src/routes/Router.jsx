@@ -13,6 +13,7 @@ import CreateDogWalkerPage from '../profile/pages/CreateDogWalkerPage'
 import CreateProfileReview from '../profile/pages/CreateProfileReview'
 import UploadProfileImagePage from '../profile/pages/UploadProfileImagePage'
 import CreateDogOwnerPage from '../profile/pages/CreateDogOwnerPage'
+import DogOwnerProfilePage from '../profile/pages/DogOwnerProfilePage'
 
 function Router() {
     return (
@@ -26,6 +27,7 @@ function Router() {
             <Route path={`${ROUTES.PROFILE_WALKER}/:user_id`} element={<DogWalkerProfilePage />} />
             <Route path={`${ROUTES.UPDATE_PROFILE_IMAGE}/:user_id`} element={<UploadProfileImagePage />} />
             <Route path={`${ROUTES.CREATE_DOGOWNER}/:user_id`} element={<CreateDogOwnerPage />} />
+            <Route path={`${ROUTES.PROFILE_OWNER}/:user_id`} element={<DogOwnerProfilePage />} />
             <Route path='/Billing' element={<Billing />} />
             <Route path='/phone/verify' element={<PhoneVerify />} />
             <Route path='*' element={<ErrorPage />} />

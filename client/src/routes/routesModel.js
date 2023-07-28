@@ -4,7 +4,7 @@ const ROUTES = {
     REVIEW_ADD: '/add-review',
     PROFILE: '/profile',
     PROFILE_WALKER: '/profile/walker',
-    PROFILE_OWNER: '/profile/walker',
+    PROFILE_OWNER: '/profile/owner',
     CREATE_DOGWALKER: '/profile/walker/create',
     UPDATE_DOGWALKER: '/profile/walker/update',
     CREATE_DOGOWNER: '/profile/owner/create',

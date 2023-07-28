@@ -7,10 +7,10 @@ import * as Icon from 'react-bootstrap-icons'
 const ProfileReviews = ({ reviews, onAddReview }) => {
 
     if (!reviews.length) return (
-        <Col xs={12}>
+        <>
             <Button variant="orange" style={{width: '100%', maxWidth: '200px'}} onClick={onAddReview}><Icon.PencilFill/> כתיבת ביקורת</Button>
             <p>טרם נכתבו ביקורות</p>
-        </Col>)
+        </>)
 
     return (
         <>

@@ -4,9 +4,11 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import useWalkerProfiles from '../hooks/useWalkerProfiles'
 import ROUTES from '../../routes/routesModel'
 import Profile from '../components/profile/Profile'
+import { useUser } from '../../users/providers/UserProvider'
 
 const ProfilePage = () => {
   const { user_id } = useParams()
+  const { userData } = useUser()
   const { handleGetProfile, handleGetWalkerReviews, setReviews, value: { profile, reviews } } = useWalkerProfiles()
   const navigate = useNavigate()
 
@@ -19,8 +21,10 @@ const ProfilePage = () => {
   
   useEffect( () => {
     handleGetProfile(user_id).then(data => {
-      if(!data) return navigate(`${ROUTES.UPDATE_DOGWALKER}/${user_id}`)
-
+      if(!data) return (
+        <p>No Profile</p>
+      )
+      
       const walkerProfile = {
         name: data.name,
         birth: data.birth,
@@ -33,7 +37,7 @@ const ProfilePage = () => {
 
       setDbProfile(walkerProfile)
 
-      handleGetWalkerReviews(data._id).then(revData => {
+      handleGetWalkerReviews(data.dogWalker._id).then(revData => {
         setReviews(revData)
         let sum = 0
         revData.map( (rev) => {
@@ -42,15 +46,13 @@ const ProfilePage = () => {
       })
       })
     })
-  }, [] )
+  }, [user_id] )
 
-  if(!profile) return('Error')
+  if(!profile) return('Error22222')
 
   return (
-    <Profile profile={dbProfile} stars={stars} reviews={reviews} handleEdit={onHandleEdit} user_id={user_id} profile_id={profile._id} kind='walker'/>
+    <Profile profile={dbProfile} stars={stars} reviews={reviews} handleEdit={onHandleEdit} user_id={userData._id} profile_id={profile._id} kind='walker'/>
   )
 }
-
-ProfilePage.propTypes = {}
 
 export default ProfilePage

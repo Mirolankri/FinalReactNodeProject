@@ -45,7 +45,7 @@ const useOwnerProfile = () => {
         }
     } , [])
 
-    const handleGetWalkerReviews = useCallback( async (profile_id) => {
+    const handleGetOwnerReviews = useCallback( async (profile_id) => {
         try {
             const profileReviews = await getReviews(profile_id)
             return profileReviews
@@ -71,7 +71,7 @@ const useOwnerProfile = () => {
         value,
         handleGetProfile,
         handleUpdateProfile,
-        handleGetWalkerReviews,
+        handleGetOwnerReviews,
         handleGetDataForReview,
         setReviews
     }
