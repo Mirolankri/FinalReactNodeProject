@@ -13,7 +13,7 @@ const profileValidation = (profile) => {
             street: Joi.string().required(),
         }).required(),
         phone: Joi.string().ruleset.regex(/^[0][5][0|2|3|4|5|8|9]{1}[-]{0,1}[0-9]{7}$/).rule({ message: 'יש להכניס מספר סלולארי ישראלי בעל 10 ספרות.' }).required(),
-        dogWalker: Joi.object().keys({
+        dogOwner: Joi.object().keys({
             payBy: Joi.string().required(),
             mobile: Joi.string().required(),
             about: Joi.string().min(2).required()

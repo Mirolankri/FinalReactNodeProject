@@ -25,6 +25,7 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
     "mongoose": "^7.2.2",
+    "morgan": "^1.10.0",
     "uuid": "^9.0.0"
   },
   "devDependencies": {

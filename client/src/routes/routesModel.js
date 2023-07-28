@@ -8,7 +8,8 @@ const ROUTES = {
     CREATE_DOGWALKER: '/profile/walker/create',
     UPDATE_DOGWALKER: '/profile/walker/update',
     CREATE_DOGOWNER: '/profile/owner/create',
-    UPDATE_DOGOWNER: '/profile/owner/update'
+    UPDATE_DOGOWNER: '/profile/owner/update',
+    UPDATE_PROFILE_IMAGE: 'profile/update_image'
 }
 
 export default ROUTES

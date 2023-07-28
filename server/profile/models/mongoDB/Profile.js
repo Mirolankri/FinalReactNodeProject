@@ -19,6 +19,10 @@ const ProfileSchema = mongoose.Schema({
         type: String,
         require: true
     },
+    profileImage: {
+        type: String,
+        match: RegExp(/^.*\.(jpg|JPG|jpeg|JPEG|png|PNG)$/g)
+    },
     dogWalker: dogWalkerSchema,
     dogOwner: DogOwnerSchema,
     user_id: {

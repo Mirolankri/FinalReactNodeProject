@@ -44,7 +44,6 @@ const getProfileDataForReview = async (id) => {
     if(DB === 'mongoDB'){
         try {
             const profileData = await ProfileSchema.findOne({user_id: id}, {name: 1})
-            console.log(profileData);
             if(!profileData) return ({name:{ first: 'משתמש לא קיים', last: ''}})
             return Promise.resolve(profileData)
         } catch (error) {

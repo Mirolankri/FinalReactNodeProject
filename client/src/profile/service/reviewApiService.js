@@ -21,10 +21,9 @@ export const getProfilesNameAndImages = async (profile_id) => {
 
 export const createReview = async (review) => {
     try {
-        console.log(review)
         const { data } = await axios.post(`${apiUrl}/review`, review)
         return data
     } catch (error) {
-        return Promise.reject(error.message)
+        return Promise.reject(error)
     }
 }

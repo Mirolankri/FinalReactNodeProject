@@ -14,7 +14,7 @@ const createReview = async (normalizeReview) => {
             await review.save()
             return Promise.resolve(review)
         } catch (error) {
-            error.status = 400
+            error.status = 404
             return Promise.reject(error)
         }
     }
@@ -38,7 +38,7 @@ const getUserProfileReview = async (user_id, profile_id) => {
 const getProfileReviews = async (id) => {
     if(DB === 'mongoDB'){
         try {
-            const reviews = await ReviewSchema.find({profile_id: id})
+            const reviews = await ReviewSchema.find({profile_id: id}).sort({createdAt: -1})
             if(!reviews.length) return ([])
 
             return Promise.resolve(reviews)

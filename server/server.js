@@ -6,6 +6,7 @@ const chalk = require('chalk');
 const connectToDB = require('./db/dbService');
 const cookieParser = require("cookie-parser")
 // const proxy = require('express-http-proxy');
+const logger = require('./logger/loggerService')
 
 const { v4: uuidv4 } = require('uuid');
 require('dotenv').config()
@@ -13,10 +14,11 @@ const app = express();
 
 const PORT = process.env.PORT || 5000;
 
+// app.use(cors());
+app.use(logger)
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-// app.use(cors());
 const corsOptions = {
     origin: ["http://localhost:3000","http://10.10.10.3:3000","*"],
     credentials: true, //access-control-allow-credentials:true

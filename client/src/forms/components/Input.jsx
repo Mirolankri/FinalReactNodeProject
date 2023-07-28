@@ -36,6 +36,20 @@ const Input = ({ varient, type, name, data, label, error, errMsg, style, placeho
         </>
     )
 
+    if( (varient === 'file') ) return (
+        <>
+            <FloatingLabel controlId={name} label={label} className="mb-3 col-12">
+                <Form.Control isInvalid={error} type={varient} name={name} onChange={onChange} placeholder={placeholder} defaultValue={data[name] ? data[name] : ''} aria-describedby={name} required />
+                <Form.Text id={name} muted>{formText ? formText : ''}</Form.Text>
+                <div className="err-msg-container">
+                    <Form.Control.Feedback className='msg' type="invalid">
+                        {error ? errMsg : ''}
+                    </Form.Control.Feedback>
+                </div>
+            </FloatingLabel>
+        </>
+    )
+
     if( varient === 'select' ) return (
         <>
             <FloatingLabel controlId={name} label={label} className="mb-3 col-12">

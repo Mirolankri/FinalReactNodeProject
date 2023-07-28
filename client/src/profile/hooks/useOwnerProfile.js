@@ -1,12 +1,12 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import { useUser } from '../../users/providers/UserProvider'
-import { getProfile, getProfilesNameAndImages, getReviews, updateProfile } from '../service/profileApiService'
-import normalizeProfile from '../helpers/normalization/normalizeProfile'
 import { useNavigate } from 'react-router-dom'
-import ROUTES from '../../routes/routesModel'
 import useAxios from '../../hooks/useAxios'
+import { getProfile, getProfilesNameAndImages, getReviews, updateProfile } from '../service/profileApiService'
+import normalizeProfile from '../helpers/normalization/normalizeProfileOwner'
+import ROUTES from '../../routes/routesModel'
 
-const useWalkerProfiles = () => {
+const useOwnerProfile = () => {
     const { userData } = useUser()
     const [ profile, setProfile ] = useState(null)
     const [ error, setError ] = useState(null)
@@ -39,7 +39,7 @@ const useWalkerProfiles = () => {
             let normalizedProfile = normalizeProfile(profileFromClient)
             const profile = await updateProfile(normalizedProfile)
             requestStatus(null, profile)
-            navigate(`${ROUTES.PROFILE}/${type}/${user_id}`)
+            navigate(`${ROUTES.PROFILE}/owner/${user_id}`)
         } catch (error) {
             requestStatus(error, null)
         }
@@ -54,7 +54,7 @@ const useWalkerProfiles = () => {
         }
     }, [] )
 
-    const handleGetDataForReviewa = useCallback( async (profile_id) => {
+    const handleGetDataForReview = useCallback( async (profile_id) => {
         try {
             const profileData = await getProfilesNameAndImages(profile_id)
             return profileData
@@ -72,9 +72,9 @@ const useWalkerProfiles = () => {
         handleGetProfile,
         handleUpdateProfile,
         handleGetWalkerReviews,
-        handleGetDataForReviewa,
+        handleGetDataForReview,
         setReviews
     }
 }
 
-export default useWalkerProfiles
+export default useOwnerProfile

@@ -1,14 +1,15 @@
-import React, { useCallback, useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
 import { getProfilesNameAndImages, getReviews } from '../service/profileApiService'
 import normalizeReview from '../helpers/normalization/normalizeReview'
 import { createReview } from '../service/reviewApiService'
 import { useNavigate } from 'react-router-dom'
-import ROUTES from '../../routes/routesModel'
+import { useToast } from '../../providers/ToastProvider'
 
 const useProfileReview = () => {
     const [ reviews, setReviews ] = useState([])
     const [ error, setError ] = useState(null)
+    const toast = useToast()
 
     const navigate = useNavigate()
 
@@ -17,7 +18,7 @@ const useProfileReview = () => {
         setReviews(reviews)
     }
 
-    const handleCreateReview = useCallback( async (reviewFromClient, user_id, profile_id, type, to_profile) => {
+    const handleCreateReview = useCallback( async (reviewFromClient, user_id, profile_id, to_profile) => {
         try {
             reviewFromClient.user_id = user_id
             reviewFromClient.profile_id = profile_id
@@ -26,8 +27,8 @@ const useProfileReview = () => {
             review = await createReview(review)
             
             requestStatus(null, setReviews(prev => ({...prev, review})))
-            navigate(`${ROUTES.PROFILE}/${type}/${to_profile}`)
-
+            toast('', 'הביקורת נשלחה בהצלחה')
+            navigate(to_profile)
         } catch (error) {
             requestStatus(error, null)
         }

@@ -42,12 +42,11 @@ function NavBar() {
             { !!userData && !userData.isDogManager ? <Nav.Link as={NavLink} to={`${ROUTES.CREATE_DOGOWNER}/${userData._id}`} style={{color:"#ffffff"}}>יצירת פרופיל בעלים</Nav.Link> : ''}
             { !!userData && !!userData.isDogWalker ? <Nav.Link as={NavLink} to={`${ROUTES.PROFILE_WALKER}/${userData._id}`} style={{color:"#ffffff"}}>פרופיל דוגווקר</Nav.Link> : ''}
             { !!userData && !!userData.isDogManager ? <Nav.Link as={NavLink} to={`${ROUTES.PROFILE_OWNER}/${userData._id}`} style={{color:"#ffffff"}}>פרופיל בעלים</Nav.Link> : ''} */}
-            { !!userData ? <Nav.Link as={NavLink} to={`${ROUTES.UPDATE_DOGWALKER}/${userData._id}`} style={{color:"#ffffff"}}>עדכון פרופיל דוגווקר</Nav.Link> : ''}
             { !!userData ? <Nav.Link as={NavLink} to={`${ROUTES.CREATE_DOGWALKER}/${userData._id}`} style={{color:"#ffffff"}}>יצירת פרופיל דוגווקר</Nav.Link> : ''}
-            { !!userData ? <Nav.Link as={NavLink} to={`${ROUTES.UPDATE_DOGOWNER}/${userData._id}`} style={{color:"#ffffff"}}>עדכון פרופיל בעלים</Nav.Link> : ''}
-            { !!userData ? <Nav.Link as={NavLink} to={`${ROUTES.CREATE_DOGOWNER}/${userData._id}`} style={{color:"#ffffff"}}>יצירת פרופיל בעלים</Nav.Link> : ''}
             { !!userData ? <Nav.Link as={NavLink} to={`${ROUTES.PROFILE_WALKER}/${userData._id}`} style={{color:"#ffffff"}}>פרופיל דוגווקר</Nav.Link> : ''}
+            { !!userData ? <Nav.Link as={NavLink} to={`${ROUTES.CREATE_DOGOWNER}/${userData._id}`} style={{color:"#ffffff"}}>יצירת פרופיל בעלים</Nav.Link> : ''}
             { !!userData ? <Nav.Link as={NavLink} to={`${ROUTES.PROFILE_OWNER}/${userData._id}`} style={{color:"#ffffff"}}>פרופיל בעלים</Nav.Link> : ''}
+            {/* { !!userData ? <Nav.Link as={NavLink} to={`${ROUTES.UPDATE_PROFILE_IMAGE}/${userData._id}`} style={{color:"#ffffff"}}>עדכון תמונת פרופיל</Nav.Link> : ''} */}
             {/* <Nav.Link as={NavLink} to={`${ROUTES.PROFILE}/update/${userData._id}`} style={{color:"#ffffff"}}>Profile</Nav.Link> */}
 
             <NavDropdown title="Dropdown" id="collasible-nav-dropdown" className='d-none' style={{color:"#ffffff"}}>

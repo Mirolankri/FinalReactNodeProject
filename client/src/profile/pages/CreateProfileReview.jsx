@@ -14,11 +14,11 @@ const CreateProfileReview = () => {
     const { handleCreateReview } = useProfileReview()
 
     const { value, ...rest } = useForm(initialProfileReview, updateProfileReviewSchema, () => {
-        handleCreateReview(value.data, userData._id, profile_id, 'walker', '/64a305306a87ab8237080706' )
+        handleCreateReview(value.data, userData._id, profile_id, -1 )
     })
 
     return (
-        <ProfileReviewForm title={'ביקורת'} onSubmit={rest.onSubmit} onReset={rest.onReset} onFormChange={rest.validateForm} to={'/'} errors={value.errors} onInputChange={rest.handleChange} data={value.data} />
+        <ProfileReviewForm title={'ביקורת'} onSubmit={rest.onSubmit} onReset={rest.handleReset} onFormChange={rest.validateForm} to={-1} errors={value.errors} onInputChange={rest.handleChange} data={value.data} />
     )
 }
 

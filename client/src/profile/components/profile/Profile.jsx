@@ -7,9 +7,7 @@ import useWalkerProfiles from '../../hooks/useWalkerProfiles'
 import { useNavigate } from 'react-router-dom'
 import ROUTES from '../../../routes/routesModel'
 
-const Profile = ({ profile, profile_id, user_id, handleEdit, kind }) => {
-  const { handleGetWalkerReviews, setReviews, value: {reviews} } = useWalkerProfiles()
-  const [ stars, setStars ] = useState(0)
+const Profile = ({ profile, reviews, profile_id, user_id, stars, handleEdit, kind }) => {
   const navigate = useNavigate()
 
   const getAge = (birthDate) => {
@@ -26,17 +24,6 @@ const Profile = ({ profile, profile_id, user_id, handleEdit, kind }) => {
   const handleAddReview = () => {
     navigate(`${ROUTES.REVIEW_ADD}/${profile_id}`)
   }
-
-  useEffect( () => {
-    handleGetWalkerReviews(profile_id).then(data => {
-      setReviews(data)
-      let sum = 0
-      data.map( (rev) => {
-        sum = sum + rev.rate
-        return setStars(sum / data.length)
-      })
-    })
-  }, [] )
   
   if (!profile) return (
     <p>Error</p>
@@ -61,7 +48,7 @@ const Profile = ({ profile, profile_id, user_id, handleEdit, kind }) => {
             </Col>
             <Col>
               <h2 className='profile-name'>{`${profile.name.first} ${profile.name.last}`}</h2>
-              <p>{`תאריך הצטרפות: ${new Date(profile.dogWalker.createdAt).toLocaleDateString()}`}</p>
+              <p>{`תאריך הצטרפות: ${new Date(profile.data.createdAt).toLocaleDateString()}`}</p>
             </Col>
           </Row>
         </Col>
@@ -97,7 +84,7 @@ const Profile = ({ profile, profile_id, user_id, handleEdit, kind }) => {
       <Row className='d-flex p-3 justify-content-between align-items-end'>
         <Col xs={12}>
           <h3 className='reviews'>קצת עלי</h3>
-          <p>{profile.dogWalker.about}</p>
+          <p>{profile.data.about}</p>
         </Col>
       </Row>
 
