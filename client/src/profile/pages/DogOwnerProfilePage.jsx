@@ -44,9 +44,9 @@ const DogOwnerProfilePage = () => {
             
             })
         })
-    }, [] )
+    }, [user_id] )
 
-    if(!profile) return('Error1111')
+    if(!profile) return('Error Owner')
 
     return (
         <Profile profile={dbProfile} stars={stars} reviews={reviews} handleEdit={onHandleEdit} user_id={userData._id} profile_id={profile._id} kind='owner'/>

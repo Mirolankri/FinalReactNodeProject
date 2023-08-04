@@ -48,7 +48,7 @@ const ProfilePage = () => {
     })
   }, [user_id] )
 
-  if(!profile) return('Error22222')
+  if(!profile) return('Error Walker')
 
   return (
     <Profile profile={dbProfile} stars={stars} reviews={reviews} handleEdit={onHandleEdit} user_id={userData._id} profile_id={profile._id} kind='walker'/>
