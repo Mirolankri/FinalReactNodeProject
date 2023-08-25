@@ -52,7 +52,7 @@ app.use(session({
 // 	next()
 // })
 // let code;
-
+app.use(express.static('./public'))
 app.use(router)
 // app.use(proxy('http://127.0.0.1:3000'));
 
@@ -60,4 +60,4 @@ app.listen(PORT, () => {
 	console.log(chalk.bgRed(`Server listening on ${PORT}`));
 
 	connectToDB(process.env.NODE_ENV)
-});
+})

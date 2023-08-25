@@ -13,6 +13,7 @@ const CreateDogWalkerPage = () => {
   const { user_id } = useParams()
   const { userData } = useUser()
   const { handleUpdateProfile, handleGetProfile } = useWalkerProfiles()
+  
   const navigate = useNavigate()
 
   const { value, ...rest } = useForm(initialProfileWalkerForm, updateProfileWalkerSchema, ()=>{

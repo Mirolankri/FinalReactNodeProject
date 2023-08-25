@@ -18,8 +18,6 @@ const CreateDogOwnerPage = () => {
     const navigate = useNavigate()
 
     const { value, ...rest } = useForm(initialProfileOwnerForm, updateProfileOwnerSchema, ()=>{
-        console.log(value.data);
-        console.log(user_id);
         handleUpdateProfile(value.data, user_id, 'owner')
     })
 
