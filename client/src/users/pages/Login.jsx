@@ -15,12 +15,14 @@ import BlankPage from "./BlankPage";
 
 
 const Login = () => {
+	const instance = axios.create({
+		withCredentials: true
+	  })
 	let ParamToLogin = "ben@krakov.co"
 	if(process.env.REACT_APP_WHO && process.env.REACT_APP_WHO === "MIRO")
 	{
 		ParamToLogin = "0542412241"
 	}
-	axios.defaults.withCredentials = true;
 	const {userData,setUserData,login} = useUser()
 
 	const [email, setEmail] = useState(ParamToLogin);
@@ -49,7 +51,7 @@ const Login = () => {
         "Content-Type": "application/json",
     	};
 	
-    axios.post(`${process.env.REACT_APP_DOMAIN}/user/login`, body, { headers:headers })
+	instance.post(`${process.env.REACT_APP_DOMAIN}/user/login`, body, { headers:headers })
         .then(response => {
 			console.log(" response axios",response);
 			if(response.data.error_message)
