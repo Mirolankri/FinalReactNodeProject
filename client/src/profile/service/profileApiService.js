@@ -19,3 +19,21 @@ export const updateProfile = async (profile) => {
         return Promise.reject(error.message)
     }
 }
+
+export const getReviews = async (profile_id) => {
+    try {
+        const { data } = await axios.get(`${apiUrl}/review/profile/${profile_id}`)
+        return data
+    } catch (error) {
+        return Promise.reject(error.message)
+    }
+}
+
+export const getProfilesNameAndImages = async (profile_id) => {
+    try {
+        const { data } = await axios.get(`${apiUrl}/profile/data_for_review/${profile_id}`)
+        return data
+    } catch (error) {
+        return Promise.reject(error.message)
+    }
+}

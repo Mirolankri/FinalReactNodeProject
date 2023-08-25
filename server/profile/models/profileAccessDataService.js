@@ -10,7 +10,6 @@ const createUpdateProfile = async (normalizedProfile) => {
             let profile = await ProfileSchema.findOne({user_id})
 
             if (profile){
-                console.log(user_id);
                 profile = await ProfileSchema.findByIdAndUpdate(profile._id, normalizedProfile, {new: true}).select(['name.first','name.last'])
                 return Promise.resolve(profile)
             }
@@ -32,7 +31,6 @@ const getProfile = async (user_id) => {
             if (!profile) throw new Error ('Profile not found')
 
             // profile = pick(profile, [''])
-            console.log(profile)
 
             return Promise.resolve(profile)
         } catch (error) {
@@ -42,4 +40,18 @@ const getProfile = async (user_id) => {
     }
 }
 
-module.exports = { createUpdateProfile, getProfile }
+const getProfileDataForReview = async (id) => {
+    if(DB === 'mongoDB'){
+        try {
+            const profileData = await ProfileSchema.findOne({user_id: id}, {name: 1})
+            if(!profileData) return ({name:{ first: 'משתמש לא קיים', last: ''}})
+            return Promise.resolve(profileData)
+        } catch (error) {
+            error.status = 400
+            return Promise.reject(error)
+        }
+    }
+    return Promise.resolve('Not in mongoDB')
+}
+
+module.exports = { createUpdateProfile, getProfile, getProfileDataForReview }

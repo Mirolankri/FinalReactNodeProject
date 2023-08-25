@@ -37,10 +37,18 @@ function NavBar() {
         
         <Navbar.Collapse id="responsive-navbar-nav" >
           <Nav className="me-auto">
-            { !!userData ? <Nav.Link as={NavLink} to={`${ROUTES.PROFILE}/update/${userData._id}`} style={{color:"#ffffff"}}>עדכון פרופיל</Nav.Link> : ''}
-            { !!userData ? <Nav.Link as={NavLink} to={`${ROUTES.PROFILE}/create/${userData._id}`} style={{color:"#ffffff"}}>יצירת פרופיל</Nav.Link> : ''}
-            { !!userData ? <Nav.Link as={NavLink} to={`${ROUTES.PROFILE}/${userData._id}`} style={{color:"#ffffff"}}>הפרופיל שלי</Nav.Link> : ''}
-            <Nav.Link as={NavLink} to={`/`} style={{color:"#ffffff"}}><ScrenSize/></Nav.Link>
+            {/* { !!userData && !!userData.isDogWalker ? <Nav.Link as={NavLink} to={`${ROUTES.UPDATE_DOGWALKER}/${userData._id}`} style={{color:"#ffffff"}}>עדכון פרופיל דוגווקר</Nav.Link> : ''}
+            { !!userData && !userData.isDogWalker ? <Nav.Link as={NavLink} to={`${ROUTES.CREATE_DOGWALKER}/${userData._id}`} style={{color:"#ffffff"}}>יצירת פרופיל דוגווקר</Nav.Link> : ''}
+            { !!userData && !!userData.isDogManager ? <Nav.Link as={NavLink} to={`${ROUTES.UPDATE_DOGOWNER}/${userData._id}`} style={{color:"#ffffff"}}>עדכון פרופיל בעלים</Nav.Link> : ''}
+            { !!userData && !userData.isDogManager ? <Nav.Link as={NavLink} to={`${ROUTES.CREATE_DOGOWNER}/${userData._id}`} style={{color:"#ffffff"}}>יצירת פרופיל בעלים</Nav.Link> : ''}
+            { !!userData && !!userData.isDogWalker ? <Nav.Link as={NavLink} to={`${ROUTES.PROFILE_WALKER}/${userData._id}`} style={{color:"#ffffff"}}>פרופיל דוגווקר</Nav.Link> : ''}
+            { !!userData && !!userData.isDogManager ? <Nav.Link as={NavLink} to={`${ROUTES.PROFILE_OWNER}/${userData._id}`} style={{color:"#ffffff"}}>פרופיל בעלים</Nav.Link> : ''} */}
+            { !!userData ? <Nav.Link as={NavLink} to={`${ROUTES.CREATE_DOGWALKER}/${userData._id}`} style={{color:"#ffffff"}}>יצירת פרופיל דוגווקר</Nav.Link> : ''}
+            { !!userData ? <Nav.Link as={NavLink} to={`${ROUTES.PROFILE_WALKER}/${userData._id}`} style={{color:"#ffffff"}}>פרופיל דוגווקר</Nav.Link> : ''}
+            { !!userData ? <Nav.Link as={NavLink} to={`${ROUTES.CREATE_DOGOWNER}/${userData._id}`} style={{color:"#ffffff"}}>יצירת פרופיל בעלים</Nav.Link> : ''}
+            { !!userData ? <Nav.Link as={NavLink} to={`${ROUTES.PROFILE_OWNER}/${userData._id}`} style={{color:"#ffffff"}}>פרופיל בעלים</Nav.Link> : ''}
+            {/* { !!userData ? <Nav.Link as={NavLink} to={`${ROUTES.UPDATE_PROFILE_IMAGE}/${userData._id}`} style={{color:"#ffffff"}}>עדכון תמונת פרופיל</Nav.Link> : ''} */}
+            {/* <Nav.Link as={NavLink} to={`${ROUTES.PROFILE}/update/${userData._id}`} style={{color:"#ffffff"}}>Profile</Nav.Link> */}
 
             <NavDropdown title="Dropdown" id="collasible-nav-dropdown" className='d-none' style={{color:"#ffffff"}}>
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>

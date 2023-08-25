@@ -1,0 +1,10 @@
+.err-msg-container{
+    position: relative;
+    height: 5px;
+    .msg{
+        position: absolute;
+        top: -3px;
+        height: 0;
+        display: block;
+    }
+}

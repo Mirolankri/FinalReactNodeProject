@@ -11,7 +11,7 @@ const dogWalkerSchema = mongoose.Schema({
         required: true
     },
     mobile: {
-        type: Boolean,
+        type: String,
         required: true
     },
     experience: {
@@ -19,7 +19,7 @@ const dogWalkerSchema = mongoose.Schema({
         require: true
     },
     bigDogs: {
-        type: Boolean,
+        type: String,
         require: true
     },
     about: {
