@@ -251,6 +251,17 @@ body {
 	font-weight: 700;
 	font-size: 40px;
 } */
+.profiles-container {
+  font-size: 16px;
+}
+.profiles-container .profile-name {
+  font-size: 120%;
+  font-weight: 600;
+}
+.profiles-container .profile-city {
+  font-size: 80%;
+}
+
 @media (min-width: 992px) {
   .navbar-expand-custom {
     flex-flow: row nowrap;

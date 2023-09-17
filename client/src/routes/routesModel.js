@@ -9,6 +9,7 @@ const ROUTES = {
     UPDATE_DOGWALKER: '/profile/walker/update',
     CREATE_DOGOWNER: '/profile/owner/create',
     UPDATE_DOGOWNER: '/profile/owner/update',
+    PROGILES_PAGE: '/profiles'
     // UPDATE_PROFILE_IMAGE: 'profile/update_image',
 }
 

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
+import { arrayOf, string, number, func } from 'prop-types'
 import { Button, Col, Container, Image, Row } from 'react-bootstrap'
 import ProfileReviews from './ProfileReviews'
 import * as Icon from 'react-bootstrap-icons'
 import useWalkerProfiles from '../../hooks/useWalkerProfiles'
 import { useNavigate } from 'react-router-dom'
 import ROUTES from '../../../routes/routesModel'
+import profileType from '../../models/types/profileType'
+import reviewType from '../../models/types/reviewType'
 
 const Profile = ({ profile, reviews, user_id, stars, handleEdit, kind }) => {
   const navigate = useNavigate()
@@ -100,6 +102,13 @@ const Profile = ({ profile, reviews, user_id, stars, handleEdit, kind }) => {
   )
 }
 
-Profile.propTypes = {}
+Profile.propTypes = {
+  profile: profileType.isRequired,
+  reviews: arrayOf(reviewType).isRequired,
+  user_id: string.isRequired,
+  stars: number.isRequired,
+  handleEdit: func.isRequired,
+  kind: string.isRequired
+}
 
 export default Profile

@@ -135,6 +135,18 @@ body {
 	font-size: 40px;
 } */
 
+.profiles-container{
+    font-size: 16px;
+    .profile-name{
+        font-size: 120%;
+        font-weight: 600;
+    }
+
+    .profile-city{
+        font-size: 80%;
+    }
+}
+
 
 @media(min-width: 992px) {
     .navbar-expand-custom {
