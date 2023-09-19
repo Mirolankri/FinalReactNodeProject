@@ -6,6 +6,7 @@ const UserSchema = require("../../db/schemas/User");
 const { GeneratePassWord, ComparePassWord } = require("../../helpers/bcrypt");
 const {generateCode,generateID} = require("../../helpers/generateNumbers");
 const { verifyGoogleToken } = require("../../helpers/googleverify");
+const DogsSchema = require("../../dogs/models/mongoDB/Dog")
 require('dotenv').config()
 
 const secretKey = process.env.JWT_KEY;
@@ -17,6 +18,7 @@ router.post("/login", async (req, res) => {
 	//await verifyGoogleToken(req.body.e.credential);
 
 	const { email, password } = req.body;
+	let GetDogs = []
 	let emailforsignin = email??verificationResponse.payload.email
 	console.log(emailforsignin);
 	// {email:emailforsignin}
@@ -32,6 +34,8 @@ router.post("/login", async (req, res) => {
 			error_message: "שם משתמש או סיסמא שגויים",
 		});
 	}
+	let GetAllDogs = await DogsSchema.find({user_id: CheckUserLogin._id})
+	if(GetAllDogs) GetDogs=GetAllDogs
 	// code = generateCode(100000,999999);
 	code = 111111
 	//👇🏻 Send the SMS 
@@ -58,7 +62,8 @@ router.post("/login", async (req, res) => {
 			userdata: CheckUserLogin,
 			code: code,
 			token:token,
-			sess:req.session
+			sess:req.session,
+			dogs:GetDogs
 		},
 	});
 });

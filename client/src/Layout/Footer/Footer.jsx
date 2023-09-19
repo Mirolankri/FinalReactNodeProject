@@ -5,9 +5,12 @@ import ScrenSize from '../../Helpers/ScrenSize'
 import * as Icon from 'react-bootstrap-icons';
 import { excludeNavbarPaths } from '../LayoutSettings';
 import { NavLink, useLocation } from 'react-router-dom';
+import ROUTES from '../../routes/routesModel';
+import { useUser } from '../../users/providers/UserProvider';
 
 const Footer = () => {
   const location = useLocation();
+  const {userData}= useUser()
 
   const shouldExcludeNavbar = excludeNavbarPaths.includes(location.pathname);
 
@@ -15,9 +18,9 @@ const Footer = () => {
     <>
     {!shouldExcludeNavbar && 
     (
-      <Nav fill variant='underline' className="justify-content-center" ActiveKey="/" as="ul" style={{position: 'sticky', bottom: 0,left: 0, right: 0}}>
+      <Nav fill variant='underline' className="justify-content-center" activeKey={"/"} as="ul" style={{background: 'white',position: 'sticky', bottom: 0,left: 0, right: 0}}>
         <Nav.Item as="li">
-          <Nav.Link as={NavLink} to={"/"} eventKey="/"><Icon.House color='' size={25}/></Nav.Link>
+          <Nav.Link as={NavLink}  to={"/"} eventKey="/home"><Icon.House color='' size={25}/></Nav.Link>
         </Nav.Item>
         <Nav.Item as="li">
           <Nav.Link as={NavLink} to={"/Calendar4Week"} eventKey="Calendar4Week"><Icon.Calendar4Week color='' size={25}/></Nav.Link>
@@ -26,7 +29,7 @@ const Footer = () => {
           <Nav.Link as={NavLink} to={"/Store"} eventKey="Store"><Icon.Cart2 color='' size={25}/></Nav.Link>
         </Nav.Item>
         <Nav.Item as="li">
-          <Nav.Link as={NavLink} to={"/profile"} eventKey="profile" ><Icon.PersonCircle color='' size={25}/></Nav.Link>
+          <Nav.Link as={NavLink} to={`${ROUTES.PROFILE_OWNER}/${userData._id}`} eventKey="profile" ><Icon.PersonCircle color='' size={25}/></Nav.Link>
         </Nav.Item>
       </Nav>
     )

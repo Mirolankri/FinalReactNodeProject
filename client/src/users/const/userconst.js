@@ -1,6 +1,6 @@
 export const OptionUserType = [
-    { name: 'בעלים', value: '1' },
-    { name: 'דוגווקר', value: '2' },
+    { name: 'בעלים', value: '1',componentname:"HomePageOwner" },
+    { name: 'דוגווקר', value: '2',componentname:"HomePageDogWalker" },
   ]
 
 

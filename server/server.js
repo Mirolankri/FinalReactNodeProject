@@ -32,8 +32,8 @@ const generateCustomSessionId = () => {
 	console.log(customSessionId);
 	return customSessionId;
   };
-// const oneDay = 1000 * 60 * 60 * 24;
-const oneDay = 300000;
+const oneDay = 1000 * 60 * 60 * 24;
+// const oneDay = 300000;
 app.use(session({
 	secret: process.env.SESSION_KEY,
 	resave: false,
