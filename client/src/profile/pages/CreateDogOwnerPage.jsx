@@ -14,13 +14,13 @@ const CreateDogOwnerPage = () => {
     const { user_id } = useParams()
     const { userData } = useUser()
     const { handleUpdateProfile, handleGetProfile } = useOwnerProfile()
-
     const navigate = useNavigate()
 
     const { value, ...rest } = useForm(initialProfileOwnerForm, updateProfileOwnerSchema, ()=>{
+        console.log(value);
         handleUpdateProfile(value.data, user_id, 'owner')
     })
-
+console.log(value);
     useEffect( () => {
         handleGetProfile(user_id).then(data => {
             if(data && data.dogOwner) return navigate(`${ROUTES.UPDATE_DOGOWNER}/${user_id}`)

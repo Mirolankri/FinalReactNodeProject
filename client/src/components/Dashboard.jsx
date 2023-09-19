@@ -11,12 +11,16 @@ import HomePageOwner from "../page/HomePageOwner";
 import HomePageDogWalker from "../page/HomePageDogWalker";
 
 const Dashboard = () => {
+	console.info("first in Dashboard");
 	// const { userData } = useContext(UserContext);
     const {userData,useUserType} = useUser()
-	// console.log(userData);
+	console.log(userData);
+	console.log(useUserType);
 	const navigate = useNavigate();
 
 	useEffect(() => {
+		console.log("first useEffect in Dashboard");
+
 		const checkUser = () => {
 			console.log("userData",userData,useUserType);
 			if (!localStorage.getItem("username")) {
@@ -27,10 +31,13 @@ const Dashboard = () => {
 	}, [navigate]);
 
 	let findname = FindUserType(useUserType)
+	console.log("useUserType",useUserType);
+	console.log("findname",findname);
 	const components = {HomePageOwner,HomePageDogWalker};
 	const DynamicComponent = components[findname.componentname];
 	return (
         <Container fluid>
+			{/* <PageHeader _title={`דף בית `}/> */}
 			<PageHeader _title={`דף בית ${findname.name}`}/>
 			{ findname && <DynamicComponent />}
 				{/* <GoogleOAuthProvider clientId="213352614385-gk8iuql2eok33cisjg8mt6l5iil2c2fa.apps.googleusercontent.com">

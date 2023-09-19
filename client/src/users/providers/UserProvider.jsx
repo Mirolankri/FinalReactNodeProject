@@ -9,11 +9,14 @@ export const UserContext = createContext()
 
 // Create a provider component
 export const UserProvider = ({ children }) => {
+  console.log('%cfirst in UserProvider', 'background-color: blue;color:#fff;');
+
   axios.defaults.withCredentials = true;
 
   const navigate = useNavigate();
   const [userData, setUserData] = useState(null)
   const [UserBrowserData, setUserBrowserData] = useState({})
+  // const [Dogs, setDogs] = useState([])
   const [useUserType, setuseUserType] = useState(false)
   const [isAskUserType, setisAskUserType] = useState(false)
   const [Token, setToken] = useState(LocalStorage.get_item("token"))
@@ -38,10 +41,11 @@ export const UserProvider = ({ children }) => {
     setisAskUserType(_userData.isDogWalker && _userData.isDogManager)
     if(_userData.isDogWalker) setuseUserType("1")
     if(_userData.isDogManager) setuseUserType("2")
+    console.info("useUserType UserProvider",useUserType);
   }
-  const SetUserType = (_UserType)=>{
+      // const SetUserType = (_UserType)=>{
 
-  }
+      // }
 
   const login = (_userData,_Token) => {
     console.log("in login pro");
@@ -54,8 +58,10 @@ export const UserProvider = ({ children }) => {
   };
 
   useEffect(() => {
+    console.log('%cfirst useEffect in UserProvider', 'background-color: red');
+    console.log(Token);
+
     GetUserBrowserData()
-    console.log("useEffect in UserProvider",Token);
     if (Token) {
       const headers = {
         "Authorization":`Bearer ${Token}`,
@@ -72,8 +78,8 @@ export const UserProvider = ({ children }) => {
           } else {
             CheckUserType(response.data.CheckUserLogin)
             setUserData(response.data.CheckUserLogin)
-            console.log(response.data.session.cookie.expires);
-            console.log(response.data.session.Site.username);
+            // console.log(response.data.session.cookie.expires);
+            // console.log(response.data.session.Site.username);
             if(AddHourToDate(ConvertStringToDate(response.data.session.cookie.expires).getTime()) < currentTime || !response.data.session.Site.username)
             {
               console.log("Logout Valid");
@@ -97,6 +103,8 @@ export const UserProvider = ({ children }) => {
     {
        if(!["/register","/login"].includes(window.location.pathname)) return navigate("/login")
     }
+    console.log('%cend useEffect in UserProvider', 'background-color: red');
+
   }, [Token]);
   const value = useMemo(() => {
     return { userData, setUserData,login,logout,Token,UserBrowserData,isAskUserType,useUserType, setuseUserType }
@@ -108,6 +116,8 @@ export const UserProvider = ({ children }) => {
       {children}
     </UserContext.Provider>
   );
+
+
 };
 
 export const useUser = () => {
