@@ -6,21 +6,10 @@ import * as Icon from 'react-bootstrap-icons'
 import useWalkerProfiles from '../../hooks/useWalkerProfiles'
 import { useNavigate } from 'react-router-dom'
 import ROUTES from '../../../routes/routesModel'
+import { getAgeFromBirth } from '../../../Helpers/DateTime'
 
 const Profile = ({ profile, reviews, user_id, stars, handleEdit, kind }) => {
   const navigate = useNavigate()
-
-  const getAge = (birthDate) => {
-    const now = new Date()
-    birthDate = new Date(birthDate)
-    const month = now.getMonth() - birthDate.getMonth()
-    let age = now.getFullYear() - birthDate.getFullYear()
-    if (month < 0 || (month === 0 && now.getDate() < birthDate.getDate()) ){
-      age--
-    }
-    return age
-  }
-
   const handleAddReview = () => {
     navigate(`${ROUTES.REVIEW_ADD}/${profile.data._id}`)
   }
@@ -76,7 +65,7 @@ const Profile = ({ profile, reviews, user_id, stars, handleEdit, kind }) => {
             <Col xs={3}>
               <div className="profile-tags">
                 <Icon.PersonBadgeFill color='#8668ff' size={24} className='mb-1' />
-                { `${profile.gender === 'male' ? 'בן' : profile.gender === 'female' ? 'בת' :''} ${getAge(profile.birth)}`}
+                { `${profile.gender === 'male' ? 'בן' : profile.gender === 'female' ? 'בת' :''} ${getAgeFromBirth(profile.birth)}`}
               </div>
             </Col>
           </Row>

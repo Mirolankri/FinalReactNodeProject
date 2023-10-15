@@ -15,6 +15,7 @@ export const UserProvider = ({ children }) => {
 
   const navigate = useNavigate();
   const [userData, setUserData] = useState(null)
+  const [DogsData, setDogsData] = useState([])
   const [UserBrowserData, setUserBrowserData] = useState({})
   // const [Dogs, setDogs] = useState([])
   const [useUserType, setuseUserType] = useState(false)
@@ -47,13 +48,16 @@ export const UserProvider = ({ children }) => {
 
       // }
 
-  const login = (_userData,_Token) => {
+  const login = (_response) => {
+    // response.data.data.userdata,response.data.data.token
     console.log("in login pro");
     // Assuming successful authentication, set the user data
-    setUserData(_userData);
-    setToken(_Token)
-    LocalStorage.set_item("token",_Token)
-    LocalStorage.set_item("username",_userData.username)
+    setUserData(_response.userdata);
+    setToken(_response.token)
+    console.log("_response.dogs",_response.dogs);
+    setDogsData(_response.dogs)
+    LocalStorage.set_item("token",_response.token)
+    LocalStorage.set_item("username",_response.userdata.username)
 
   };
 
@@ -107,8 +111,8 @@ export const UserProvider = ({ children }) => {
 
   }, [Token]);
   const value = useMemo(() => {
-    return { userData, setUserData,login,logout,Token,UserBrowserData,isAskUserType,useUserType, setuseUserType }
-}, [userData,Token,useUserType])
+    return { userData, setUserData,login,logout,Token,UserBrowserData,isAskUserType,useUserType, setuseUserType,DogsData,setDogsData }
+}, [userData,Token,useUserType,DogsData])
 
   return (
     <UserContext.Provider value={ value }>

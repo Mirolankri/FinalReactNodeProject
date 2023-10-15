@@ -68,7 +68,7 @@ function NavBar() {
               <NavDropdown.Item>{userData && userData.username}
               </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item as={NavLink} to={`${ROUTES.PROFILE_OWNER}/${userData._id}`}>הפרופיל שלי</NavDropdown.Item>
+              <NavDropdown.Item as={NavLink} to={`${ROUTES.PROFILE_OWNER}/${userData && userData._id}`}>הפרופיל שלי</NavDropdown.Item>
               {/* <NavDropdown.Item as={NavLink} to="/profile">הפרופיל שלי</NavDropdown.Item> */}
               <NavDropdown.Item as={NavLink} to="/">הפגישות שלי</NavDropdown.Item>
               <NavDropdown.Item as={NavLink} to={ROUTES.DOG_LIST}>הכלבים שלי</NavDropdown.Item>

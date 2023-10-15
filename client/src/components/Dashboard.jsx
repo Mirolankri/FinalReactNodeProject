@@ -14,27 +14,26 @@ const Dashboard = () => {
 	console.info("first in Dashboard");
 	// const { userData } = useContext(UserContext);
     const {userData,useUserType} = useUser()
-	console.log(userData);
-	console.log(useUserType);
 	const navigate = useNavigate();
 
 	useEffect(() => {
 		console.log("first useEffect in Dashboard");
 
 		const checkUser = () => {
-			console.log("userData",userData,useUserType);
 			if (!localStorage.getItem("username")) {
 				navigate("/login");
 			}
 		};
 		checkUser();
-	}, [navigate]);
-
-	let findname = FindUserType(useUserType)
-	console.log("useUserType",useUserType);
-	console.log("findname",findname);
-	const components = {HomePageOwner,HomePageDogWalker};
-	const DynamicComponent = components[findname.componentname];
+	}, []);
+	
+		let findname = FindUserType(useUserType)
+		if(!findname) return
+	
+		const components = {HomePageOwner,HomePageDogWalker};
+		const DynamicComponent = components[findname.componentname];
+	
+	
 	return (
         <Container fluid>
 			{/* <PageHeader _title={`דף בית `}/> */}

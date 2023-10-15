@@ -8,6 +8,7 @@ const useForm = (initialForm, schema, handleSubmit) => {
   const [errors, setErrors] = useState({})
 
   const handleReset = useCallback(()=>{
+    console.log(resetData);
     setData(resetData)
     setErrors({})
   }, [resetData])
@@ -38,8 +39,11 @@ const useForm = (initialForm, schema, handleSubmit) => {
 
   const validateForm = useCallback(() => {
     const schemaForValidate = Joi.object(schema)
-    const { error } = schemaForValidate.validate(data)
-    if (error) return error
+    const { error ,value} = schemaForValidate.validate(data)
+    if (error){
+  // console.error(error,value);
+      return error
+    }
     return null
   }, [schema, data])
 

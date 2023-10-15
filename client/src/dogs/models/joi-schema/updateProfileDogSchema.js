@@ -8,7 +8,8 @@ const updateProfileDogSchema = {
     meetdogs: Joi.string().min(2).max(3).required(),
     meetpepole: Joi.string().min(2).max(3).required(),
     about: Joi.string().min(2).max(300),
-    active:Joi.boolean()
+    active:Joi.boolean(),
+    user_id:Joi.string()
 }
 
 export default updateProfileDogSchema

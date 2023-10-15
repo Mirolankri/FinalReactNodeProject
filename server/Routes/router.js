@@ -4,7 +4,7 @@ const UserRoute = require('./User/UserRoute')
 
 const profileRestController = require('../profile/routes/profileRestController')
 const reviewRestController = require('../reviews/routes/reviewRestController')
-const dogsRestController = require('../dogs/routes/reviewRestController')
+const dogsRestController = require('../dogs/routes/DogsRestController')
 
 // const cardsRestController = require("../cards/routes/cardsRestController")
 // const usersRestController = require("../users/routes/usersRestController")

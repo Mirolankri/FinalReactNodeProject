@@ -1,6 +1,6 @@
 const Joi = require('joi')
 
-const reviewValidation = (review) => {
+const DogValidation = (review) => {
     const schema = Joi.object({
         user_id: Joi.string().required(),
         name: Joi.string().min(2).max(50).required(),
@@ -17,4 +17,4 @@ const reviewValidation = (review) => {
     return schema.validate(review)
 }
 
-module.exports = reviewValidation
+module.exports = DogValidation

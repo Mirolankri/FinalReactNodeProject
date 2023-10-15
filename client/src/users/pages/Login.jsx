@@ -61,7 +61,7 @@ const Login = () => {
 				return setError(response.data.error_message)
 			}
 			// localStorage.setItem("username", data.data.username.username);
-			login(response.data.data.userdata,response.data.data.token);
+			login(response.data.data);
 			navigate("/phone/verify");
 
 		});

@@ -32,11 +32,10 @@ export const DogsPage = () => {
     {/* <LoaderComponent/> */}
 
     {!!DogList && 
-        DogList.map((dog)=>{
+        DogList.map((dog,index)=>{
+          console.log(index,dog);
         return (
-            <>
-            <div>{dog.id} - {dog.name}</div>
-            </>
+          <div key={dog.id}>{dog.id} - {dog.name}</div>
         )
     }
     )}

@@ -17,10 +17,13 @@ import DogOwnerProfilePage from '../profile/pages/DogOwnerProfilePage'
 import UpdateDogOwnerPage from '../profile/pages/UpdateDogOwnerPage'
 import {  DogsPage } from '../dogs/pages/DogsPage'
 import { DogAdd } from '../dogs/pages/DogAdd'
+import Table from '../components/Table/Table'
+import { TableBS } from '../components/Table/TableBS'
 
 function Router() {
     return (
         <Routes>
+            {/* <Route exact path={ROUTES.ROOT} element={<Table />} /> */}
             <Route exact path={ROUTES.ROOT} element={<Dashboard />} />
             <Route path={ROUTES.LOGIN} element={<Login />} />
             <Route path='/register' element={<Signup />} />
@@ -35,7 +38,8 @@ function Router() {
             <Route path='/Billing' element={<Billing />} />
             <Route path={ROUTES.DOGS}  >
                 <Route path='add' element={<DogAdd />} />
-                <Route path='list' element={<DogsPage />} />
+                <Route path={`update/:DogID`} element={<DogAdd />} />
+                <Route path='list' element={<Table />} />
             </Route>
             <Route path='/phone/verify' element={<PhoneVerify />} />
             <Route path='*' element={<ErrorPage />} />

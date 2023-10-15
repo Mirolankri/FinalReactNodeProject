@@ -29,7 +29,7 @@ const Footer = () => {
           <Nav.Link as={NavLink} to={"/Store"} eventKey="Store"><Icon.Cart2 color='' size={25}/></Nav.Link>
         </Nav.Item>
         <Nav.Item as="li">
-          <Nav.Link as={NavLink} to={`${ROUTES.PROFILE_OWNER}/${userData._id}`} eventKey="profile" ><Icon.PersonCircle color='' size={25}/></Nav.Link>
+          <Nav.Link as={NavLink} to={`${ROUTES.PROFILE_OWNER}/${userData && userData._id}`} eventKey="profile" ><Icon.PersonCircle color='' size={25}/></Nav.Link>
         </Nav.Item>
       </Nav>
     )
