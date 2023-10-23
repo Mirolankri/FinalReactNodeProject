@@ -9,6 +9,7 @@ const useAxios = () => {
 
     useEffect( () => {
         axios.defaults.headers.common["x-auth-token"] = Token
+        axios.defaults.withCredentials = true;
 
         if (toast) {
             axios.interceptors.request.use( (data) => {

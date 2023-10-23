@@ -1,4 +1,7 @@
 export const currentTime = Date.now();
+export const currentDate = new Date();
+export const dayNumber = currentDate.getDay()+1;
+
 
 export const ConvertStringToDate = (_StringDate)=> new Date(_StringDate)
 

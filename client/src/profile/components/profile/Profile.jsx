@@ -71,6 +71,7 @@ const Profile = ({ profile, reviews, user_id, stars, handleEdit, kind }) => {
           </Row>
         </Col>
       </Row>
+      
       <Row className='d-flex p-3 justify-content-between align-items-end'>
         <Col xs={12}>
           <h3 className='reviews'>קצת עלי</h3>

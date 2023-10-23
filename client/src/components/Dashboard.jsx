@@ -7,8 +7,8 @@ import { Button, Container } from "react-bootstrap";
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import Google from './Buttons/SignInButtons/google';
 import { FindUserType, OptionUserType } from "../users/const/userconst";
-import HomePageOwner from "../page/HomePageOwner";
-import HomePageDogWalker from "../page/HomePageDogWalker";
+import HomePageOwner from "../users/pages/Owner/HomePageOwner";
+import HomePageDogWalker from "../users/pages/HomePageDogWalker";
 
 const Dashboard = () => {
 	console.info("first in Dashboard");
@@ -20,6 +20,8 @@ const Dashboard = () => {
 		console.log("first useEffect in Dashboard");
 
 		const checkUser = () => {
+			console.log('%cCheck user in Dashboard', 'background-color: green;color:#fff;');
+
 			if (!localStorage.getItem("username")) {
 				navigate("/login");
 			}
@@ -32,16 +34,13 @@ const Dashboard = () => {
 	
 		const components = {HomePageOwner,HomePageDogWalker};
 		const DynamicComponent = components[findname.componentname];
-	
-	
+		
 	return (
         <Container fluid>
 			{/* <PageHeader _title={`דף בית `}/> */}
 			<PageHeader _title={`דף בית ${findname.name}`}/>
 			{ findname && <DynamicComponent />}
-				{/* <GoogleOAuthProvider clientId="213352614385-gk8iuql2eok33cisjg8mt6l5iil2c2fa.apps.googleusercontent.com">
-          			<Google />
-        		</GoogleOAuthProvider> */}
+				
 				{/* Hello, {localStorage.getItem("username")} */}
 			
         </Container>

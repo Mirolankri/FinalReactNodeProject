@@ -19,6 +19,7 @@ import {  DogsPage } from '../dogs/pages/DogsPage'
 import { DogAdd } from '../dogs/pages/DogAdd'
 import Table from '../components/Table/Table'
 import { TableBS } from '../components/Table/TableBS'
+import CreateAppointment from '../Appointments/pages/CreateAppointment'
 
 function Router() {
     return (
@@ -36,11 +37,15 @@ function Router() {
             <Route path={`${ROUTES.PROFILE_OWNER}/:user_id`} element={<DogOwnerProfilePage />} />
             <Route path={`${ROUTES.UPDATE_DOGOWNER}/:user_id`} element={<UpdateDogOwnerPage />} />
             <Route path='/Billing' element={<Billing />} />
-            <Route path={ROUTES.DOGS}  >
+            <Route path={ROUTES.DOGS}>
                 <Route path='add' element={<DogAdd />} />
                 <Route path={`update/:DogID`} element={<DogAdd />} />
                 <Route path='list' element={<Table />} />
             </Route>
+            <Route path={ROUTES.Appointments.Main}>
+                <Route path={`${ROUTES.Appointments.Create}/:UserID`} element={<CreateAppointment />} />
+            </Route>
+
             <Route path='/phone/verify' element={<PhoneVerify />} />
             <Route path='*' element={<ErrorPage />} />
         </Routes>

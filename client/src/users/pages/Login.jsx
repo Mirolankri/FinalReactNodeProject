@@ -11,19 +11,22 @@ import Form from 'react-bootstrap/Form';
 import { UserContext, useUser } from "../providers/UserProvider";
 import  axios  from "axios";
 import BlankPage from "./BlankPage";
+import Users from "../service/usersApiService";
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import Google from '../../components/Buttons/SignInButtons/google';
 
 
 
 const Login = () => {
-	const instance = axios.create({
-		withCredentials: true
-	  })
+	// const instance = axios.create({
+	// 	withCredentials: true
+	//   })
 	let ParamToLogin = "ben@krakov.co"
 	if(process.env.REACT_APP_WHO && process.env.REACT_APP_WHO === "MIRO")
 	{
 		ParamToLogin = "0542412241"
 	}
-	const {userData,setUserData,login} = useUser()
+	const {userData,setUserData,login,SetLocalStorage} = useUser()
 
 	const [email, setEmail] = useState(ParamToLogin);
 	const [password, setPassword] = useState("1234");
@@ -32,9 +35,10 @@ const Login = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		// if(userData) navigate("/")
+		
+
 		function simulateNetworkRequest() {
-		  return new Promise((resolve) => setTimeout(resolve, 10000));
+		  return new Promise((resolve) => setTimeout(resolve, 9999999));
 		}
 	
 		if (isLoading) {
@@ -45,38 +49,31 @@ const Login = () => {
 	  }, [isLoading]);
 	
 	const postLoginDetails = () => {
+		const UsersInstance = new Users();
 		const body = {email,password};
-    	const headers = { 
-        // 'Authorization': 'Bearer my-token',
-        "Content-Type": "application/json",
-    	};
-	
-	instance.post(`${process.env.REACT_APP_DOMAIN}/user/login`, body, { headers:headers })
-        .then(response => {
-			console.log(" response axios",response);
-			if(response.data.error_message)
-			{
-				setLoading(false);
-				
-				return setError(response.data.error_message)
-			}
-			// localStorage.setItem("username", data.data.username.username);
-			login(response.data.data);
+		UsersInstance.Login(body)
+		.then(response=>{
+			console.log(response);
+			login(response);
 			navigate("/phone/verify");
+		}).catch(error=>{
+			// console.info(error);
+			setLoading(false);
+			return setError(error.response.data)
+		})
 
-		});
 	};
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setLoading(true);
-		// return
 		postLoginDetails();
 		setPassword("");
 		setEmail("");
 	};
 
 	const gotoSignUpPage = () => navigate("/register");
-
+	// console.log(userData);
+	// if(userData) return navigate("/")
 	return (
 		<BlankPage>
 			{Error && (<div className="mt-3 text-center text-danger">{Error}</div>)}
@@ -117,13 +114,10 @@ const Login = () => {
 				onClick={!isLoading ? handleSubmit : null}>
 
 				{isLoading ? (
-						<>
 						<Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
-						</>
 					) : (
 						'התחברות'
 					)}
-					
 				</Button>
 
 				<div style={{ display: "flex", alignItems: "center" }}>
@@ -133,11 +127,11 @@ const Login = () => {
 				</div>
 
 				{/* <div style={{ display: "flex", alignItems: "center" }}> */}
-				<ButtonGroup className="d-flex align-items-center mb-2" >
+				<ButtonGroup className="d-flex align-items-center mb-2 justify-content-center" >
+				<GoogleOAuthProvider  clientId="213352614385-gk8iuql2eok33cisjg8mt6l5iil2c2fa.apps.googleusercontent.com">
+          			<Google CustomParam={{login,navigate,SetLocalStorage}}/>
+        		</GoogleOAuthProvider>
 					
-					<Button variant="outline-dark" size="xs" className="" type="button">
-						התחברות עם <i className="bi bi-google"></i>						
-					</Button>
 				</ButtonGroup>
 
 				{/* </div> */}

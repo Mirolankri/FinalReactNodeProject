@@ -9,6 +9,8 @@ import ButtonGroup from "react-bootstrap/esm/ButtonGroup";
 import ToggleButton from "react-bootstrap/esm/ToggleButton";
 import Form from 'react-bootstrap/Form';
 import { OptionUserType } from "../const/userconst";
+import ROUTES from "../../routes/routesModel";
+import Users from "../service/usersApiService";
 
 const Signup = () => {
 	const [email, setEmail] = useState("miro@istoreil.co.il");
@@ -18,7 +20,8 @@ const Signup = () => {
     const [isLoading, setLoading] = useState(false);
     const [Agreement, setAgreement] = useState(false);
 	const [UserType, setUserType] = useState(false);
-	
+	const [Error, setError] = useState("");
+
 
 
 	const navigate = useNavigate();
@@ -33,37 +36,24 @@ const Signup = () => {
 		setUserType(false);
 	};
 	const handleCheckboxAgreement = (e) => {
-		console.log(e.target.checked);
 		setAgreement(e.target.checked)
 	}
-	const gotoLoginPage = () => navigate("/login");
+	const gotoLoginPage = () => navigate(`${ROUTES.LOGIN}`);
 
 	const postSignUpDetails = () => {
-		// let type = UserType
-		fetch(`${process.env.REACT_APP_DOMAIN}/user/register`, {
-			method: "POST",
-			body: JSON.stringify({
-				email,
-				password,
-				tel,
-				username,
-				UserType
-			}),
-			headers: {
-				"Content-Type": "application/json",
-			},
+		const UsersInstance = new Users()
+		let BodyData = {email,password,tel,username,UserType}
+
+		UsersInstance.SignUp(BodyData)
+		.then(response=>{
+			console.log(response);
+			navigate(`${ROUTES.LOGIN}`);
 		})
-			.then((res) => res.json())
-			.then((data) => {
-				if (data.error_message) {
-					alert(data.error_message);
-                    setLoading(false);
-				} else {
-					alert("Account created successfully!");
-					navigate("/login");
-				}
-			})
-			.catch((err) => console.error(err));
+		.catch(error=>{
+			console.error(error)
+			setLoading(false);
+			return setError(error.response.data)
+		})
 	};
 	return (
         <BlankPage>
@@ -163,6 +153,8 @@ const Signup = () => {
 					/>
 				</div>
 				<div className="d-grid gap-2 mt-3">
+				{Error && (<div className="mt-3 text-center text-danger">{Error}</div>)}
+
 					<Button 
 					variant="orange" 
 					className="btn-block w-100" 

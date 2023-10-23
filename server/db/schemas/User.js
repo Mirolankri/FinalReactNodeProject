@@ -18,7 +18,7 @@ const UserSchema = mongoose.Schema({
         type:String,
         trim: true,
         match: RegExp(/^[0][5][0|2|3|4|5|8|9]{1}[-]{0,1}[0-9]{7}$/g),
-        required: [true, "Please provide a Mobile!"],
+        required: [false, "Please provide a Mobile!"],
         unique: true
     },
     email:{
@@ -43,6 +43,10 @@ const UserSchema = mongoose.Schema({
         default: false
     },
     isDogWalker:{
+        type:Boolean,
+        default: false
+    },
+    SignWith:{
         type:Boolean,
         default: false
     },

@@ -13,6 +13,14 @@ const ROUTES = {
     DOG_UPDATE: '/dogs/update',
     DOG_LIST: '/dogs/list',
     DOGS: '/dogs',
+    Appointments:{
+        Main:'/Appointments',
+        Create:'/Appointments/Create',
+        Update:'/Appointments/Update',
+    },
+    User:{
+        Main:'/user'
+    }
     // UPDATE_PROFILE_IMAGE: 'profile/update_image',
 }
 

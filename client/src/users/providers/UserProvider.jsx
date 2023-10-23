@@ -3,13 +3,13 @@ import LocalStorage from '../../Helpers/LocalStorage/LocalStorage'
 import { AddHourToDate, ConvertStringToDate, currentTime } from '../../Helpers/DateTime';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import Swal from 'sweetalert2'
 // Create the user context
 export const UserContext = createContext()
 
 // Create a provider component
 export const UserProvider = ({ children }) => {
-  console.log('%cfirst in UserProvider', 'background-color: blue;color:#fff;');
+  // console.log('%cfirst in UserProvider', 'background-color: blue;color:#fff;');
 
   axios.defaults.withCredentials = true;
 
@@ -39,9 +39,14 @@ export const UserProvider = ({ children }) => {
   }
 
   const CheckUserType = (_userData)=>{
-    setisAskUserType(_userData.isDogWalker && _userData.isDogManager)
-    if(_userData.isDogWalker) setuseUserType("1")
-    if(_userData.isDogManager) setuseUserType("2")
+    let checkisask = _userData.isDogWalker && _userData.isDogManager
+    let checkisask1 = !(_userData.isDogWalker && _userData.isDogManager)
+
+    setisAskUserType(checkisask1?checkisask1:checkisask)
+
+    // setisAskUserType(_userData.isDogWalker && _userData.isDogManager)
+    if(_userData.isDogWalker) setuseUserType("2")
+    if(_userData.isDogManager) setuseUserType("1")
     console.info("useUserType UserProvider",useUserType);
   }
       // const SetUserType = (_UserType)=>{
@@ -49,21 +54,20 @@ export const UserProvider = ({ children }) => {
       // }
 
   const login = (_response) => {
-    // response.data.data.userdata,response.data.data.token
-    console.log("in login pro");
-    // Assuming successful authentication, set the user data
-    setUserData(_response.userdata);
+    setUserData(_response);
+    setDogsData(_response.MyDogs)
     setToken(_response.token)
-    console.log("_response.dogs",_response.dogs);
-    setDogsData(_response.dogs)
-    LocalStorage.set_item("token",_response.token)
-    LocalStorage.set_item("username",_response.userdata.username)
+  }
 
-  };
+  const SetLocalStorage = (_UserData)=>{
+    LocalStorage.set_item("token",_UserData.token)
+    LocalStorage.set_item("username",_UserData.username)
+
+  }
 
   useEffect(() => {
-    console.log('%cfirst useEffect in UserProvider', 'background-color: red');
-    console.log(Token);
+    // console.log('%cfirst useEffect in UserProvider', 'background-color: red');
+    // console.log(Token);
 
     GetUserBrowserData()
     if (Token) {
@@ -73,12 +77,21 @@ export const UserProvider = ({ children }) => {
       axios.get(`${process.env.REACT_APP_DOMAIN}/user/getme`,{headers:headers})
       .then(response => {
         console.log(" response axios get me",response);
-          if (response.data.error_message) {
-            alert(response.data.error_message);
-            setUserData("");
-              setToken("")
-              LocalStorage.remove_item("token")
-              LocalStorage.remove_item("username")
+          if (response.data && response.data === "לא נמצא משתמש מחובר") {
+              // alert(response.data);
+              Swal.fire({
+                icon:'warning',
+                title: 'נגמר לך זמן החיבור!',
+                text: 'יש להתחבר מחדש',
+                confirmButtonText:'מעבר למסך התחברות'
+              }).then((res)=>{
+                setUserData("");
+                setToken("")
+                LocalStorage.remove_item("token")
+                LocalStorage.remove_item("username")
+                return navigate("/login")
+              })
+              
           } else {
             CheckUserType(response.data.CheckUserLogin)
             setUserData(response.data.CheckUserLogin)
@@ -101,17 +114,17 @@ export const UserProvider = ({ children }) => {
             }
           }  
       })
-      .catch((err) => console.error(err));
+      .catch((err) => console.error("err",err));
     }
     else
     {
        if(!["/register","/login"].includes(window.location.pathname)) return navigate("/login")
     }
-    console.log('%cend useEffect in UserProvider', 'background-color: red');
+    // console.log('%cend useEffect in UserProvider', 'background-color: red');
 
   }, [Token]);
   const value = useMemo(() => {
-    return { userData, setUserData,login,logout,Token,UserBrowserData,isAskUserType,useUserType, setuseUserType,DogsData,setDogsData }
+    return { userData, setUserData,login,SetLocalStorage,logout,Token,UserBrowserData,isAskUserType,useUserType, setuseUserType,DogsData,setDogsData }
 }, [userData,Token,useUserType,DogsData])
 
   return (

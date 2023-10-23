@@ -1,5 +1,6 @@
 require('dotenv').config()
 const DB = process.env.DB || 'mongoDB'
+const AppointmentsSchema = require('./mongoDB/Appointments/Appointments')
 const ProfileSchema = require('./mongoDB/Profile')
 const { pick } = require('lodash')
 
@@ -8,8 +9,16 @@ const createUpdateProfile = async (normalizedProfile) => {
         try {
             const { user_id } = normalizedProfile
             let profile = await ProfileSchema.findOne({user_id})
+            try {
+                let Appointments = new AppointmentsSchema({user_id})
+                Appointments = await Appointments.save()
+                console.log(Appointments);
 
+            } catch (error) {
+                
+            }
             if (profile){
+                
                 profile = await ProfileSchema.findByIdAndUpdate(profile._id, normalizedProfile, {new: true}).select(['name.first','name.last'])
                 return Promise.resolve(profile)
             }
